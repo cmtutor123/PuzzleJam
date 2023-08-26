@@ -64,6 +64,45 @@ public class PuzzleRenderer : MonoBehaviour
         }
     }
 
+    public void UpdateSprites(PuzzleEdge topEdge, PuzzleEdge leftEdge, PuzzleEdge rightEdge, PuzzleEdge bottomEdge, Color color)
+    {
+        UpdateColor(top, color);
+        UpdateColor(topLeft, color);
+        UpdateColor(topMiddle, color);
+        UpdateColor(topRight, color);
+        UpdateColor(left, color);
+        UpdateColor(middleLeft, color);
+        UpdateColor(middle, color);
+        UpdateColor(middleRight, color);
+        UpdateColor(right, color);
+        UpdateColor(bottomLeft, color);
+        UpdateColor(bottomMiddle, color);
+        UpdateColor(bottomRight, color);
+        UpdateColor(bottom, color);
+        UpdateSprite(topLeft, blank);
+        UpdateSprite(topRight, blank);
+        UpdateSprite(middle, blank);
+        UpdateSprite(bottomLeft, blank);
+        UpdateSprite(bottomRight, blank);
+        if (topEdge == PuzzleEdge.Socket) UpdateSprite(topMiddle, socket);
+        else UpdateSprite(topMiddle, blank);
+        if (topEdge == PuzzleEdge.Key) UpdateSprite(top, key);
+        else UpdateSprite(top, null);
+        if (leftEdge == PuzzleEdge.Socket) UpdateSprite(middleLeft, socket);
+        else UpdateSprite(middleLeft, blank);
+        if (leftEdge == PuzzleEdge.Key) UpdateSprite(left, key);
+        else UpdateSprite(left, null);
+        if (rightEdge == PuzzleEdge.Socket) UpdateSprite(middleRight, socket);
+        else UpdateSprite(middleRight, blank);
+        if (rightEdge == PuzzleEdge.Key) UpdateSprite(right, key);
+        else UpdateSprite(right, null);
+        if (bottomEdge == PuzzleEdge.Socket) UpdateSprite(bottomMiddle, socket);
+        else UpdateSprite(bottomMiddle, blank);
+        if (bottomEdge == PuzzleEdge.Key) UpdateSprite(bottom, key);
+        else UpdateSprite(bottom, null);
+
+    }
+
     public void UpdateColor(SpriteRenderer renderer, Color color)
     {
         renderer.color = color;
