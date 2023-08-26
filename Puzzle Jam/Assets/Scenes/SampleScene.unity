@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzlePrefab: {fileID: 8460290175747846794, guid: 0a672a2e58be19e4f9b98006245fb239, type: 3}
-  puzzleData: {fileID: 11400000, guid: 05daf40021c848f458b97147f50db9d4, type: 2}
+  puzzleData: {fileID: 0}
 --- !u!4 &1831051093
 Transform:
   m_ObjectHideFlags: 0
