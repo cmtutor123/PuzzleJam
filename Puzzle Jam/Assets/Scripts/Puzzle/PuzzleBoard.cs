@@ -37,4 +37,15 @@ public class PuzzleBoard
         board[x, y] = null;
         return piece;
     }
+
+    public void ClearBoard()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                board[x, y] = null;
+            }
+        }
+    }
 }

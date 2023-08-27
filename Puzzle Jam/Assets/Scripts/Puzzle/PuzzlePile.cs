@@ -42,6 +42,11 @@ public class PuzzlePile
         puzzlePieces.Clear();
     }
 
+    public List<PuzzlePiece> GetPuzzlePieces()
+    {
+        return puzzlePieces;
+    }
+
     public void ShufflePile()
     {
         List<PuzzlePiece> newList = new List<PuzzlePiece>();
