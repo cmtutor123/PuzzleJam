@@ -56,4 +56,10 @@ public class PuzzlePile
         }
         puzzlePieces.AddRange(newList);
     }
+
+    public int Size()
+    {
+        if (puzzlePieces != null) return puzzlePieces.Count;
+        else return 0;
+    }
 }

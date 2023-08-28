@@ -7,9 +7,16 @@ public class CombatManager : MonoBehaviour
 {
     public const int defaultBoardSize = 6;
 
-    public PuzzlePile drawPile, discardPile, handPile;
-    public PuzzleBoard puzzleBoard;
-    public List<Enemy> enemies;
+    private PuzzlePile drawPile, discardPile, handPile;
+    private PuzzleBoard puzzleBoard;
+    private List<Enemy> enemies;
+
+    public GameObject combatCanvas;
+
+    public SpriteManager puzzleBoardSpriteManager;
+    public TooltipManager tooltipManager;
+    public List<SpriteManager> puzzlePieceSpriteManagers;
+    public List<SpriteManager> enemySpriteManagers;
 
     private PlayerManager playerManager;
 
@@ -35,11 +42,37 @@ public class CombatManager : MonoBehaviour
             handPile.EmptyPile();
             drawPile.AddPuzzlePieces(playerManager.GetPuzzleDeck());
             drawPile.ShufflePile();
-            LoadSprites();
+            LoadEnemySprites();
         }
     }
 
-    public void LoadSprites()
+    public void EndEncounter()
+    {
+
+    }
+
+    public void LoadEnemySprites()
+    {
+        for (int i = 0; i < 4 && i < enemies.Count; i++)
+        {
+            enemySpriteManagers[i].SetSprite(enemies[i].spriteIdle);
+        }
+    }
+
+    public void UnloadEnemySprite(int index)
+    {
+        enemySpriteManagers[index].SetSprite(null);
+    }
+
+    public void UnloadEnemySprites()
+    {
+        foreach (SpriteManager spriteManager in enemySpriteManagers)
+        {
+            spriteManager.SetSprite(null);
+        }
+    }
+
+    public void LoadPuzzleBoardBackground()
     {
 
     }
