@@ -13,8 +13,9 @@ public class CombatManager : MonoBehaviour
     private PuzzleBoard puzzleBoard;
     private List<Enemy> enemies;
 
-    [SerializeField] private GameObject combatCanvas;
+    //[SerializeField] private GameObject combatCanvas;
 
+    [Header("UI Elements")]
     [SerializeField] private SpriteManager puzzleBoardSpriteManager;
     [SerializeField] private TooltipManager tooltipManager;
     [SerializeField] private SpriteManager mouseSpriteManager;
@@ -35,6 +36,7 @@ public class CombatManager : MonoBehaviour
         enemies = new List<Enemy>();
     }
 
+    // starts an encounter using data from PlayerData and the EnemyEncounter
     public void StartEncounter(EnemyEncounter encounter)
     {
         if (encounter != null && encounter.GetEnemies() != null && encounter.GetEnemyCount() > 0)
@@ -53,11 +55,13 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    // ends an encounter
     public void EndEncounter()
     {
         inCombat = false;
     }
 
+    // displays all of enemy's idle Sprites on screen
     public void LoadEnemySprites()
     {
         for (int i = 0; i < 4 && i < enemies.Count; i++)
@@ -66,11 +70,13 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    // removes a specified enemy's Sprite from screen
     public void UnloadEnemySprite(int index)
     {
         enemySpriteManagers[index].SetSprite(null);
     }
 
+    // removes all enemy Sprites from screen
     public void UnloadEnemySprites()
     {
         foreach (SpriteManager spriteManager in enemySpriteManagers)
@@ -79,16 +85,19 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    // displays the puzzle board's background Sprite
     public void LoadPuzzleBoardBackground()
     {
         puzzleBoardSpriteManager.SetSprite(playerManager.GetPuzzleBoardSprite());
     }
 
+    // removes the puzzle board's background Sprite
     public void UnloadPuzzleBoardBackground()
     {
         puzzleBoardSpriteManager.SetSprite(null);
     }
 
+    // updates all of the Sprites of the PuzzlePieces in the player's hand PuzzlePile
     public void UpdateHandSprites()
     {
         for (int i = 0; i < handPuzzlePieceRenderers.Count; i++)
@@ -105,6 +114,7 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    // removes all of the Sprites of the PuzzlePieces in the player's hand PuzzlePile
     public void UnloadHandSprites()
     {
         foreach (PuzzleRenderer puzzleRenderer in handPuzzlePieceRenderers)
@@ -113,12 +123,14 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    // updates the tooltip ui with information from a PuzzlePiece
     public void SetTooltipUIFromPuzzlePiece(PuzzlePiece piece)
     {
         tooltipManager.SetSprite(piece.GetImage());
-        tooltipManager.SetText(piece.GetDescription());
+        tooltipManager.SetText(piece.GetName(), piece.GetDescription());
     }
 
+    // updates the tooltip ui based on the ui id and index provided
     public void UpdateTooltipUI(UIID uiid, int index)
     {
         switch (uiid)
@@ -145,11 +157,13 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    // removes tooltip ui from screen
     public void UnloadTooltipUI()
     {
         tooltipManager.UnloadSprites();
     }
-
+    
+    // updates all of the Sprites of the PuzzlePieces on the puzzle board
     public void UpdateBoardPieceSprites()
     {
         for (int i = 0; i < puzzleBoard.GetSize(); i++)
@@ -158,6 +172,7 @@ public class CombatManager : MonoBehaviour
         }
     }
     
+    // updates the Sprite of the PuzzlePiece at a specified location on the PuzzleBoard
     public void UpdateBoardPieceSprite(int index)
     {
         PuzzlePiece boardPiece = puzzleBoard.GetPuzzlePieceFromIndex(index);
@@ -171,35 +186,47 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    // changes the Sprite that follows the mouse
     public void SetMouseSprite(Sprite sprite)
     {
         mousePuzzleRenderer.UnloadSprites();
         mouseSpriteManager.SetSprite(sprite);
     }
 
+    // changes the PuzzlePiece Sprites that follow the mouse
     public void SetMousePuzzle(PuzzlePiece piece)
     {
         mouseSpriteManager.UnloadSprites();
         mousePuzzleRenderer.UpdateSprites(piece);
     }
 
+    // removes all Sprites that are following the mouse
     public void ClearMouseImage()
     {
         mousePuzzleRenderer.UnloadSprites();
         mouseSpriteManager.UnloadSprites();
     }
 
+    // start player turn
     public void StartPlayerTurn()
     {
 
     }
 
+    // end player turn
     public void EndPlayerTurn()
     {
 
     }
 
+    // start enemy turn
     public void StartEnemyTurn()
+    {
+
+    }
+
+    // end enemy turn
+    public void EndEnemyTurn()
     {
 
     }

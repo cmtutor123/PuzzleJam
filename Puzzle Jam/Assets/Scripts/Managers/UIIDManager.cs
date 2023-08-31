@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(CombatManager))]
 public class UIIDManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public UIID uiid;
-    public int index;
+    [Header("Identification Information")]
+    [SerializeField] private UIID uiid;
+    [SerializeField] private int index;
+    [Header("Game Manager")]
+    [SerializeField] private CombatManager combatManager;
 
-    private CombatManager combatManager;
-
+    // updates the information in the tooltip when the pointer enters the object
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         combatManager.UpdateTooltipUI(uiid, index);
     }
 
+    // removes the information in the tooltip when the pointer exits the object
     public void OnPointerExit(PointerEventData pointerEventData)
     {
         combatManager.UnloadTooltipUI();

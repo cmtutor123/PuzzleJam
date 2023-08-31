@@ -5,11 +5,26 @@ using UnityEngine;
 public class PuzzleRenderer : MonoBehaviour
 {
     [Header("Puzzle Piece Segments")]
-    [SerializeField] private Sprite blank, socket, key;
+    [SerializeField] private Sprite blank;
+    [SerializeField] private Sprite socket;
+    [SerializeField] private Sprite key;
     [Header("Center Image Sprite Renderer")]
     [SerializeField] private SpriteRenderer image;
     [Header("Segment Sprite Renderers")]
-    [SerializeField] private SpriteRenderer top, topLeft, topMiddle, topRight, left, middleLeft, middle, middleRight, right, bottomLeft, bottomMiddle, bottomRight, bottom;
+    [SerializeField] private SpriteRenderer top;
+    [SerializeField] private SpriteRenderer topLeft;
+    [SerializeField] private SpriteRenderer topMiddle;
+    [SerializeField] private SpriteRenderer topRight;
+    [SerializeField] private SpriteRenderer left;
+    [SerializeField] private SpriteRenderer middleLeft;
+    [SerializeField] private SpriteRenderer middle;
+    [SerializeField] private SpriteRenderer middleRight;
+    [SerializeField] private SpriteRenderer right;
+    [SerializeField] private SpriteRenderer bottomLeft;
+    [SerializeField] private SpriteRenderer bottomMiddle;
+    [SerializeField] private SpriteRenderer bottomRight;
+    [SerializeField] private SpriteRenderer bottom;
+    
 
     // updates the sprite renderers to match a given puzzle piece
     public void UpdateSprites(PuzzlePiece puzzlePiece)

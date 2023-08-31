@@ -12,7 +12,8 @@ public class PuzzleData : ScriptableObject
     [Header("Puzzle Image")]
     [SerializeField] private Sprite puzzleImage;
     [Header("Puzzle Information")]
-    [SerializeField] private string puzzleName, puzzleDescription;
+    [SerializeField] private string puzzleName;
+    [SerializeField] private string puzzleDescription;
 
     // returns the PuzzleShape
     public PuzzleShape GetPuzzleShape()

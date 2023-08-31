@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [Header("Character Data")]
     [SerializeField] private CharacterData characterData;
     private PuzzlePile puzzleDeck;
 
@@ -12,11 +13,13 @@ public class PlayerManager : MonoBehaviour
         puzzleDeck = new PuzzlePile();
     }
 
+    // returns the PuzzlePieces in the deck PuzzlePile
     public List<PuzzlePiece> GetPuzzleDeck()
     {
         return puzzleDeck.GetPuzzlePieces();
     }
 
+    // returns the puzzle board Sprite from CharacterData
     public Sprite GetPuzzleBoardSprite()
     {
         return characterData.GetSpritePuzzleBoard();

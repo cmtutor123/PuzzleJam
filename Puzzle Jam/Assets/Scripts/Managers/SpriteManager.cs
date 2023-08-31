@@ -12,11 +12,13 @@ public class SpriteManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    // sets the SpriteRenderer's Sprite to the specified Sprite
     public virtual void SetSprite(Sprite sprite)
     {
         spriteRenderer.sprite = sprite;
     }
 
+    // sets the SpriteRenderer's Sprite to null
     public virtual void UnloadSprites()
     {
         spriteRenderer.sprite = null;

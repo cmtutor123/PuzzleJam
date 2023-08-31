@@ -3,34 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-[RequireComponent(typeof(TextMeshProUGUI))]
 public class TooltipManager : SpriteManager
 {
-    private TextMeshProUGUI tooltip;
+    [Header("TextMeshPro")]
+    [SerializeField] private TextMeshProUGUI tooltipName;
+    [SerializeField] private TextMeshProUGUI tooltipDescription;
+    [Header("SpriteRenderer")]
     [SerializeField] private SpriteRenderer backgroundRenderer;
+    [Header("Sprite")]
     [SerializeField] private Sprite backgroundSprite;
 
-    private void Start()
+    // changes the tooltip text
+    public void SetText(string nameText, string descriptionText)
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        tooltip = GetComponent<TextMeshProUGUI>();
+        tooltipName.text = nameText;
+        tooltipDescription.text = descriptionText;
     }
 
-    public void SetText(string tooltipText)
-    {
-        tooltip.text = tooltipText;
-    }
-
+    // changes the tooltip Sprites
     public override void SetSprite(Sprite sprite)
     {
         base.SetSprite(sprite);
         backgroundRenderer.sprite = backgroundSprite;
     }
 
+    // hides the text and images
     public override void UnloadSprites()
     {
         base.UnloadSprites();
-        tooltip.text = string.Empty;
+        tooltipName.text = string.Empty;
+        tooltipDescription.text = string.Empty;
         backgroundRenderer.sprite = null;
     }
 }

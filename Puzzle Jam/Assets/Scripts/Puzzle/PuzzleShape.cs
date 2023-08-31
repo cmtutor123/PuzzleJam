@@ -6,7 +6,10 @@ using UnityEngine;
 public class PuzzleShape : ScriptableObject
 {
     [Header("Puzzle Piece Shape")]
-    [SerializeField] private PuzzleEdge topEdge, leftEdge, rightEdge, bottomEdge;
+    [SerializeField] private PuzzleEdge topEdge;
+    [SerializeField] private PuzzleEdge leftEdge;
+    [SerializeField] private PuzzleEdge rightEdge;
+    [SerializeField] private PuzzleEdge bottomEdge;
 
     // returns the top edge
     public PuzzleEdge GetTop()
