@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(CombatManager))]
 public class UIIDManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public UIID uiid;
     public int index;
 
-    public CombatManager combatManager;
+    private CombatManager combatManager;
 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {

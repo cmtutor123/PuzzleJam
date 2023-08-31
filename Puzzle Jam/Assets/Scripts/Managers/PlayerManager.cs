@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public CharacterData characterData;
-    public PuzzlePile puzzleDeck;
+    [SerializeField] private CharacterData characterData;
+    private PuzzlePile puzzleDeck;
 
     private void Start()
     {
@@ -19,6 +19,6 @@ public class PlayerManager : MonoBehaviour
 
     public Sprite GetPuzzleBoardSprite()
     {
-        return characterData.spritePuzzleBoard;
+        return characterData.GetSpritePuzzleBoard();
     }
 }

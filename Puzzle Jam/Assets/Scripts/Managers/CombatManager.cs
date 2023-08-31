@@ -5,20 +5,22 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerManager))]
 public class CombatManager : MonoBehaviour
 {
-    public const int defaultBoardSize = 6;
+    private const int defaultBoardSize = 6;
 
-    public bool inCombat;
+    private bool inCombat;
 
     private PuzzlePile drawPile, discardPile, handPile;
     private PuzzleBoard puzzleBoard;
     private List<Enemy> enemies;
 
-    public GameObject combatCanvas;
+    [SerializeField] private GameObject combatCanvas;
 
-    public SpriteManager puzzleBoardSpriteManager;
-    public TooltipManager tooltipManager;
-    public List<PuzzleRenderer> handPuzzlePieceRenderers;
-    public List<SpriteManager> enemySpriteManagers;
+    [SerializeField] private SpriteManager puzzleBoardSpriteManager;
+    [SerializeField] private TooltipManager tooltipManager;
+    [SerializeField] private SpriteManager mouseSpriteManager;
+    [SerializeField] private PuzzleRenderer mousePuzzleRenderer;
+    [SerializeField] private List<PuzzleRenderer> handPuzzlePieceRenderers, boardPuzzlePieceRenderers;
+    [SerializeField] private List<SpriteManager> enemySpriteManagers;
 
     private PlayerManager playerManager;
 
@@ -35,11 +37,11 @@ public class CombatManager : MonoBehaviour
 
     public void StartEncounter(EnemyEncounter encounter)
     {
-        if (encounter != null && encounter.enemies != null && encounter.enemies.Count > 0)
+        if (encounter != null && encounter.GetEnemies() != null && encounter.GetEnemyCount() > 0)
         {
             puzzleBoard.ClearBoard();
             enemies.Clear();
-            enemies.AddRange(encounter.enemies);
+            enemies = encounter.GetEnemies();
             drawPile.EmptyPile();
             discardPile.EmptyPile();
             handPile.EmptyPile();
@@ -47,7 +49,6 @@ public class CombatManager : MonoBehaviour
             drawPile.ShufflePile();
             LoadEnemySprites();
             LoadPuzzleBoardBackground();
-
             inCombat = true;
         }
     }
@@ -61,7 +62,7 @@ public class CombatManager : MonoBehaviour
     {
         for (int i = 0; i < 4 && i < enemies.Count; i++)
         {
-            enemySpriteManagers[i].SetSprite(enemies[i].spriteIdle);
+            enemySpriteManagers[i].SetSprite(enemies[i].GetSpriteIdle());
         }
     }
 
@@ -95,7 +96,7 @@ public class CombatManager : MonoBehaviour
             if (handPile.GetSize() - 1 < i)
             {
                 PuzzlePiece piece = handPile.GetPuzzlePiece(i);
-                handPuzzlePieceRenderers[i].UpdateSprites(piece.top, piece.left, piece.right, piece.bottom, piece.color);
+                handPuzzlePieceRenderers[i].UpdateSprites(piece);
             }
             else
             {
@@ -112,15 +113,28 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void SetTooltipUIFromPuzzlePiece(PuzzlePiece piece)
+    {
+        tooltipManager.SetSprite(piece.GetImage());
+        tooltipManager.SetText(piece.GetDescription());
+    }
+
     public void UpdateTooltipUI(UIID uiid, int index)
     {
         switch (uiid)
         {
             case UIID.Hand:
-
+                if (handPile.GetSize() > index)
+                {
+                    SetTooltipUIFromPuzzlePiece(handPile.GetPuzzlePiece(index));
+                }
                 break;
             case UIID.Board:
-
+                PuzzlePiece boardPiece = puzzleBoard.GetPuzzlePieceFromIndex(index);
+                if (boardPiece != null)
+                {
+                    SetTooltipUIFromPuzzlePiece(boardPiece);
+                }
                 break;
             case UIID.Enemy:
 
@@ -134,5 +148,59 @@ public class CombatManager : MonoBehaviour
     public void UnloadTooltipUI()
     {
         tooltipManager.UnloadSprites();
+    }
+
+    public void UpdateBoardPieceSprites()
+    {
+        for (int i = 0; i < puzzleBoard.GetSize(); i++)
+        {
+            UpdateBoardPieceSprite(i);
+        }
+    }
+    
+    public void UpdateBoardPieceSprite(int index)
+    {
+        PuzzlePiece boardPiece = puzzleBoard.GetPuzzlePieceFromIndex(index);
+        if (boardPiece != null)
+        {
+            boardPuzzlePieceRenderers[index].UpdateSprites(boardPiece);
+        }
+        else
+        {
+            boardPuzzlePieceRenderers[index].UnloadSprites();
+        }
+    }
+
+    public void SetMouseSprite(Sprite sprite)
+    {
+        mousePuzzleRenderer.UnloadSprites();
+        mouseSpriteManager.SetSprite(sprite);
+    }
+
+    public void SetMousePuzzle(PuzzlePiece piece)
+    {
+        mouseSpriteManager.UnloadSprites();
+        mousePuzzleRenderer.UpdateSprites(piece);
+    }
+
+    public void ClearMouseImage()
+    {
+        mousePuzzleRenderer.UnloadSprites();
+        mouseSpriteManager.UnloadSprites();
+    }
+
+    public void StartPlayerTurn()
+    {
+
+    }
+
+    public void EndPlayerTurn()
+    {
+
+    }
+
+    public void StartEnemyTurn()
+    {
+
     }
 }

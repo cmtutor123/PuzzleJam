@@ -5,5 +5,30 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Puzzle Shape", menuName = "Puzzle/Shape")]
 public class PuzzleShape : ScriptableObject
 {
-    public PuzzleEdge top, left, right, bottom;
+    [Header("Puzzle Piece Shape")]
+    [SerializeField] private PuzzleEdge topEdge, leftEdge, rightEdge, bottomEdge;
+
+    // returns the top edge
+    public PuzzleEdge GetTop()
+    {
+        return topEdge;
+    }
+
+    // returns the left edge
+    public PuzzleEdge GetLeft()
+    {
+        return leftEdge;
+    }
+
+    // returns the right edge
+    public PuzzleEdge GetRight()
+    {
+        return rightEdge;
+    }
+
+    // returns the bottom edge
+    public PuzzleEdge GetBottom()
+    {
+        return bottomEdge;
+    }
 }

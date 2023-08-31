@@ -5,5 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Character Data", menuName = "Character/Data")]
 public class CharacterData : ScriptableObject
 {
-    public Sprite spritePuzzleBoard;
+    [Header("Sprites")]
+    [SerializeField] private Sprite spritePuzzleBoard;
+
+    public Sprite GetSpritePuzzleBoard()
+    {
+        return spritePuzzleBoard;
+    }
 }

@@ -1360,6 +1360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzlePrefab: {fileID: 8460290175747846794, guid: 0a672a2e58be19e4f9b98006245fb239, type: 3}
   puzzleData: {fileID: 11400000, guid: ffe572065f5d75848bf496b92e3002fd, type: 2}
+  puzzlePiece: {fileID: 0}
 --- !u!4 &1831051093
 Transform:
   m_ObjectHideFlags: 0
@@ -1633,9 +1634,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d093d6ec5f20db4193b7f476319e8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleBoardSpriteRenderer: {fileID: 0}
-  puzzlePieceSpriteRenderers: []
-  enemySpriteRenderers: []
+  combatCanvas: {fileID: 0}
+  puzzleBoardSpriteManager: {fileID: 0}
+  tooltipManager: {fileID: 0}
+  mouseSpriteManager: {fileID: 0}
+  mousePuzzleRenderer: {fileID: 0}
+  handPuzzlePieceRenderers: []
+  boardPuzzlePieceRenderers: []
+  enemySpriteManagers: []
 --- !u!114 &2104373807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1648,6 +1654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be6b8f634a5f4f478005c80713ce8ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterData: {fileID: 0}
 --- !u!4 &2104373808
 Transform:
   m_ObjectHideFlags: 0

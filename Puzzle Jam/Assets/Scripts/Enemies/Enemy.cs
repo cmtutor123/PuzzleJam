@@ -4,17 +4,42 @@ using UnityEngine;
 
 public class Enemy
 {
-    public string enemyName;
-    public int maxHealth, currentHealth;
-    public Sprite spriteIdle;
-    public EnemyAttackPattern attackPattern;
+    private string enemyName;
+    private int maxHealth, currentHealth;
+    private Sprite spriteIdle;
+    private EnemyAttackPattern attackPattern;
 
-    public Enemy(EnemyData data)
+    public Enemy(EnemyData enemyData)
     {
-        enemyName = data.enemyName;
-        maxHealth = data.health;
-        currentHealth = data.health;
-        spriteIdle = data.spriteIdle;
-        attackPattern = data.attackPattern;
+        enemyName = enemyData.GetName();
+        maxHealth = enemyData.GetMaxHealth();
+        currentHealth = maxHealth;
+        spriteIdle = enemyData.GetSpriteIdle();
+        attackPattern = enemyData.GetEnemyAttackPattern();
+    }
+
+    public string GetName()
+    {
+        return enemyName;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public Sprite GetSpriteIdle()
+    {
+        return spriteIdle;
+    }
+
+    public EnemyAttackPattern GetEnemyAttackPattern()
+    {
+        return attackPattern;
     }
 }

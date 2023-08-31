@@ -7,8 +7,8 @@ using TMPro;
 public class TooltipManager : SpriteManager
 {
     private TextMeshProUGUI tooltip;
-    public SpriteRenderer backgroundRenderer;
-    public Sprite backgroundSprite;
+    [SerializeField] private SpriteRenderer backgroundRenderer;
+    [SerializeField] private Sprite backgroundSprite;
 
     private void Start()
     {
