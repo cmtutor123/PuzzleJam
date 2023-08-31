@@ -112,4 +112,21 @@ public class PuzzleRenderer : MonoBehaviour
     {
         renderer.sprite = sprite;
     }
+
+    public void UnloadSprites()
+    {
+        UpdateSprite(top, null);
+        UpdateSprite(topLeft, null);
+        UpdateSprite(topMiddle, null);
+        UpdateSprite(topRight, null);
+        UpdateSprite(left, null);
+        UpdateSprite(middleLeft, null);
+        UpdateSprite(middle, null);
+        UpdateSprite(middleRight, null);
+        UpdateSprite(right, null);
+        UpdateSprite(bottomLeft, null);
+        UpdateSprite(bottomMiddle, null);
+        UpdateSprite(bottomRight, null);
+        UpdateSprite(bottom, null);
+    }
 }

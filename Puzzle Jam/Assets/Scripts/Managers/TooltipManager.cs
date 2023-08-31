@@ -7,6 +7,8 @@ using TMPro;
 public class TooltipManager : SpriteManager
 {
     private TextMeshProUGUI tooltip;
+    public SpriteRenderer backgroundRenderer;
+    public Sprite backgroundSprite;
 
     private void Start()
     {
@@ -17,5 +19,18 @@ public class TooltipManager : SpriteManager
     public void SetText(string tooltipText)
     {
         tooltip.text = tooltipText;
+    }
+
+    public override void SetSprite(Sprite sprite)
+    {
+        base.SetSprite(sprite);
+        backgroundRenderer.sprite = backgroundSprite;
+    }
+
+    public override void UnloadSprites()
+    {
+        base.UnloadSprites();
+        tooltip.text = string.Empty;
+        backgroundRenderer.sprite = null;
     }
 }
