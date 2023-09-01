@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed3c06815a4f494b8392f98ad666ca0, type: 3}
   m_Name: TestColor
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 0.19240992, b: 0, a: 1}
-  colorName: 
+  color: {r: 0.87309694, g: 0, b: 1, a: 1}
+  colorName: Test Name

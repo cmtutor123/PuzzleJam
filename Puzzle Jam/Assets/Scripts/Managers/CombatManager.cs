@@ -56,6 +56,7 @@ public class CombatManager : MonoBehaviour
             LoadPuzzleBoardBackground();
             UpdateHandSprites();
             UpdateBoardPieceSprites();
+            ClearMouseImage();
             StartPlayerTurn();
         }
     }
@@ -69,16 +70,17 @@ public class CombatManager : MonoBehaviour
     // displays all of enemy's idle Sprites on screen
     public void LoadEnemySprites()
     {
-        for (int i = 0; i < 4 && i < enemies.Count; i++)
+        for (int i = 0; i < 4; i++)
         {
-            enemySpriteManagers[i].SetSprite(enemies[i].GetSpriteIdle());
+            if (i < enemies.Count) enemySpriteManagers[i].SetSprite(enemies[i].GetSpriteIdle());
+            else UnloadEnemySprite(i);
         }
     }
 
     // removes a specified enemy's Sprite from screen
     public void UnloadEnemySprite(int index)
     {
-        enemySpriteManagers[index].SetSprite(null);
+        enemySpriteManagers[index].UnloadSprites();
     }
 
     // removes all enemy Sprites from screen
@@ -86,7 +88,7 @@ public class CombatManager : MonoBehaviour
     {
         foreach (SpriteManager spriteManager in enemySpriteManagers)
         {
-            spriteManager.SetSprite(null);
+            spriteManager.UnloadSprites();
         }
     }
 

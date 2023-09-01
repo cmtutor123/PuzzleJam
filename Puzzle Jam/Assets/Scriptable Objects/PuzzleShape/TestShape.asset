@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44acc3cb60b388443bbd30c8929cc378, type: 3}
   m_Name: TestShape
   m_EditorClassIdentifier: 
-  topEdge: 1
-  leftEdge: 0
+  topEdge: 2
+  leftEdge: 1
   rightEdge: 2
   bottomEdge: 0
