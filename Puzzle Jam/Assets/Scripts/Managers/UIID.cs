@@ -7,5 +7,6 @@ public enum UIID
     Hand,
     Board,
     Enemy,
-    EnemyAttack
+    EnemyAttack,
+    End
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerManager))]
 public class CombatManager : MonoBehaviour
 {
+    private CombatState combatState;
+
     private const int defaultBoardSize = 6;
     private const int turnDrawAmount = 6;
 
@@ -30,6 +32,7 @@ public class CombatManager : MonoBehaviour
 
     private void Start()
     {
+        combatState = CombatState.OutOfCombat;
         playerManager = GetComponent<PlayerManager>();
         drawPile = new PuzzlePile();
         discardPile = new PuzzlePile();
@@ -44,6 +47,7 @@ public class CombatManager : MonoBehaviour
     {
         if (encounter != null && encounter.GetEnemies() != null && encounter.GetEnemyCount() > 0)
         {
+            SetCombatState(CombatState.DoingStuff);
             puzzleBoard.ClearBoard();
             enemies.Clear();
             enemies = encounter.GetEnemies();
@@ -64,7 +68,7 @@ public class CombatManager : MonoBehaviour
     // ends an encounter
     public void EndEncounter()
     {
-
+        SetCombatState(CombatState.OutOfCombat);
     }
 
     // displays all of enemy's idle Sprites on screen
@@ -268,38 +272,83 @@ public class CombatManager : MonoBehaviour
     // end player turn
     public void EndPlayerTurn()
     {
+        SetCombatState(CombatState.DoingStuff);
         DiscardHand();
     }
 
     // start enemy turn
     public void StartEnemyTurn()
     {
-
+        EndEnemyTurn();
     }
 
     // end enemy turn
     public void EndEnemyTurn()
     {
-
+        StartPlayerTurn();
     }
 
     // triggers click events
     public void ObjectClicked(UIID uiid, int index)
     {
-        switch (uiid)
+        switch (combatState)
         {
-            case UIID.Hand:
-                
+            case CombatState.PlayerTurn:
+                if (uiid == UIID.End)
+                {
+                    EndPlayerTurn();
+                }
+                else if (uiid == UIID.Hand)
+                {
+                    AttemptHandSelection(index);
+                }
                 break;
-            case UIID.Board:
-                
+            case CombatState.PieceSelected:
+                if (uiid == UIID.End)
+                {
+                    ReturnHandSelection();
+                }
+                else if (uiid == UIID.Board)
+                {
+                    AttemptBoardPlacement(index);
+                }
                 break;
-            case UIID.Enemy:
-
-                break;
-            case UIID.EnemyAttack:
-
+            case CombatState.PickingTarget:
+                if (uiid == UIID.Enemy)
+                {
+                    AttemptPickTarget(index);
+                }
                 break;
         }
+    }
+
+    // selects a PuzzlePiece from the player's hand if the index is in the current hand size
+    public void AttemptHandSelection(int index)
+    {
+
+    }
+
+    // returns the selected PuzzlePiece to the player's hand
+    public void ReturnHandSelection()
+    {
+
+    }
+
+    // attempts to place the selected PuzzlePiece on the PuzzleBoard
+    public void AttemptBoardPlacement(int index)
+    {
+
+    }
+
+    // attempts to use the selected action on the selected target
+    public void AttemptPickTarget(int index)
+    {
+
+    }
+
+    // changes the CombatState
+    public void SetCombatState(CombatState newCombatState)
+    {
+        combatState = newCombatState;
     }
 }
