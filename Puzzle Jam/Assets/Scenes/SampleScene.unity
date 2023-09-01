@@ -396,6 +396,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5008868098475297171, guid: 3d09422defe2f0b47ad8635d8ceb8910, type: 3}
+      propertyPath: index
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8730338709074501777, guid: 3d09422defe2f0b47ad8635d8ceb8910, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1424,6 +1428,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5008868098475297171, guid: 3d09422defe2f0b47ad8635d8ceb8910, type: 3}
+      propertyPath: index
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8730338709074501777, guid: 3d09422defe2f0b47ad8635d8ceb8910, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1613,6 +1621,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5008868098475297171, guid: 3d09422defe2f0b47ad8635d8ceb8910, type: 3}
+      propertyPath: index
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8730338709074501777, guid: 3d09422defe2f0b47ad8635d8ceb8910, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1724,7 +1736,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 431805753360968674, guid: b960b301bb559dd4993927bcd7851b1c, type: 3}
       propertyPath: m_Name
-      value: PuzzleBoardSprite
+      value: Puzzle Board
       objectReference: {fileID: 0}
     - target: {fileID: 461357660558735145, guid: b960b301bb559dd4993927bcd7851b1c, type: 3}
       propertyPath: empty
@@ -1927,6 +1939,10 @@ PrefabInstance:
     - target: {fileID: 431805753360968674, guid: 3d09422defe2f0b47ad8635d8ceb8910, type: 3}
       propertyPath: m_Name
       value: Enemy 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5008868098475297171, guid: 3d09422defe2f0b47ad8635d8ceb8910, type: 3}
+      propertyPath: index
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8730338709074501777, guid: 3d09422defe2f0b47ad8635d8ceb8910, type: 3}
       propertyPath: m_Pivot.x

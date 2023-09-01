@@ -6,8 +6,7 @@ using UnityEngine;
 public class CombatManager : MonoBehaviour
 {
     private const int defaultBoardSize = 6;
-
-    private bool inCombat;
+    private const int turnDrawAmount = 6;
 
     private PuzzlePile drawPile, discardPile, handPile;
     private PuzzleBoard puzzleBoard;
@@ -23,14 +22,14 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private List<PuzzleRenderer> handPuzzlePieceRenderers, boardPuzzlePieceRenderers;
     [SerializeField] private List<SpriteManager> enemySpriteManagers;
 
-    [Header("Test Encounter")]
+    [Header("Test Variables")]
     public EnemyEncounter testEncounter;
+    public PuzzleData testPuzzlePiece;
 
     private PlayerManager playerManager;
 
     private void Start()
     {
-        inCombat = false;
         playerManager = GetComponent<PlayerManager>();
         drawPile = new PuzzlePile();
         discardPile = new PuzzlePile();
@@ -57,14 +56,14 @@ public class CombatManager : MonoBehaviour
             LoadPuzzleBoardBackground();
             UpdateHandSprites();
             UpdateBoardPieceSprites();
-            inCombat = true;
+            StartPlayerTurn();
         }
     }
 
     // ends an encounter
     public void EndEncounter()
     {
-        inCombat = false;
+
     }
 
     // displays all of enemy's idle Sprites on screen
@@ -139,6 +138,7 @@ public class CombatManager : MonoBehaviour
     // updates the tooltip ui based on the ui id and index provided
     public void UpdateTooltipUI(UIID uiid, int index)
     {
+        return;
         switch (uiid)
         {
             case UIID.Hand:
@@ -166,6 +166,7 @@ public class CombatManager : MonoBehaviour
     // removes tooltip ui from screen
     public void UnloadTooltipUI()
     {
+        return;
         tooltipManager.UnloadSprites();
     }
     
@@ -216,13 +217,56 @@ public class CombatManager : MonoBehaviour
     // start player turn
     public void StartPlayerTurn()
     {
+        DrawHand(turnDrawAmount);
+    }
 
+    // adds the specified number of PuzzlePieces to the player's hand, if possible
+    public void DrawHand(int drawAmount)
+    {
+        if (drawPile.GetSize() >= drawAmount)
+        {
+            for (int i = 0; i < drawAmount; i++)
+            {
+                handPile.AddPuzzlePiece(drawPile.DrawPuzzlePiece());
+            }
+        }
+        else
+        {
+            int drawnCount = 0;
+            while (drawnCount < drawAmount && (drawPile.GetSize() > 0 || discardPile.GetSize() > 0))
+            {
+                if (drawPile.GetSize() > 0)
+                {
+                    handPile.AddPuzzlePiece(drawPile.DrawPuzzlePiece());
+                    drawnCount++;
+                }
+                else
+                {
+                    DiscardToDraw();
+                }
+            }
+        }
+        UpdateHandSprites();
+    }
+
+    // puts all of the cards in the discard pile into the draw pile
+    public void DiscardToDraw()
+    {
+        drawPile.AddPuzzlePieces(discardPile.DiscardPile());
+        drawPile.ShufflePile();
+    }
+
+    // puts all of the cards in the player's hand into the discard pile
+    public void DiscardHand()
+    {
+        discardPile.AddPuzzlePieces(handPile.DiscardPile());
+        UpdateHandSprites();
     }
 
     // end player turn
     public void EndPlayerTurn()
     {
-
+        DiscardHand();
     }
 
     // start enemy turn
@@ -240,6 +284,20 @@ public class CombatManager : MonoBehaviour
     // triggers click events
     public void ObjectClicked(UIID uiid, int index)
     {
-        Debug.Log("Clicked " + uiid + " " + index);
+        switch (uiid)
+        {
+            case UIID.Hand:
+                
+                break;
+            case UIID.Board:
+                
+                break;
+            case UIID.Enemy:
+
+                break;
+            case UIID.EnemyAttack:
+
+                break;
+        }
     }
 }
