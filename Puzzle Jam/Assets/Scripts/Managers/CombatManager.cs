@@ -108,7 +108,7 @@ public class CombatManager : MonoBehaviour
     {
         for (int i = 0; i < handPuzzlePieceRenderers.Count; i++)
         {
-            if (handPile.GetSize() - 1 < i)
+            if (i < handPile.GetSize())
             {
                 PuzzlePiece piece = handPile.GetPuzzlePiece(i);
                 handPuzzlePieceRenderers[i].UpdateSprites(piece);
@@ -240,6 +240,6 @@ public class CombatManager : MonoBehaviour
     // triggers click events
     public void ObjectClicked(UIID uiid, int index)
     {
-
+        Debug.Log("Clicked " + uiid + " " + index);
     }
 }
