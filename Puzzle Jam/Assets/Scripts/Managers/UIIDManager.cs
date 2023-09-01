@@ -23,4 +23,10 @@ public class UIIDManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         combatManager.UnloadTooltipUI();
     }
+
+    // triggers information to combat manager
+    public void OnClick()
+    {
+        combatManager.ObjectClicked(uiid, index);
+    }
 }

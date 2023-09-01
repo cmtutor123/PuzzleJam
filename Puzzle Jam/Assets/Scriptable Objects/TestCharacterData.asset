@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44acc3cb60b388443bbd30c8929cc378, type: 3}
-  m_Name: TestShape
+  m_Script: {fileID: 11500000, guid: 620883588008e874f9916773e02cced9, type: 3}
+  m_Name: TestCharacterData
   m_EditorClassIdentifier: 
-  topEdge: 1
-  leftEdge: 0
-  rightEdge: 2
-  bottomEdge: 0
+  spritePuzzleBoard: {fileID: 21300000, guid: a47441be56675494fb69dafe92e6cf14, type: 3}
+  startingPuzzlePieces:
+  - {fileID: 11400000, guid: ffe572065f5d75848bf496b92e3002fd, type: 2}

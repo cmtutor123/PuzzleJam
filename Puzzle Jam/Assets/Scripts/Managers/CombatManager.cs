@@ -23,6 +23,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private List<PuzzleRenderer> handPuzzlePieceRenderers, boardPuzzlePieceRenderers;
     [SerializeField] private List<SpriteManager> enemySpriteManagers;
 
+    [Header("Test Encounter")]
+    public EnemyEncounter testEncounter;
+
     private PlayerManager playerManager;
 
     private void Start()
@@ -34,6 +37,7 @@ public class CombatManager : MonoBehaviour
         handPile = new PuzzlePile(6);
         puzzleBoard = new PuzzleBoard(defaultBoardSize);
         enemies = new List<Enemy>();
+        StartEncounter(testEncounter);
     }
 
     // starts an encounter using data from PlayerData and the EnemyEncounter
@@ -51,6 +55,8 @@ public class CombatManager : MonoBehaviour
             drawPile.ShufflePile();
             LoadEnemySprites();
             LoadPuzzleBoardBackground();
+            UpdateHandSprites();
+            UpdateBoardPieceSprites();
             inCombat = true;
         }
     }
@@ -227,6 +233,12 @@ public class CombatManager : MonoBehaviour
 
     // end enemy turn
     public void EndEnemyTurn()
+    {
+
+    }
+
+    // triggers click events
+    public void ObjectClicked(UIID uiid, int index)
     {
 
     }

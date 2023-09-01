@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         puzzleDeck = new PuzzlePile();
+        puzzleDeck.AddPuzzlePieces(characterData.GetStartingPuzzlePieces());
     }
 
     // returns the PuzzlePieces in the deck PuzzlePile
