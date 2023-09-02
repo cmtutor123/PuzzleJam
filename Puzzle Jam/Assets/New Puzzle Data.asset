@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: New Puzzle Data
   m_EditorClassIdentifier: 
   puzzleShape: {fileID: 0}
-  puzzleColor: {fileID: 0}
+  puzzleColor: {fileID: 11400000, guid: 990846e4c1db9b94d9dbcc044a80c1f3, type: 2}
   puzzleImage: {fileID: 0}
   puzzleName: 
   puzzleDescription: 
