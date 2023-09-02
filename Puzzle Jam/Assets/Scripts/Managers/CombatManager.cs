@@ -41,6 +41,7 @@ public class CombatManager : MonoBehaviour
         handPile = new PuzzlePile(6);
         puzzleBoard = new PuzzleBoard(defaultBoardSize);
         enemies = new List<Enemy>();
+        selectedPuzzlePiece = null;
         StartEncounter(testEncounter);
     }
 
@@ -225,6 +226,7 @@ public class CombatManager : MonoBehaviour
     // start player turn
     public void StartPlayerTurn()
     {
+        SetCombatState(CombatState.PlayerTurn);
         DrawHand(turnDrawAmount);
     }
 
@@ -327,7 +329,13 @@ public class CombatManager : MonoBehaviour
     // selects a PuzzlePiece from the player's hand if the index is in the current hand size
     public void AttemptHandSelection(int index)
     {
-
+        if (index < handPile.GetSize() && selectedPuzzlePiece == null)
+        {
+            combatState = CombatState.PieceSelected;
+            selectedPuzzlePiece = handPile.DrawPuzzlePiece(index);
+            SetMousePuzzle(selectedPuzzlePiece);
+            UpdateHandSprites();
+        }
     }
 
     // returns the selected PuzzlePiece to the player's hand
