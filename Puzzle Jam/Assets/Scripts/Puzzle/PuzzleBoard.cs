@@ -37,12 +37,28 @@ public class PuzzleBoard
         board[x, y] = piece;
     }
 
+    // places a PuzzlePiece at the specified index
+    public void PlacePiece(PuzzlePiece piece, int index)
+    {
+        int x = index % width;
+        int y = (index - x) / width;
+        PlacePiece(piece, x, y);
+    }
+
     // removes and returns the PuzzlePiece at the specified location
     public PuzzlePiece RemovePiece(int x, int y)
     {
         PuzzlePiece piece = board[x, y];
         board[x, y] = null;
         return piece;
+    }
+
+    // removes and returns the PuzzlePiece at the specified index
+    public PuzzlePiece RemovePiece(int index)
+    {
+        int x = index % width;
+        int y = (index - x) / width;
+        return RemovePiece(x, y);
     }
 
     // removes all of the PuzzlePieces on the PuzzleBoard
@@ -63,6 +79,14 @@ public class PuzzleBoard
         return PositionOnBoard(x, y) && board[x, y] == null;
     }
 
+    // returns true is there is an empty space at the specified index
+    public bool LocationEmpty(int index)
+    {
+        int x = index % width;
+        int y = (index - x) / width;
+        return PositionOnBoard(x, y) && board[x, y] == null;
+    }
+
     // returns the PuzzlePiece at the specified location
     public PuzzlePiece GetPuzzlePiece(int x, int y)
     {
@@ -70,7 +94,7 @@ public class PuzzleBoard
     }
 
     // returns the PuzzlePiece at the specified index
-    public PuzzlePiece GetPuzzlePieceFromIndex(int index)
+    public PuzzlePiece GetPuzzlePiece(int index)
     {
         if (index < width * height)
         {
@@ -87,9 +111,48 @@ public class PuzzleBoard
         return LocationEmpty(x, y) && EdgesCanConnect(top, GetTopEdge(x, y)) && EdgesCanConnect(left, GetLeftEdge(x, y)) && EdgesCanConnect(right, GetRightEdge(x, y)) && EdgesCanConnect(bottom, GetBottomEdge(x, y));
     }
 
+    // returns true if a PuzzlePiece with the specified edges can fit in the specified index
+    public bool PieceCanFit(int index, PuzzleEdge top, PuzzleEdge left, PuzzleEdge right, PuzzleEdge bottom)
+    {
+        int x = index % width;
+        int y = (index - x) / width;
+        return LocationEmpty(x, y) && EdgesCanConnect(top, GetTopEdge(x, y)) && EdgesCanConnect(left, GetLeftEdge(x, y)) && EdgesCanConnect(right, GetRightEdge(x, y)) && EdgesCanConnect(bottom, GetBottomEdge(x, y));
+    }
+
+    // returns true if a PuzzlePiece can fit in the specified location
+    public bool PieceCanFit(int x, int y, PuzzlePiece piece)
+    {
+        PuzzleEdge top = piece.GetTop();
+        PuzzleEdge left = piece.GetLeft();
+        PuzzleEdge right = piece.GetRight();
+        PuzzleEdge bottom = piece.GetBottom();
+        return LocationEmpty(x, y) && EdgesCanConnect(top, GetTopEdge(x, y)) && EdgesCanConnect(left, GetLeftEdge(x, y)) && EdgesCanConnect(right, GetRightEdge(x, y)) && EdgesCanConnect(bottom, GetBottomEdge(x, y));
+    }
+
+    // returns true if a PuzzlePiece can fit in the specified index
+    public bool PieceCanFit(int index, PuzzlePiece piece)
+    {
+        int x = index % width;
+        int y = (index - x) / width;
+        PuzzleEdge top = piece.GetTop();
+        PuzzleEdge left = piece.GetLeft();
+        PuzzleEdge right = piece.GetRight();
+        PuzzleEdge bottom = piece.GetBottom();
+        return LocationEmpty(x, y) && EdgesCanConnect(top, GetTopEdge(x, y)) && EdgesCanConnect(left, GetLeftEdge(x, y)) && EdgesCanConnect(right, GetRightEdge(x, y)) && EdgesCanConnect(bottom, GetBottomEdge(x, y));
+    }
+
     // returns true if the specified position is within the bounds of the board
     public bool PositionOnBoard(int x, int y)
     {
+        return x >= 0 && x < width && y >= 0 && y < height;
+    }
+
+    // returns true if the specified index is within the bounds of the board
+    public bool PositionOnBoard(int index)
+    {
+
+        int x = index % width;
+        int y = (index - x) / width;
         return x >= 0 && x < width && y >= 0 && y < height;
     }
 
@@ -98,8 +161,9 @@ public class PuzzleBoard
     {
         int xPos = x;
         int yPos = y + 1;
-        if (PositionOnBoard(xPos, yPos)) return GetPuzzlePiece(xPos, yPos).GetBottom();
-        else return boardEdge;
+        if (!PositionOnBoard(xPos, yPos)) return boardEdge;
+        else if (LocationEmpty(xPos, yPos)) return PuzzleEdge.Socket;
+        else return GetPuzzlePiece(xPos, yPos).GetBottom();
     }
 
     // returns the right edge of the PuzzlePiece to the left of the specified position
@@ -107,8 +171,9 @@ public class PuzzleBoard
     {
         int xPos = x - 1;
         int yPos = y;
-        if (PositionOnBoard(xPos, yPos)) return GetPuzzlePiece(xPos, yPos).GetRight();
-        else return boardEdge;
+        if (!PositionOnBoard(xPos, yPos)) return boardEdge;
+        else if (LocationEmpty(xPos, yPos)) return PuzzleEdge.Socket;
+        else return GetPuzzlePiece(xPos, yPos).GetRight();
     }
 
     // returns the left edge of the PuzzlePiece to the right of the specified position
@@ -116,8 +181,9 @@ public class PuzzleBoard
     {
         int xPos = x + 1;
         int yPos = y;
-        if (PositionOnBoard(xPos, yPos)) return GetPuzzlePiece(xPos, yPos).GetLeft();
-        else return boardEdge;
+        if (!PositionOnBoard(xPos, yPos)) return boardEdge;
+        else if (LocationEmpty(xPos, yPos)) return PuzzleEdge.Socket;
+        else return GetPuzzlePiece(xPos, yPos).GetLeft();
     }
 
     // returns the top edge of the PuzzlePiece below the specified position
@@ -125,8 +191,9 @@ public class PuzzleBoard
     {
         int xPos = x;
         int yPos = y - 1;
-        if (PositionOnBoard(xPos, yPos)) return GetPuzzlePiece(xPos, yPos).GetTop();
-        else return boardEdge;
+        if (!PositionOnBoard(xPos, yPos)) return boardEdge;
+        else if (LocationEmpty(xPos, yPos)) return PuzzleEdge.Socket;
+        else return GetPuzzlePiece(xPos, yPos).GetTop();
     }
 
     // returns true if the two edges can be placed next to each other

@@ -48,4 +48,16 @@ public class Enemy
     {
         return attackPattern;
     }
+
+    // returns true if the enemy has hp remaining
+    public bool Alive()
+    {
+        return currentHealth > 0;
+    }
+
+    // returns true if the enemy can be targeted
+    public bool ValidTarget()
+    {
+        return Alive();
+    }
 }

@@ -157,7 +157,7 @@ public class CombatManager : MonoBehaviour
                 }
                 break;
             case UIID.Board:
-                PuzzlePiece boardPiece = puzzleBoard.GetPuzzlePieceFromIndex(index);
+                PuzzlePiece boardPiece = puzzleBoard.GetPuzzlePiece(index);
                 if (boardPiece != null)
                 {
                     SetTooltipUIFromPuzzlePiece(boardPiece);
@@ -191,7 +191,7 @@ public class CombatManager : MonoBehaviour
     // updates the Sprite of the PuzzlePiece at a specified location on the PuzzleBoard
     public void UpdateBoardPieceSprite(int index)
     {
-        PuzzlePiece boardPiece = puzzleBoard.GetPuzzlePieceFromIndex(index);
+        PuzzlePiece boardPiece = puzzleBoard.GetPuzzlePiece(index);
         if (boardPiece != null)
         {
             boardPuzzlePieceRenderers[index].UpdateSprites(boardPiece);
@@ -331,7 +331,7 @@ public class CombatManager : MonoBehaviour
     {
         if (index < handPile.GetSize() && selectedPuzzlePiece == null)
         {
-            combatState = CombatState.PieceSelected;
+            SetCombatState(CombatState.PieceSelected);
             selectedPuzzlePiece = handPile.DrawPuzzlePiece(index);
             SetMousePuzzle(selectedPuzzlePiece);
             UpdateHandSprites();
@@ -341,24 +341,50 @@ public class CombatManager : MonoBehaviour
     // returns the selected PuzzlePiece to the player's hand
     public void ReturnHandSelection()
     {
-
+        SetCombatState(CombatState.PlayerTurn);
+        handPile.AddPuzzlePiece(selectedPuzzlePiece);
+        selectedPuzzlePiece = null;
+        ClearMouseImage();
+        UpdateHandSprites();
     }
 
     // attempts to place the selected PuzzlePiece on the PuzzleBoard
     public void AttemptBoardPlacement(int index)
     {
-
+        SetCombatState(CombatState.PlayerTurn);
+        if (puzzleBoard.PieceCanFit(index, selectedPuzzlePiece))
+        {
+            puzzleBoard.PlacePiece(selectedPuzzlePiece, index);
+            selectedPuzzlePiece = null;
+            ClearMouseImage();
+            UpdateBoardPieceSprites();
+        }
+        else
+        {
+            ReturnHandSelection();
+        }
     }
 
     // attempts to use the selected action on the selected target
     public void AttemptPickTarget(int index)
     {
-
+        if (index < enemies.Count && enemies[index].ValidTarget())
+        {
+            SetCombatState(CombatState.PlayerTurn);
+            SelectTarget(enemies[index]);
+            ClearMouseImage();
+        }
     }
 
     // changes the CombatState
     public void SetCombatState(CombatState newCombatState)
     {
         combatState = newCombatState;
+    }
+
+    // selects the provided enemy as the target of the current effect
+    public void SelectTarget(Enemy enemy)
+    {
+
     }
 }
