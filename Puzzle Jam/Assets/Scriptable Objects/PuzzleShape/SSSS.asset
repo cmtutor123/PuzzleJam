@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44acc3cb60b388443bbd30c8929cc378, type: 3}
   m_Name: SSSS
   m_EditorClassIdentifier: 
-  top: 1
-  left: 1
-  right: 1
-  bottom: 1
+  topEdge: 1
+  leftEdge: 1
+  rightEdge: 1
+  bottomEdge: 1

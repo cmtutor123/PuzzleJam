@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44acc3cb60b388443bbd30c8929cc378, type: 3}
   m_Name: KKKK
   m_EditorClassIdentifier: 
-  top: 2
-  left: 2
-  right: 2
-  bottom: 2
+  topEdge: 2
+  leftEdge: 2
+  rightEdge: 2
+  bottomEdge: 2

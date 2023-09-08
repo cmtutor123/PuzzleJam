@@ -147,7 +147,6 @@ public class CombatManager : MonoBehaviour
     // updates the tooltip ui based on the ui id and index provided
     public void UpdateTooltipUI(UIID uiid, int index)
     {
-        return;
         switch (uiid)
         {
             case UIID.Hand:
@@ -175,7 +174,6 @@ public class CombatManager : MonoBehaviour
     // removes tooltip ui from screen
     public void UnloadTooltipUI()
     {
-        return;
         tooltipManager.UnloadSprites();
     }
     

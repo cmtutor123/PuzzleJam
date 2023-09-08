@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class TooltipManager : SpriteManager
 {
     [Header("TextMeshPro")]
     [SerializeField] private TextMeshProUGUI tooltipName;
     [SerializeField] private TextMeshProUGUI tooltipDescription;
-    [Header("SpriteRenderer")]
-    [SerializeField] private SpriteRenderer backgroundRenderer;
+    [Header("Images")]
+    [SerializeField] private Image image;
+    [SerializeField] private Image backgroundRenderer;
     [Header("Sprite")]
+    [SerializeField] private Sprite emptySprite;
     [SerializeField] private Sprite backgroundSprite;
 
     // changes the tooltip text
@@ -23,16 +26,17 @@ public class TooltipManager : SpriteManager
     // changes the tooltip Sprites
     public override void SetSprite(Sprite sprite)
     {
-        base.SetSprite(sprite);
+        if (sprite != null) image.sprite = sprite;
+        else image.sprite = emptySprite;
         backgroundRenderer.sprite = backgroundSprite;
     }
 
     // hides the text and images
     public override void UnloadSprites()
     {
-        base.UnloadSprites();
         tooltipName.text = string.Empty;
         tooltipDescription.text = string.Empty;
-        backgroundRenderer.sprite = null;
+        image.sprite = emptySprite;
+        backgroundRenderer.sprite = emptySprite;
     }
 }
