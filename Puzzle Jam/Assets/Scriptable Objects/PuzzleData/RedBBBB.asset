@@ -14,3 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleShape: {fileID: 11400000, guid: dbf8e6ec45e54054896747c0544b59f9, type: 2}
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
+  puzzleImage: {fileID: 0}
+  puzzleName: Instant Combo
+  puzzleDescription: 'On combo, deal 5 damage to a random enemy up to 3 times. '
+  puzzleEffects:
+  - triggerType: 6
+    hasTriggerColor: 0
+    triggerColor: {fileID: 0}
+    effectType: 1
+    buffID: 0
+    modificationType: 0
+    destroyCompletely: 0
+    newColor: {fileID: 0}
+    shapeChange: 0
+    targetType: 2
+    limitPieceSelection: 0
+    limitTargetColor: 0
+    targetColor: {fileID: 0}
+    amount: 0
+    amountConstant: 5
+    amountMin: 0
+    amountMax: 0
+    amountVariableSource: 0
+    amountPuzzlePieceRange: 0
+    amountLimitColor: 0
+    amountColor: {fileID: 0}
+    amountVariableCoefficient: 0
+    amountVariableConstant: 0
+    repeats: 1
+    repetitions: 2
+    repetitionsConstant: 0
+    repetitionsMin: 1
+    repetitionsMax: 3
+    repetitionsVariableSource: 0
+    repetitionsPuzzlePieceRange: 0
+    repetitionsLimitColor: 0
+    repetitionsColor: {fileID: 0}
+    repetitionsVariableCoefficient: 0
+    repetitionsVariableConstant: 0

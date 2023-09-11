@@ -9,7 +9,7 @@ using UnityEditor.UIElements;
 public class PuzzleEffectEditor : PropertyDrawer
 {
     private float fieldSize = 16;
-    private float padding = 2;
+    private float padding = 4;
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {

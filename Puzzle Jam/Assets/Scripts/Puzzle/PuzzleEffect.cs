@@ -68,4 +68,21 @@ public class PuzzleEffect
     //      if Variable
     [SerializeField] private int repetitionsVariableCoefficient;
     [SerializeField] private int repetitionsVariableConstant;
+
+    public TriggerType GetTriggerType()
+    {
+        return triggerType;
+    }
+
+    public bool HasTriggerConditions()
+    {
+        if (triggerType == TriggerType.Adjacent || triggerType == TriggerType.Connected || triggerType == TriggerType.Chain)
+        {
+            if (hasTriggerColor)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

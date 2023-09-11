@@ -15,6 +15,40 @@ MonoBehaviour:
   puzzleShape: {fileID: 11400000, guid: a798dff2bde1f554f8e7a8e817551412, type: 2}
   puzzleColor: {fileID: 11400000, guid: 07cebbd8c86d28844b98fefe91c767ac, type: 2}
   puzzleImage: {fileID: 21300000, guid: 0ae0b95a1706f274dbf030b5d48c1cf1, type: 3}
-  puzzleName: Test Name
-  puzzleDescription: Test Description
-  puzzleEffects: []
+  puzzleName: Basic Damage
+  puzzleDescription: Deals 10 damage to target enemy.
+  puzzleEffects:
+  - triggerType: 1
+    hasTriggerColor: 0
+    triggerColor: {fileID: 0}
+    effectType: 1
+    buffID: 0
+    modificationType: 0
+    destroyCompletely: 0
+    newColor: {fileID: 0}
+    shapeChange: 0
+    targetType: 0
+    limitPieceSelection: 0
+    limitTargetColor: 0
+    targetColor: {fileID: 0}
+    amount: 0
+    amountConstant: 10
+    amountMin: 0
+    amountMax: 0
+    amountVariableSource: 0
+    amountPuzzlePieceRange: 0
+    amountLimitColor: 0
+    amountColor: {fileID: 0}
+    amountVariableCoefficient: 0
+    amountVariableConstant: 0
+    repeats: 0
+    repetitions: 0
+    repetitionsConstant: 0
+    repetitionsMin: 0
+    repetitionsMax: 0
+    repetitionsVariableSource: 0
+    repetitionsPuzzlePieceRange: 0
+    repetitionsLimitColor: 0
+    repetitionsColor: {fileID: 0}
+    repetitionsVariableCoefficient: 0
+    repetitionsVariableConstant: 0
