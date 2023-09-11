@@ -14,6 +14,8 @@ public class PuzzleData : ScriptableObject
     [Header("Puzzle Information")]
     [SerializeField] private string puzzleName;
     [SerializeField] private string puzzleDescription;
+    [Header("Puzzle Effects")]
+    [SerializeField] private List<PuzzleEffect> puzzleEffects;
 
     // returns the PuzzleShape
     public PuzzleShape GetPuzzleShape()

@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleShape: {fileID: 11400000, guid: eb46b920698e477478dc966444425b17, type: 2}
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
+  puzzleImage: {fileID: 0}
+  puzzleName: 
+  puzzleDescription: 
+  puzzleEffects: []
