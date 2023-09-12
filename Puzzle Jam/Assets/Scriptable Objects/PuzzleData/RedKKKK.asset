@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf05c41416271f4ab6e8e5c8e7a8bb6, type: 3}
   m_Name: RedKKKK
   m_EditorClassIdentifier: 
-  puzzleShape: {fileID: 11400000, guid: 792b50f5bc600314b8cdd78142fef2af, type: 2}
+  puzzleShape:
+    topEdge: 2
+    leftEdge: 2
+    rightEdge: 2
+    bottomEdge: 2
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
   puzzleImage: {fileID: 0}
   puzzleName: Damage All

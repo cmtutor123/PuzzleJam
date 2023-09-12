@@ -1,11 +1,11 @@
     using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-[CreateAssetMenu(fileName = "New Puzzle Shape", menuName = "Puzzle/Shape")]
-public class PuzzleShape : ScriptableObject
+[Serializable]
+public class PuzzleShape
 {
-    [Header("Puzzle Piece Shape")]
     [SerializeField] private PuzzleEdge topEdge;
     [SerializeField] private PuzzleEdge leftEdge;
     [SerializeField] private PuzzleEdge rightEdge;

@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf05c41416271f4ab6e8e5c8e7a8bb6, type: 3}
   m_Name: TestData
   m_EditorClassIdentifier: 
-  puzzleShape: {fileID: 11400000, guid: a798dff2bde1f554f8e7a8e817551412, type: 2}
+  puzzleShape:
+    topEdge: 2
+    leftEdge: 1
+    rightEdge: 2
+    bottomEdge: 0
   puzzleColor: {fileID: 11400000, guid: 07cebbd8c86d28844b98fefe91c767ac, type: 2}
   puzzleImage: {fileID: 21300000, guid: 0ae0b95a1706f274dbf030b5d48c1cf1, type: 3}
   puzzleName: Basic Damage

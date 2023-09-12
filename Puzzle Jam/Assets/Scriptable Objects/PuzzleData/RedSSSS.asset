@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf05c41416271f4ab6e8e5c8e7a8bb6, type: 3}
   m_Name: RedSSSS
   m_EditorClassIdentifier: 
-  puzzleShape: {fileID: 11400000, guid: eb46b920698e477478dc966444425b17, type: 2}
+  puzzleShape:
+    topEdge: 1
+    leftEdge: 1
+    rightEdge: 1
+    bottomEdge: 1
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
   puzzleImage: {fileID: 0}
   puzzleName: Self Damage Shield
