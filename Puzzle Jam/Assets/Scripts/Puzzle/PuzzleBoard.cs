@@ -209,4 +209,34 @@ public class PuzzleBoard
     {
         return width * height;
     }
+
+    // returns all puzzle pieces that are adjacent
+    public List<PuzzlePiece> GetAdjacent(int index)
+    {
+        return null;
+    }
+
+    // returns all puzzle pieces that are connected
+    public List<PuzzlePiece> GetConnected(int index)
+    {
+        return null;
+    }
+
+    // returns all puzzle pieces that are in the chain
+    public List<PuzzlePiece> GetChain(int index)
+    {
+        return null;
+    }
+
+    // returns all puzzle pieces that are in the combo
+    public List<PuzzlePiece> GetCombo(int index)
+    {
+        return null;
+    }
+
+    // returns whether a piece is in a combo
+    public bool InCombo(int index)
+    {
+        return false;
+    }
 }
