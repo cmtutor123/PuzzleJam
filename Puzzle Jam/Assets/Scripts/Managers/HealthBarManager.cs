@@ -75,6 +75,7 @@ public class HealthBarManager : MonoBehaviour
     /// </summary>
     public void UpdateHealthBarUI()
     {
+        lerpTimer += Time.deltaTime;
         float fillFront = frontHealthBar.fillAmount;
         float fillBack = backHealthBar.fillAmount;
         float hFraction;
@@ -84,7 +85,6 @@ public class HealthBarManager : MonoBehaviour
         {
             frontHealthBar.fillAmount = hFraction;
             backHealthBar.color = damageColor;
-            lerpTimer += Time.deltaTime;
             float percentComplete;
             if (chipSpeed <= 0) percentComplete = 1;
             else percentComplete = lerpTimer / chipSpeed;
@@ -95,7 +95,6 @@ public class HealthBarManager : MonoBehaviour
         {
             backHealthBar.color = healColor;
             backHealthBar.fillAmount = hFraction;
-            lerpTimer += Time.deltaTime;
             float percentComplete;
             if (chipSpeed <= 0) percentComplete = 1;
             else percentComplete = lerpTimer / chipSpeed;

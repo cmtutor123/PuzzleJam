@@ -22,6 +22,8 @@ public class CombatManager : MonoBehaviour
     private PuzzleBoard puzzleBoard;
     private List<Enemy> enemies;
 
+    private List<PuzzleEffect> effectQueue;
+
     //[SerializeField] private GameObject combatCanvas;
 
     [Header("UI Elements")]
@@ -48,6 +50,7 @@ public class CombatManager : MonoBehaviour
         puzzleBoard = new PuzzleBoard(defaultBoardSize);
         enemies = new List<Enemy>();
         selectedPuzzlePiece = null;
+        effectQueue = new List<PuzzleEffect>();
         StartEncounter(testEncounter);
     }
 
@@ -496,7 +499,14 @@ public class CombatManager : MonoBehaviour
     /// <param name="enemy">The Enemy to target</param>
     public void SelectTarget(Enemy enemy)
     {
-
+        if (GetCurrentEffect() != null)
+        {
+            EffectType currentEffectType = GetCurrentEffect().GetEffectType();
+            if (currentEffectType == EffectType.Damage || currentEffectType == EffectType.Debuff)
+            {
+                ActivateNextEffect(enemy);
+            }
+        }
     }
 
     /// <summary>
@@ -532,15 +542,15 @@ public class CombatManager : MonoBehaviour
     public void PlacePiece(PuzzlePiece puzzlePiece, int index)
     {
         puzzleBoard.PlacePiece(puzzlePiece, index);
-        ActivateEffects(CheckForTrigger(puzzlePiece, TriggerType.Place));
-        ActivateEffects(CheckForTrigger(puzzleBoard.GetAdjacent(index), TriggerType.Adjacent));
-        ActivateEffects(CheckForTrigger(puzzleBoard.GetConnected(index), TriggerType.Connected));
-        ActivateEffects(CheckForTrigger(puzzleBoard.GetChain(index), TriggerType.Chain));
+        QueueEffects(CheckForTrigger(puzzlePiece, TriggerType.Place));
+        QueueEffects(CheckForTrigger(puzzleBoard.GetAdjacent(index), TriggerType.Adjacent));
+        QueueEffects(CheckForTrigger(puzzleBoard.GetConnected(index), TriggerType.Connected));
+        QueueEffects(CheckForTrigger(puzzleBoard.GetChain(index), TriggerType.Chain));
         if (puzzleBoard.InCombo(index))
         {
             List<PuzzlePiece> pieces = puzzleBoard.GetChain(index);
             pieces.Insert(0, puzzlePiece);
-            ActivateEffects(CheckForTrigger(pieces, TriggerType.Combo));
+            QueueEffects(CheckForTrigger(pieces, TriggerType.Combo));
             List<int> indexes = puzzleBoard.GetChainIndex(index);
             indexes.Insert(0, index);
             DestroyPiece(index);
@@ -583,20 +593,141 @@ public class CombatManager : MonoBehaviour
         return puzzleEffects;
     }
 
-    public void ActivateEffects(List<PuzzleEffect> effects)
+    public void QueueEffects(List<PuzzleEffect> effects)
     {
+        if (effects.Count > 0) SetCombatState(CombatState.PickingTarget);
         foreach(PuzzleEffect effect in effects)
         {
-            switch(effect)
-            {
-
-            }
+            effectQueue.Add(effect);
         }
+        ActivateNextEffect();
     }
 
     public void DestroyPiece(int index)
     {
-        ActivateEffects(CheckForTrigger(puzzleBoard.GetPuzzlePiece(index), TriggerType.Destroy));
+        QueueEffects(CheckForTrigger(puzzleBoard.GetPuzzlePiece(index), TriggerType.Destroy));
         discardPile.AddPuzzlePiece(puzzleBoard.RemovePiece(index));
+    }
+
+    public PuzzleEffect GetCurrentEffect()
+    {
+        if (effectQueue.Count > 0) return effectQueue[0];
+        else return null;
+    }
+
+    public void ActivateNextEffect()
+    {
+        if (GetCurrentEffect() == null) return;
+        SetCombatState(CombatState.DoingStuff);
+        PuzzleEffect effect = GetCurrentEffect();
+        if (effect.GetEffectType() == EffectType.Damage && effect.GetTargetType() == TargetType.Single)
+        {
+            GetTarget();
+        }
+    }
+
+    public void ActivateNextEffect(PuzzlePiece piece)
+    {
+
+    }
+
+    public void ActivateNextEffect(Enemy enemy)
+    {
+        SetCombatState(CombatState.DoingStuff);
+        PuzzleEffect effect = GetCurrentEffect();
+        if (effect.GetEffectType() == EffectType.Damage)
+        {
+            int damage = 0, repetitions = 1;
+            switch (effect.GetAmountValueType())
+            {
+                case ValueType.Constant:
+                    damage = effect.GetAmountConstant();
+                    break;
+                case ValueType.Random:
+                    damage = Random.Range(effect.GetAmountMin(), effect.GetAmountMax() + 1);
+                    break;
+                case ValueType.Variable:
+                    ConditionSource source = effect.GetAmountVariableSource();
+                    if (source == ConditionSource.PuzzleBoard)
+                    {
+                        List<PuzzlePiece> inRange = new List<PuzzlePiece>();
+                        switch (effect.GetAmountPuzzlePieceRange())
+                        {
+                            case PuzzlePieceRange.Adjacent:
+                                break;
+                            case PuzzlePieceRange.Connected:
+
+                                break;
+                            case PuzzlePieceRange.Chain:
+
+                                break;
+                            case PuzzlePieceRange.All:
+
+                                break;
+                        }
+                    }
+                    break;
+            }
+            if (effect.GetRepeats())
+            {
+                switch (effect.GetRepetitionsValueType())
+                {
+                    case ValueType.Constant:
+                        damage = effect.GetRepetitionsConstant();
+                        break;
+                    case ValueType.Random:
+                        damage = Random.Range(effect.GetRepetitionsMin(), effect.GetRepetitionsMax() + 1);
+                        break;
+                    case ValueType.Variable:
+                        ConditionSource source = effect.GetAmountVariableSource();
+                        if (source == ConditionSource.PuzzleBoard)
+                        {
+                            List<PuzzlePiece> inRange = new List<PuzzlePiece>();
+                            switch (effect.GetAmountPuzzlePieceRange())
+                            {
+                                case PuzzlePieceRange.Adjacent:
+                                    break;
+                                case PuzzlePieceRange.Connected:
+
+                                    break;
+                                case PuzzlePieceRange.Chain:
+
+                                    break;
+                                case PuzzlePieceRange.All:
+
+                                    break;
+                            }
+                        }
+                        break;
+                }
+            }
+            DamageSingleEnemy(enemy, damage, repetitions);
+
+        }
+        effectQueue.RemoveAt(0);
+        ActivateNextEffect();
+    }
+
+    public void DamageSingleEnemy(Enemy enemy, int damage, int repetitions)
+    {
+        for (int i = 0; i < repetitions; i++)
+        {
+            enemy.Damage(damage);
+        }
+        ReloadEnemySprites();
+    }    
+
+    public void GetTarget()
+    {
+        SetMouseSprite(enemies[0].GetSpriteIdle());
+        SetCombatState(CombatState.PickingTarget);
+    }
+
+    public void ReloadEnemySprites()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            enemySpriteManagers[i].SetSprite(enemies[0].GetSpriteIdle(), enemies[0].GetCurrentHealth(), enemies[0].GetMaxHealth(), enemies[0].GetNextAttack());
+        }
     }
 }

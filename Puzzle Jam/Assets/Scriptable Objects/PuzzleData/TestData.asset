@@ -31,7 +31,7 @@ MonoBehaviour:
     destroyCompletely: 0
     newColor: {fileID: 0}
     shapeChange: 0
-    targetType: 0
+    targetType: 1
     limitPieceSelection: 0
     limitTargetColor: 0
     targetColor: {fileID: 0}

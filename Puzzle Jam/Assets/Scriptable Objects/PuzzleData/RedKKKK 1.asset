@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bf05c41416271f4ab6e8e5c8e7a8bb6, type: 3}
-  m_Name: RedKKKK
+  m_Name: RedKKKK 1
   m_EditorClassIdentifier: 
   puzzleShape:
     topEdge: 2
@@ -20,7 +20,8 @@ MonoBehaviour:
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
   puzzleImage: {fileID: 0}
   puzzleName: Damage All
-  puzzleDescription: Deals 5 damage
+  puzzleDescription: Deals damage to all enemies equal to 5 times the number of connected
+    pieces plus 5
   puzzleEffects:
   - triggerType: 1
     hasTriggerColor: 0
@@ -31,12 +32,12 @@ MonoBehaviour:
     destroyCompletely: 0
     newColor: {fileID: 0}
     shapeChange: 0
-    targetType: 1
+    targetType: 3
     limitPieceSelection: 0
     limitTargetColor: 0
     targetColor: {fileID: 0}
-    amount: 0
-    amountConstant: 5
+    amount: 1
+    amountConstant: 0
     amountMin: 0
     amountMax: 0
     amountVariableSource: 1

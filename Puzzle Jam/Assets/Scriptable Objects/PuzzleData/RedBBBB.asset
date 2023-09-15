@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf05c41416271f4ab6e8e5c8e7a8bb6, type: 3}
   m_Name: RedBBBB
   m_EditorClassIdentifier: 
-  puzzleShape: {fileID: 11400000, guid: dbf8e6ec45e54054896747c0544b59f9, type: 2}
+  puzzleShape:
+    topEdge: 0
+    leftEdge: 0
+    rightEdge: 0
+    bottomEdge: 0
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
   puzzleImage: {fileID: 0}
   puzzleName: Instant Combo
@@ -27,7 +31,7 @@ MonoBehaviour:
     destroyCompletely: 0
     newColor: {fileID: 0}
     shapeChange: 0
-    targetType: 2
+    targetType: 1
     limitPieceSelection: 0
     limitTargetColor: 0
     targetColor: {fileID: 0}

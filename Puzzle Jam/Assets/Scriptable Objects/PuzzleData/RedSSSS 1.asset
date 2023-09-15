@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bf05c41416271f4ab6e8e5c8e7a8bb6, type: 3}
-  m_Name: RedSSSS
+  m_Name: RedSSSS 1
   m_EditorClassIdentifier: 
   puzzleShape:
     topEdge: 1
@@ -38,6 +38,40 @@ MonoBehaviour:
     targetColor: {fileID: 0}
     amount: 0
     amountConstant: 20
+    amountMin: 0
+    amountMax: 0
+    amountVariableSource: 0
+    amountPuzzlePieceRange: 0
+    amountLimitColor: 0
+    amountColor: {fileID: 0}
+    amountVariableCoefficient: 0
+    amountVariableConstant: 0
+    repeats: 0
+    repetitions: 0
+    repetitionsConstant: 0
+    repetitionsMin: 0
+    repetitionsMax: 0
+    repetitionsVariableSource: 0
+    repetitionsPuzzlePieceRange: 0
+    repetitionsLimitColor: 0
+    repetitionsColor: {fileID: 0}
+    repetitionsVariableCoefficient: 0
+    repetitionsVariableConstant: 0
+  - triggerType: 2
+    hasTriggerColor: 0
+    triggerColor: {fileID: 0}
+    effectType: 7
+    buffID: 0
+    modificationType: 0
+    destroyCompletely: 0
+    newColor: {fileID: 0}
+    shapeChange: 0
+    targetType: 0
+    limitPieceSelection: 0
+    limitTargetColor: 0
+    targetColor: {fileID: 0}
+    amount: 0
+    amountConstant: 5
     amountMin: 0
     amountMax: 0
     amountVariableSource: 0

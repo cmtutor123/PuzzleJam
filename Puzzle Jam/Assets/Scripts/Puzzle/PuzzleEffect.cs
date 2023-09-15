@@ -96,5 +96,82 @@ public class PuzzleEffect
         return effectType;
     }
 
+    public ValueType GetAmountValueType()
+    {
+        return amount;
+    }
 
+    public int GetAmountConstant()
+    {
+        return amountConstant;
+    }
+
+    public int GetAmountMin()
+    {
+        return amountMin;
+    }
+
+    public int GetAmountMax()
+    {
+        return amountMax;
+    }
+
+    public int GetAmountVariableConstant()
+    {
+        return amountVariableConstant;
+    }
+
+    public int GetAmountVariableCoefficient()
+    {
+        return amountVariableCoefficient;
+    }
+
+    public ConditionSource GetAmountVariableSource()
+    {
+        return amountVariableSource;
+    }
+
+    public PuzzlePieceRange GetAmountPuzzlePieceRange()
+    {
+        return amountPuzzlePieceRange;
+    }
+
+    public bool GetAmountLimitColor()
+    {
+        return amountLimitColor;
+    }
+
+    public PuzzleColor GetAmountColor()
+    {
+        return amountColor;
+    }
+
+    public bool GetRepeats()
+    {
+        return repeats;
+    }
+    public ValueType GetRepetitionsValueType()
+    {
+        return repetitions;
+    }
+
+    public int GetRepetitionsConstant()
+    {
+        return repetitionsConstant;
+    }
+
+    public int GetRepetitionsMin()
+    {
+        return repetitionsMin;
+    }
+
+    public int GetRepetitionsMax()
+    {
+        return repetitionsMax;
+    }
+
+    public TargetType GetTargetType()
+    {
+        return targetType;
+    }
 }

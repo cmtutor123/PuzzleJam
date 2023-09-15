@@ -68,4 +68,10 @@ public class Enemy
     {
         return attackPattern.GetAttack(turnCounter);
     }
+
+    public void Damage(int damage)
+    {
+        damage = Mathf.Clamp(damage, 0, maxHealth);
+        currentHealth -= damage;
+    }
 }
