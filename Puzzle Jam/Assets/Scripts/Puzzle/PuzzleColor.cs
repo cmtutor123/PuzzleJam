@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Holds information on a PuzzlePiece Color
+/// </summary>
 [CreateAssetMenu(fileName = "New Puzzle Color", menuName = "Puzzle/Color")]
 public class PuzzleColor : ScriptableObject
 {
@@ -10,13 +13,13 @@ public class PuzzleColor : ScriptableObject
     [Header("Name")]
     [SerializeField] private string colorName;
 
-    // returns the Color
+    /// <returns>The Color value</returns>
     public Color GetColor()
     {
         return color;
     }
 
-    // returns the name of the PuzzleColor
+    /// <returns>The color name</returns>
     public string GetName()
     {
         return colorName;

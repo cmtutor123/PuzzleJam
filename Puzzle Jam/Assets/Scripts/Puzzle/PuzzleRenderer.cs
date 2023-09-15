@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages sprites to form puzzle pieces dynamically
+/// </summary>
 public class PuzzleRenderer : MonoBehaviour
 {
     [Header("Puzzle Piece Segments")]
@@ -28,8 +31,10 @@ public class PuzzleRenderer : MonoBehaviour
     [SerializeField] private Image bottomRight;
     [SerializeField] private Image bottom;
     
-
-    // updates the sprite renderers to match a given puzzle piece
+    /// <summary>
+    /// Updates the sprite renderers to match a given PuzzlePiece
+    /// </summary>
+    /// <param name="puzzlePiece">The PuzzlePiece to match</param>
     public void UpdateSprites(PuzzlePiece puzzlePiece)
     {
         // reads the data from the puzzle piece
@@ -78,25 +83,38 @@ public class PuzzleRenderer : MonoBehaviour
         UpdateSprite(image, puzzleImage);
     }
 
-    // updates the sprite renderers to match a given puzzle data
+    /// <summary>
+    /// Updates the sprite renderers to match a given PuzzlePiece
+    /// </summary>
+    /// <param name="puzzleData">The PuzzleData of the PuzzlePiece to match</param>
     public void UpdateSprites(PuzzleData puzzleData)
     {
         UpdateSprites(new PuzzlePiece(puzzleData));
     }
 
-    // changes the color of a sprite renderer
+    /// <summary>
+    /// Changes the color of a sprite renderer
+    /// </summary>
+    /// <param name="renderer">The sprite renderer to change</param>
+    /// <param name="color">The color to change it to</param>
     public void UpdateColor(Image renderer, Color color)
     {
         renderer.color = color;
     }
 
-    // changes the sprite of a sprite renderer
+    /// <summary>
+    /// Changes the sprite of a sprite renderer
+    /// </summary>
+    /// <param name="renderer">The sprite renderer to change</param>
+    /// <param name="sprite">The sprite to change it to</param>
     public void UpdateSprite(Image renderer, Sprite sprite)
     {
         renderer.sprite = sprite;
     }
 
-    // removes all of the sprites from the sprite renderers
+    /// <summary>
+    /// Removes all of the sprites from the sprite renderers
+    /// </summary>
     public void UnloadSprites()
     {
         UpdateSprite(top, empty);

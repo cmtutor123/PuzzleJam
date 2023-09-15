@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Contains the data relevant to each character
+/// </summary>
 [CreateAssetMenu(fileName = "New Character Data", menuName = "Character/Data")]
 public class CharacterData : ScriptableObject
 {
@@ -10,13 +13,13 @@ public class CharacterData : ScriptableObject
     [Header("Starting Puzzle Pieces")]
     [SerializeField] private List<PuzzleData> startingPuzzlePieces;
 
-    // returns the puzzle board Sprite
+    /// <returns>The Sprite for the puzzle board</returns>
     public Sprite GetSpritePuzzleBoard()
     {
         return spritePuzzleBoard;
     }
 
-    // returns a list of PuzzlePieces from PuzzleData
+    /// <returns>A list of PuzzlePiece objects from PuzzleData</returns>
     public List<PuzzlePiece> GetStartingPuzzlePieces()
     {
         List<PuzzlePiece> startingPieces = new List<PuzzlePiece>();

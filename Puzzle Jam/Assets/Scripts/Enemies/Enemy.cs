@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Holds the data for active enemies in combat
+/// </summary>
 public class Enemy
 {
     private string enemyName;
@@ -9,7 +12,7 @@ public class Enemy
     private Sprite spriteIdle;
     private EnemyAttackPattern attackPattern;
 
-    // creates an Enemy from EnemyData
+    /// <param name="enemyData">The EnemyData to load from</param>
     public Enemy(EnemyData enemyData)
     {
         enemyName = enemyData.GetName();
@@ -19,43 +22,43 @@ public class Enemy
         attackPattern = enemyData.GetEnemyAttackPattern();
     }
 
-    // returns the enemy's name
+    /// <returns>The enemy's name</returns>
     public string GetName()
     {
         return enemyName;
     }
 
-    // returns the enemy's max health
+    /// <returns>The enemy's max health</returns>
     public int GetMaxHealth()
     {
         return maxHealth;
     }
 
-    // returns the enemy's current health
+    /// <returns>The enemy's current health</returns>
     public int GetCurrentHealth()
     {
         return currentHealth;
     }
 
-    // returns the idle Sprite
+    /// <returns>The enemy's idle sprite</returns>
     public Sprite GetSpriteIdle()
     {
         return spriteIdle;
     }
 
-    // returns the enemy's EnemyAttackPattern
+    /// <returns>The enemy's EnemyAttackPattern</returns>
     public EnemyAttackPattern GetEnemyAttackPattern()
     {
         return attackPattern;
     }
 
-    // returns true if the enemy has hp remaining
+    /// <returns>Whether the enemy has health remaining</returns>
     public bool Alive()
     {
         return currentHealth > 0;
     }
 
-    // returns true if the enemy can be targeted
+    /// <returns>Whether the enemy can be targeted</returns>
     public bool ValidTarget()
     {
         return Alive();

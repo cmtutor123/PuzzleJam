@@ -4,6 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages the Tooltip
+/// </summary>
 public class TooltipManager : SpriteManager
 {
     [Header("TextMeshPro")]
@@ -16,14 +19,26 @@ public class TooltipManager : SpriteManager
     [SerializeField] private Sprite emptySprite;
     [SerializeField] private Sprite backgroundSprite;
 
-    // changes the tooltip text
+    private void Start()
+    {
+        UnloadSprites();
+    }
+
+    /// <summary>
+    /// Changes the tooltip text
+    /// </summary>
+    /// <param name="nameText">What to change the name to</param>
+    /// <param name="descriptionText">What to change the description to</param>
     public void SetText(string nameText, string descriptionText)
     {
         tooltipName.text = nameText;
         tooltipDescription.text = descriptionText;
     }
 
-    // changes the tooltip Sprites
+    /// <summary>
+    /// Changes the tooltip Sprites
+    /// </summary>
+    /// <param name="sprite">Sprite to change to</param>
     public override void SetSprite(Sprite sprite)
     {
         if (sprite != null) image.sprite = sprite;
@@ -31,7 +46,9 @@ public class TooltipManager : SpriteManager
         backgroundRenderer.sprite = backgroundSprite;
     }
 
-    // hides the text and images
+    /// <summary>
+    /// Hides the text and images of the tooltip
+    /// </summary>
     public override void UnloadSprites()
     {
         tooltipName.text = string.Empty;

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages character data
+/// </summary>
 public class PlayerManager : MonoBehaviour
 {
     [Header("Character Data")]
@@ -14,13 +17,13 @@ public class PlayerManager : MonoBehaviour
         puzzleDeck.AddPuzzlePieces(characterData.GetStartingPuzzlePieces());
     }
 
-    // returns the PuzzlePieces in the deck PuzzlePile
+    /// <returns>A list of PuzzlePiece objects generated from the player's current deck PuzzlePile</returns>
     public List<PuzzlePiece> GetPuzzleDeck()
     {
         return puzzleDeck.GetPuzzlePieces();
     }
 
-    // returns the puzzle board Sprite from CharacterData
+    /// <returns>The puzzle board sprite from CharacterData</returns>
     public Sprite GetPuzzleBoardSprite()
     {
         return characterData.GetSpritePuzzleBoard();

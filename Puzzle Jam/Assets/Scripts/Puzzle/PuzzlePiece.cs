@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// What the player sees and manipulates during combat
+/// </summary>
 public class PuzzlePiece
 {
     private PuzzleEdge topEdge, leftEdge, rightEdge, bottomEdge;
@@ -11,7 +14,7 @@ public class PuzzlePiece
     private string puzzleDescription;
     private string puzzleName;
 
-    // creates a PuzzlePiece from the given PuzzleData
+    /// <param name="puzzleData">The PuzzleData to create the PuzzlePiece from</param>
     public PuzzlePiece(PuzzleData puzzleData)
     {
         PuzzleShape puzzleShape = puzzleData.GetPuzzleShape();
@@ -25,7 +28,9 @@ public class PuzzlePiece
         puzzleName = puzzleData.GetName();
     }
 
-    // rotates the edges of the PuzzlePiece 90 degrees to the right
+    /// <summary>
+    /// Rotates the edges of the PuzzlePiece 90 degrees to the right
+    /// </summary>
     public void RotatePiece()
     {
         PuzzleEdge tempEdge = topEdge;
@@ -35,55 +40,59 @@ public class PuzzlePiece
         leftEdge = tempEdge;
     }
 
-    // returns the top edge
+    /// <returns>The top PuzzleEdge</returns>
     public PuzzleEdge GetTop()
     {
         return topEdge;
     }
 
-    // returns the left edge
+    /// <returns>The left PuzzleEdge</returns>
     public PuzzleEdge GetLeft()
     {
         return leftEdge;
     }
 
-    // returns the right edge
+    /// <returns>The right PuzzleEdge</returns>
     public PuzzleEdge GetRight()
     {
         return rightEdge;
     }
 
-    // returns the bottom edge
+    /// <returns>The bottom PuzzleEdge</returns>
     public PuzzleEdge GetBottom()
     {
         return bottomEdge;
     }
-
-    // returns the PuzzleColor
+    
+    /// <returns>The PuzzleColor of the PuzzlePiece</returns>
     public PuzzleColor GetPuzzleColor()
     {
         return puzzleColor;
     }
 
-    // returns the Color of the PuzzleColor
+    /// <returns>The Color of the PUzzlePiece's PuzzleColor</returns>
     public Color GetColor()
     {
         return puzzleColor.GetColor();
     }
 
-    // returns the Sprite displayed in the center of the PuzzlePiece
+    /// <returns>The sprite displayed in the center of the PuzzlePiece</returns>
     public Sprite GetImage()
     {
         return puzzleImage;
     }
 
     // returns the name of the PuzzlePiece
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>the name of the PuzzlePiece</returns>
     public string GetName()
     {
         return puzzleName;
     }
 
-    // returns the description of the PuzzlePiece
+    /// <returns>The description of the PuzzlePiece</returns>
     public string GetDescription()
     {
         return puzzleDescription;

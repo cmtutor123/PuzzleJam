@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Holds the data of enemies that Enemy objects load from
+/// </summary>
 [CreateAssetMenu(fileName = "New Enemy Data", menuName = "Enemy/Data")]
 public class EnemyData : ScriptableObject
 {
@@ -14,25 +17,25 @@ public class EnemyData : ScriptableObject
     [Header("Attack Pattern")]
     [SerializeField] private EnemyAttackPattern attackPattern;
 
-    // returns the enemy's name
+    /// <returns>The enemy's name</returns>
     public string GetName()
     {
         return enemyName;
     }    
     
-    // returns the enemy's max health
+    /// <returns>The enemy's max health</returns>
     public int GetMaxHealth()
     {
         return maxHealth;
     }
 
-    // returns the enemy's idle Sprite
+    /// <returns>The enemy's idle sprite</returns>
     public Sprite GetSpriteIdle()
     {
         return spriteIdle;
     }
 
-    // returns the enemy's EnemyAttackPattern
+    /// <returns>The enemy's EnemyAttackPattern</returns>
     public EnemyAttackPattern GetEnemyAttackPattern()
     {
         return attackPattern;

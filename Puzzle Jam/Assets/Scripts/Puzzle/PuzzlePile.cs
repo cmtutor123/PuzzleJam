@@ -2,20 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Contains a group of PuzzlePiece objects
+/// </summary>
 public class PuzzlePile
 {
     private bool hasMaxSize;
     private int maxSize;
     private List<PuzzlePiece> puzzlePieces;
 
-    // creates a PuzzlePile with no max size
+    /// <summary>
+    /// Creates a PuzzlePile with no max size
+    /// </summary>
     public PuzzlePile()
     {
         puzzlePieces = new List<PuzzlePiece>();
         hasMaxSize = false;
     }
 
-    // creates a PuzzlePile with the specified max size
+    /// <summary>
+    /// Create a PuzzlePiile with a max size
+    /// </summary>
+    /// <param name="maxSize">The max size of the PuzzlePile</param>
     public PuzzlePile(int maxSize)
     {
         puzzlePieces = new List<PuzzlePiece>();
@@ -23,25 +31,37 @@ public class PuzzlePile
         this.maxSize = maxSize;
     }
 
-    // adds a PuzzlePiece to the bottom of the PuzzlePile
+    /// <summary>
+    /// Adds a PuzzlePiece to the bottom of the PuzzlePile
+    /// </summary>
+    /// <param name="puzzlePiece">The PuzzlePiece to add to the PuzzlePile</param>
     public void AddPuzzlePiece(PuzzlePiece puzzlePiece)
     {
         if (puzzlePiece != null) puzzlePieces.Add(puzzlePiece);
     }
 
-    // adds multiple PuzzlePieces to the bottom of the PuzzlePile
+    /// <summary>
+    /// Adds multiple PuzzlePiece objects to the bottom of the PuzzlePile
+    /// </summary>
+    /// <param name="newPuzzlePieces">A list of the PuzzlePiece objects to be added</param>
     public void AddPuzzlePieces(List<PuzzlePiece> newPuzzlePieces)
     {
         if (newPuzzlePieces != null) puzzlePieces.AddRange(newPuzzlePieces);
     }
 
-    // checks whether the PuzzlePile has reached or gone over its maximum capacity
+    /// <summary>
+    /// Checks whether the PuzzlePile has reached its maximum capacity
+    /// </summary>
+    /// <returns>Whether the PuzzlePile is at its max size</returns>
     public bool AtMaxSize()
     {
         return hasMaxSize && puzzlePieces.Count >= maxSize;
     }
 
-    // removes all PuzzlePieces from the PuzzlePile and returns them
+    /// <summary>
+    /// Removes all PuzzlePieces from the PuzzlePile
+    /// </summary>
+    /// <returns>A list of the PuzzlePiece objects that were removed</returns>
     public List<PuzzlePiece> DiscardPile()
     {
         List<PuzzlePiece> discardedPieces = new List<PuzzlePiece>();
@@ -50,7 +70,10 @@ public class PuzzlePile
         return discardedPieces;
     }
 
-    // draws the PuzzlePiece at the top of the PuzzlePile
+    /// <summary>
+    /// Draws the PuzzlePiece at the top of the PuzzlePile
+    /// </summary>
+    /// <returns>The PuzzlePiece being drawn</returns>
     public PuzzlePiece DrawPuzzlePiece()
     {
         if (puzzlePieces.Count == 0) return null;
@@ -62,7 +85,11 @@ public class PuzzlePile
         }
     }
 
-    // draws the PuzzlePiece at the specified index of the PuzzlePile
+    /// <summary>
+    /// Draws a PuzzlePiece from the PuzzlePile
+    /// </summary>
+    /// <param name="index">The index of the PuzzlePiece being drawn</param>
+    /// <returns>The PuzzlePiece being drawn</returns>
     public PuzzlePiece DrawPuzzlePiece(int index)
     {
         if (puzzlePieces.Count == 0) return null;
@@ -75,32 +102,37 @@ public class PuzzlePile
         }
     }
 
-    // removes all PuzzlePieces from the PuzzlePile
+    /// <summary>
+    /// Removes all PuzzlePieces from the PuzzlePile
+    /// </summary>
     public void EmptyPile()
     {
         puzzlePieces.Clear();
     }
 
-    // returns the PuzzlePiece at the specified index
+    /// <param name="index">The index of the PuzzlePiece</param>
+    /// <returns>The PuzzlePiece at the specified index</returns>
     public PuzzlePiece GetPuzzlePiece(int index)
     {
         return puzzlePieces[index];
     }
 
-    // returns all PuzzlePieces in the PuzzlePile
+    /// <returns>A list of all PuzzlePiece objects in the PuzzlePile</returns>
     public List<PuzzlePiece> GetPuzzlePieces()
     {
         return puzzlePieces;
     }
 
-    // returns the number of PuzzlePieces in the PuzzlePile
+    /// <returns>The number of PuzzlePieces in the PuzzlePile</returns>
     public int GetSize()
     {
         if (puzzlePieces != null) return puzzlePieces.Count;
         else return 0;
     }
 
-    // randomizes the order of PuzzlePieces in the PuzzlePile
+    /// <summary>
+    /// Randomizes the order of PuzzlePiece objects in the PuzzlePile
+    /// </summary>
     public void ShufflePile()
     {
         List<PuzzlePiece> newList = new List<PuzzlePiece>();

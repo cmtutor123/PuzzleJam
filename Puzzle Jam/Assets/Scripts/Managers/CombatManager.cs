@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Contains all of the logic required to run combat
+/// </summary>
 [RequireComponent(typeof(PlayerManager))]
 public class CombatManager : MonoBehaviour
 {
@@ -45,7 +48,10 @@ public class CombatManager : MonoBehaviour
         StartEncounter(testEncounter);
     }
 
-    // starts an encounter using data from PlayerData and the EnemyEncounter
+    /// <summary>
+    /// Starts an encounter using data from the current PlayerData and EnemyEncounter objects
+    /// </summary>
+    /// <param name="encounter">The EnemyEncounter object containing the enemies that are going to be fought</param>
     public void StartEncounter(EnemyEncounter encounter)
     {
         if (encounter != null && encounter.GetEnemies() != null && encounter.GetEnemyCount() > 0)
@@ -68,13 +74,17 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // ends an encounter
+    /// <summary>
+    /// Ends the current encounter
+    /// </summary>
     public void EndEncounter()
     {
         SetCombatState(CombatState.OutOfCombat);
     }
 
-    // displays all of enemy's idle Sprites on screen
+    /// <summary>
+    /// Displays all of the enemy's idle sprites
+    /// </summary>
     public void LoadEnemySprites()
     {
         for (int i = 0; i < 4; i++)
@@ -84,13 +94,18 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // removes a specified enemy's Sprite from screen
+    /// <summary>
+    /// Removes an enemy's sprites
+    /// </summary>
+    /// <param name="index">The index of the enemy</param>
     public void UnloadEnemySprite(int index)
     {
         enemySpriteManagers[index].UnloadSprites();
     }
 
-    // removes all enemy Sprites from screen
+    /// <summary>
+    /// Removes all enemy sprites
+    /// </summary>
     public void UnloadEnemySprites()
     {
         foreach (SpriteManager spriteManager in enemySpriteManagers)
@@ -99,19 +114,25 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // displays the puzzle board's background Sprite
+    /// <summary>
+    /// Displays the puzzle board's background sprite
+    /// </summary>
     public void LoadPuzzleBoardBackground()
     {
         puzzleBoardSpriteManager.SetSprite(playerManager.GetPuzzleBoardSprite());
     }
 
-    // removes the puzzle board's background Sprite
+    /// <summary>
+    /// Removes the puzzle board's background sprite
+    /// </summary>
     public void UnloadPuzzleBoardBackground()
     {
         puzzleBoardSpriteManager.SetSprite(null);
     }
 
-    // updates all of the Sprites of the PuzzlePieces in the player's hand PuzzlePile
+    /// <summary>
+    /// Updates all of the sprites of the PuzzlePiece objects in the player's hand PuzzlePile
+    /// </summary>
     public void UpdateHandSprites()
     {
         for (int i = 0; i < handPuzzlePieceRenderers.Count; i++)
@@ -128,7 +149,9 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // removes all of the Sprites of the PuzzlePieces in the player's hand PuzzlePile
+    /// <summary>
+    /// Removes all of the sprites of the PuzzlePiece objects the the player's hand PuzzlePile
+    /// </summary>
     public void UnloadHandSprites()
     {
         foreach (PuzzleRenderer puzzleRenderer in handPuzzlePieceRenderers)
@@ -137,14 +160,21 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // updates the tooltip ui with information from a PuzzlePiece
+    /// <summary>
+    /// Updates the tooltip UI
+    /// </summary>
+    /// <param name="piece">The PuzzlePiece object to load data from</param>
     public void SetTooltipUIFromPuzzlePiece(PuzzlePiece piece)
     {
         tooltipManager.SetSprite(piece.GetImage());
         tooltipManager.SetText(piece.GetName(), piece.GetDescription());
     }
 
-    // updates the tooltip ui based on the ui id and index provided
+    /// <summary>
+    /// Updates the tooltip UI
+    /// </summary>
+    /// <param name="uiid">The UIID of the object</param>
+    /// <param name="index">The index of the UIID object</param>
     public void UpdateTooltipUI(UIID uiid, int index)
     {
         switch (uiid)
@@ -171,13 +201,17 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // removes tooltip ui from screen
+    /// <summary>
+    /// Removes tooltip UI
+    /// </summary>
     public void UnloadTooltipUI()
     {
         tooltipManager.UnloadSprites();
     }
     
-    // updates all of the Sprites of the PuzzlePieces on the puzzle board
+    /// <summary>
+    /// Updates the sprites of the PuzzlePiece objects on the puzzle board
+    /// </summary>
     public void UpdateBoardPieceSprites()
     {
         for (int i = 0; i < puzzleBoard.GetSize(); i++)
@@ -186,7 +220,10 @@ public class CombatManager : MonoBehaviour
         }
     }
     
-    // updates the Sprite of the PuzzlePiece at a specified location on the PuzzleBoard
+    /// <summary>
+    /// Updates the sprite of a PuzzlePiece object
+    /// </summary>
+    /// <param name="index">The index of the PuzzlePiece object on the PuzzleBoard</param>
     public void UpdateBoardPieceSprite(int index)
     {
         PuzzlePiece boardPiece = puzzleBoard.GetPuzzlePiece(index);
@@ -200,35 +237,48 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // changes the Sprite that follows the mouse
+    /// <summary>
+    /// Makes a sprite follow the mouse
+    /// </summary>
+    /// <param name="sprite">The sprite that will follow the mouse</param>
     public void SetMouseSprite(Sprite sprite)
     {
         mousePuzzleRenderer.UnloadSprites();
         mouseSpriteManager.SetSprite(sprite);
     }
 
-    // changes the PuzzlePiece Sprites that follow the mouse
+    /// <summary>
+    /// Makes a sprite follow the mouse
+    /// </summary>
+    /// <param name="piece">The PuzzlePiece object that will follow the mouse</param>
     public void SetMousePuzzle(PuzzlePiece piece)
     {
         mouseSpriteManager.UnloadSprites();
         mousePuzzleRenderer.UpdateSprites(piece);
     }
 
-    // removes all Sprites that are following the mouse
+    /// <summary>
+    /// Removes all sprites that are following the mouse
+    /// </summary>
     public void ClearMouseImage()
     {
         mousePuzzleRenderer.UnloadSprites();
         mouseSpriteManager.UnloadSprites();
     }
 
-    // start player turn
+    /// <summary>
+    /// Start player turn
+    /// </summary>
     public void StartPlayerTurn()
     {
         SetCombatState(CombatState.PlayerTurn);
         DrawHand(turnDrawAmount);
     }
 
-    // adds the specified number of PuzzlePieces to the player's hand, if possible
+    /// <summary>
+    /// Adds PuzzlePiece objects ot the player's hand PuzzlePile, if possible
+    /// </summary>
+    /// <param name="drawAmount">The number of PuzzlePiece objects to add</param>
     public void DrawHand(int drawAmount)
     {
         if (drawPile.GetSize() >= drawAmount)
@@ -257,40 +307,54 @@ public class CombatManager : MonoBehaviour
         UpdateHandSprites();
     }
 
-    // puts all of the cards in the discard pile into the draw pile
+    /// <summary>
+    /// Puts all of the PuzzlePiece objects in the discard PuzzlePile into the draw PuzzlePile
+    /// </summary>
     public void DiscardToDraw()
     {
         drawPile.AddPuzzlePieces(discardPile.DiscardPile());
         drawPile.ShufflePile();
     }
 
-    // puts all of the cards in the player's hand into the discard pile
+    /// <summary>
+    /// Puts all of the PuzzlePiece objects in the hand PuzzlePile into the discard PuzzlePile
+    /// </summary>
     public void DiscardHand()
     {
         discardPile.AddPuzzlePieces(handPile.DiscardPile());
         UpdateHandSprites();
     }
 
-    // end player turn
+    /// <summary>
+    /// End player turn
+    /// </summary>
     public void EndPlayerTurn()
     {
         SetCombatState(CombatState.DoingStuff);
         DiscardHand();
     }
 
-    // start enemy turn
+    /// <summary>
+    /// Start enemy turn
+    /// </summary>
     public void StartEnemyTurn()
     {
         EndEnemyTurn();
     }
 
-    // end enemy turn
+    /// <summary>
+    /// End enemy turn
+    /// </summary>
     public void EndEnemyTurn()
     {
         StartPlayerTurn();
     }
 
-    // triggers click events
+    /// <summary>
+    /// Triggers click events
+    /// </summary>
+    /// <param name="uiid">The UIID of the object clicked</param>
+    /// <param name="index">The index of the UIID object clicked</param>
     public void ObjectClicked(UIID uiid, int index)
     {
         switch (combatState)
@@ -318,13 +382,20 @@ public class CombatManager : MonoBehaviour
             case CombatState.PickingTarget:
                 if (uiid == UIID.Enemy)
                 {
-                    AttemptPickTarget(index);
+                    AttemptPickTargetEnemy(index);
+                }
+                if (uiid == UIID.Board)
+                {
+                    AttemptPickTargetPuzzlePiece(index);
                 }
                 break;
         }
     }
 
-    // selects a PuzzlePiece from the player's hand if the index is in the current hand size
+    /// <summary>
+    /// Selects a PuzzlePiece from the hand PuzzlePile if the index is in the current hand size
+    /// </summary>
+    /// <param name="index">The index of PuzzlePiece</param>
     public void AttemptHandSelection(int index)
     {
         if (index < handPile.GetSize() && selectedPuzzlePiece == null)
@@ -336,7 +407,9 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // returns the selected PuzzlePiece to the player's hand
+    /// <summary>
+    /// Returns the selected PuzzlePiece object to the hand PuzzlePile
+    /// </summary>
     public void ReturnHandSelection()
     {
         SetCombatState(CombatState.PlayerTurn);
@@ -346,7 +419,10 @@ public class CombatManager : MonoBehaviour
         UpdateHandSprites();
     }
 
-    // attempts to place the selected PuzzlePiece on the PuzzleBoard
+    /// <summary>
+    /// Attempts to place the selected PuzzlePiece on the PuzzleBoard
+    /// </summary>
+    /// <param name="index">The index of the PuzzleBoard position</param>
     public void AttemptBoardPlacement(int index)
     {
         SetCombatState(CombatState.PlayerTurn);
@@ -363,8 +439,11 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // attempts to use the selected action on the selected target
-    public void AttemptPickTarget(int index)
+    /// <summary>
+    /// Attempts to use the selected action on a target Enemy
+    /// </summary>
+    /// <param name="index">The index of the target Enemy</param>
+    public void AttemptPickTargetEnemy(int index)
     {
         if (index < enemies.Count && enemies[index].ValidTarget())
         {
@@ -374,14 +453,42 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // changes the CombatState
+    /// <summary>
+    /// Attempts to use the selected action on a target PuzzlePiece
+    /// </summary>
+    /// <param name="index">the index of the target PuzzlePiece on the PuzzleBoard</param>
+    public void AttemptPickTargetPuzzlePiece(int index)
+    {
+        if (index < puzzleBoard.GetSize() && true)
+        {
+            SetCombatState(CombatState.PlayerTurn);
+            SelectTarget(index);
+        }
+    }
+
+    /// <summary>
+    /// Changes the CombatState
+    /// </summary>
+    /// <param name="newCombatState">The CombatState to change to</param>
     public void SetCombatState(CombatState newCombatState)
     {
         combatState = newCombatState;
     }
 
-    // selects the provided enemy as the target of the current effect
+    /// <summary>
+    /// Sets the target to an Enemy object
+    /// </summary>
+    /// <param name="enemy">The Enemy to target</param>
     public void SelectTarget(Enemy enemy)
+    {
+
+    }
+
+    /// <summary>
+    /// Sets the target to a PuzzlePiece object
+    /// </summary>
+    /// <param name="index">The index of the PuzzlePiece target on the PuzzleBoard</param>
+    public void SelectTarget(int index)
     {
 
     }

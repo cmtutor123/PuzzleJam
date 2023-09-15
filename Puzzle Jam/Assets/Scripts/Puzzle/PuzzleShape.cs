@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Holds data on the shape of a PuzzlePiece
+/// </summary>
 [Serializable]
 public class PuzzleShape
 {
@@ -11,25 +14,25 @@ public class PuzzleShape
     [SerializeField] private PuzzleEdge rightEdge;
     [SerializeField] private PuzzleEdge bottomEdge;
 
-    // returns the top edge
+    /// <returns>The top PuzzleEdge</returns>
     public PuzzleEdge GetTop()
     {
         return topEdge;
     }
 
-    // returns the left edge
+    /// <returns>The left PuzzleEdge</returns>
     public PuzzleEdge GetLeft()
     {
         return leftEdge;
     }
 
-    // returns the right edge
+    /// <returns>The right PuzzleEdge</returns>
     public PuzzleEdge GetRight()
     {
         return rightEdge;
     }
 
-    // returns the bottom edge
+    /// <returns>The bottom PuzzleEdge</returns>
     public PuzzleEdge GetBottom()
     {
         return bottomEdge;

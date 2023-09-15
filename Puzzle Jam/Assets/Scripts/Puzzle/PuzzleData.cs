@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Holds data on a type of PuzzlePiece
+/// </summary>
 [CreateAssetMenu(fileName = "New Puzzle Data", menuName = "Puzzle/Data")]
 public class PuzzleData : ScriptableObject
 {
@@ -17,37 +20,37 @@ public class PuzzleData : ScriptableObject
     [Header("Puzzle Effects")]
     [SerializeField] private List<PuzzleEffect> puzzleEffects;
 
-    // returns the PuzzleShape
+    /// <returns>The PuzzleShape of the PuzzlePiece</returns>
     public PuzzleShape GetPuzzleShape()
     {
         return puzzleShape;
     }
 
-    // returns the PuzzleColor
+    /// <returns>The PuzzleColor of the PuzzlePiece</returns>
     public PuzzleColor GetPuzzleColor()
     {
         return puzzleColor;
     }
 
-    // returns the Color of the PuzzleColor
+    /// <returns>The Color of the PuzzlePiece object's PuzzleColor</returns>
     public Color GetColor()
     {
         return puzzleColor.GetColor();
     }
 
-    // returns the Sprite displayed in the center of the PuzzlePiece
+    /// <returns>The sprite displayed on the PuzzlePiece</returns>
     public Sprite GetImage()
     {
         return puzzleImage;
     }
 
-    // returns the name of the PuzzlePiece
+    /// <returns>The name of the PuzzlePiece</returns>
     public string GetName()
     {
         return puzzleName;
     }
 
-    // returns the description of the PuzzlePiece
+    /// <returns>The description of the PuzzlePiece</returns>
     public string GetDescription()
     {
         return puzzleDescription;

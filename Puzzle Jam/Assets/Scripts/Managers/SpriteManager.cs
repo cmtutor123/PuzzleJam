@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages the sprite of an object
+/// </summary>
 [RequireComponent(typeof(SpriteRenderer))]
 public class SpriteManager : MonoBehaviour
 {
@@ -14,13 +17,18 @@ public class SpriteManager : MonoBehaviour
         if (this.GetType() != typeof(TooltipManager)) spriteRenderer = GetComponent<Image>();
     }
 
-    // sets the SpriteRenderer's Sprite to the specified Sprite
+    /// <summary>
+    /// Sets the SpriteREnderer's Sprite
+    /// </summary>
+    /// <param name="sprite">The Sprite to change to</param>
     public virtual void SetSprite(Sprite sprite)
     {
         spriteRenderer.sprite = sprite;
     }
 
-    // sets the SpriteRenderer's Sprite to null
+    /// <summary>
+    /// Sets the SpriteRenderer's Sprite to empty
+    /// </summary>
     public virtual void UnloadSprites()
     {
         spriteRenderer.sprite = empty;

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Makes an object follow the mouse
+/// </summary>
 [RequireComponent(typeof(RectTransform))]
 public class FollowMouse : MonoBehaviour
 {

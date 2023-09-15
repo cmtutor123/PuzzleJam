@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// An effect that is triggered by a PuzzlePiece
+/// </summary>
 [Serializable]
 public class PuzzleEffect
 {
@@ -69,11 +72,13 @@ public class PuzzleEffect
     [SerializeField] private int repetitionsVariableCoefficient;
     [SerializeField] private int repetitionsVariableConstant;
 
+    /// <returns>The TriggerType of the PuzzleEffect</returns>
     public TriggerType GetTriggerType()
     {
         return triggerType;
     }
 
+    /// <returns>Whether the PuzzleEffect has a condition to its trigger</returns>
     public bool HasTriggerConditions()
     {
         if (triggerType == TriggerType.Adjacent || triggerType == TriggerType.Connected || triggerType == TriggerType.Chain)
