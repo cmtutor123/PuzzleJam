@@ -524,4 +524,16 @@ public class CombatManager : MonoBehaviour
         puzzleBoard.PlacePiece(puzzlePiece, index);
         puzzlePiecesPlayed++;
     }
+
+    /// <summary>
+    /// Attempts to rotate the selected piece
+    /// </summary>
+    public void AttemptRotate()
+    {
+        if (combatState == CombatState.PieceSelected && selectedPuzzlePiece != null)
+        {
+            selectedPuzzlePiece.RotatePiece();
+            SetMousePuzzle(selectedPuzzlePiece);
+        }
+    }
 }

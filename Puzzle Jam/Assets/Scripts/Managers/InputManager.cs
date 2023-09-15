@@ -15,4 +15,11 @@ public class InputManager : MonoBehaviour
     {
         combatManager = GetComponent<CombatManager>();
     }
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            combatManager.AttemptRotate();
+        }
+    }
 }

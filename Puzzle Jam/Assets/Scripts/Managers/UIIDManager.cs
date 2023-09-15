@@ -38,6 +38,9 @@ public class UIIDManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     /// </summary>
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        combatManager.ObjectClicked(uiid, index); 
+        if (pointerEventData.button == 0)
+        {
+            combatManager.ObjectClicked(uiid, index);
+        }
     }
 }
