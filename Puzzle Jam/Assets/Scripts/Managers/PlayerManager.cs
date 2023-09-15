@@ -9,12 +9,18 @@ public class PlayerManager : MonoBehaviour
 {
     [Header("Character Data")]
     [SerializeField] private CharacterData characterData;
+
     private PuzzlePile puzzleDeck;
+
+    private int maxHealth;
+    private int currentHealth;
 
     private void Start()
     {
         puzzleDeck = new PuzzlePile();
         puzzleDeck.AddPuzzlePieces(characterData.GetStartingPuzzlePieces());
+        maxHealth = characterData.GetHealth();
+        currentHealth = maxHealth;
     }
 
     /// <returns>A list of PuzzlePiece objects generated from the player's current deck PuzzlePile</returns>

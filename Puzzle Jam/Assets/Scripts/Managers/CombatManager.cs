@@ -12,6 +12,7 @@ public class CombatManager : MonoBehaviour
 
     private const int defaultBoardSize = 6;
     private const int turnDrawAmount = 6;
+    private const int energyCount = 3;
 
     private PuzzlePiece selectedPuzzlePiece;
 

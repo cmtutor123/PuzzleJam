@@ -12,6 +12,8 @@ public class CharacterData : ScriptableObject
     [SerializeField] private Sprite spritePuzzleBoard;
     [Header("Starting Puzzle Pieces")]
     [SerializeField] private List<PuzzleData> startingPuzzlePieces;
+    [Header("Health")]
+    [SerializeField] private int health;
 
     /// <returns>The Sprite for the puzzle board</returns>
     public Sprite GetSpritePuzzleBoard()
@@ -28,5 +30,11 @@ public class CharacterData : ScriptableObject
             startingPieces.Add(new PuzzlePiece(puzzleData));
         }
         return startingPieces;
+    }
+
+    /// <returns>The character's max health</returns>
+    public int GetHealth()
+    {
+        return health;
     }
 }
