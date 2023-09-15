@@ -12,8 +12,13 @@ public class HealthBarManager : MonoBehaviour
     [SerializeField] private Image frontHealthBar;
     [SerializeField] private Image backHealthBar;
     [SerializeField] private Image background;
+    [Header("Sprites")]
+    [SerializeField] private Sprite emptySprite;
+    [SerializeField] private Sprite fullSprite;
+    [SerializeField] private Sprite backgroundSprite;
     [Header("Colors")]
     [SerializeField] private Color healthColor;
+    [SerializeField] private Color backgroundColor;
     [SerializeField] private Color damageColor;
     [SerializeField] private Color healColor;
     [Header("Animation Values")]
@@ -94,7 +99,9 @@ public class HealthBarManager : MonoBehaviour
     /// </summary>
     public void HideHealthBar()
     {
-
+        background.sprite = emptySprite;
+        backHealthBar.sprite = emptySprite;
+        frontHealthBar.sprite = emptySprite;
     }
 
     /// <summary>
@@ -102,6 +109,11 @@ public class HealthBarManager : MonoBehaviour
     /// </summary>
     public void ShowHealthBar()
     {
-
+        background.sprite = backgroundSprite;
+        background.color = backgroundColor;
+        backHealthBar.sprite = fullSprite;
+        backHealthBar.color = healthColor;
+        frontHealthBar.sprite = fullSprite;
+        frontHealthBar.color = healthColor;
     }
 }
