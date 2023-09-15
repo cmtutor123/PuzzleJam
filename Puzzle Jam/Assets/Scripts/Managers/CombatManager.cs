@@ -556,6 +556,7 @@ public class CombatManager : MonoBehaviour
             DestroyPiece(index);
         }
         puzzlePiecesPlayed++;
+        ActivateNextEffect();
     }
 
     /// <summary>
@@ -595,12 +596,11 @@ public class CombatManager : MonoBehaviour
 
     public void QueueEffects(List<PuzzleEffect> effects)
     {
-        if (effects.Count > 0) SetCombatState(CombatState.PickingTarget);
+        if (effects.Count > 0 && effects[0] != null) SetCombatState(CombatState.PickingTarget);
         foreach(PuzzleEffect effect in effects)
         {
             effectQueue.Add(effect);
         }
-        ActivateNextEffect();
     }
 
     public void DestroyPiece(int index)

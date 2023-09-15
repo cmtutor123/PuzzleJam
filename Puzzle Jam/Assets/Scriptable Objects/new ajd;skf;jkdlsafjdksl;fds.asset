@@ -21,4 +21,38 @@ MonoBehaviour:
   puzzleImage: {fileID: 0}
   puzzleName: 
   puzzleDescription: 
-  puzzleEffects: []
+  puzzleEffects:
+  - triggerType: 3
+    hasTriggerColor: 1
+    triggerColor: {fileID: 11400000, guid: 9d26a87dc4d38934d811abaef45cff05, type: 2}
+    effectType: 1
+    buffID: 0
+    modificationType: 0
+    destroyCompletely: 0
+    newColor: {fileID: 0}
+    shapeChange: 0
+    targetType: 1
+    limitPieceSelection: 0
+    limitTargetColor: 0
+    targetColor: {fileID: 0}
+    amount: 1
+    amountConstant: 10
+    amountMin: 0
+    amountMax: 0
+    amountVariableSource: 1
+    amountPuzzlePieceRange: 2
+    amountLimitColor: 0
+    amountColor: {fileID: 0}
+    amountVariableCoefficient: 0
+    amountVariableConstant: 0
+    repeats: 0
+    repetitions: 0
+    repetitionsConstant: 0
+    repetitionsMin: 0
+    repetitionsMax: 0
+    repetitionsVariableSource: 0
+    repetitionsPuzzlePieceRange: 0
+    repetitionsLimitColor: 0
+    repetitionsColor: {fileID: 0}
+    repetitionsVariableCoefficient: 0
+    repetitionsVariableConstant: 0
