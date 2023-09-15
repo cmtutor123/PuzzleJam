@@ -14,6 +14,8 @@ public class CombatManager : MonoBehaviour
     private const int turnDrawAmount = 6;
     private const int energyCount = 3;
 
+    private int puzzlePiecesPlayed;
+
     private PuzzlePiece selectedPuzzlePiece;
 
     private PuzzlePile drawPile, discardPile, handPile;
@@ -275,6 +277,7 @@ public class CombatManager : MonoBehaviour
     {
         SetCombatState(CombatState.PlayerTurn);
         DrawHand(turnDrawAmount);
+        puzzlePiecesPlayed = 0;
     }
 
     /// <summary>
@@ -428,9 +431,9 @@ public class CombatManager : MonoBehaviour
     public void AttemptBoardPlacement(int index)
     {
         SetCombatState(CombatState.PlayerTurn);
-        if (puzzleBoard.PieceCanFit(index, selectedPuzzlePiece))
+        if (puzzlePiecesPlayed < energyCount && puzzleBoard.PieceCanFit(index, selectedPuzzlePiece))
         {
-            puzzleBoard.PlacePiece(selectedPuzzlePiece, index);
+            PlacePiece(selectedPuzzlePiece, index);
             selectedPuzzlePiece = null;
             ClearMouseImage();
             UpdateBoardPieceSprites();
@@ -509,5 +512,16 @@ public class CombatManager : MonoBehaviour
     public void HidePlayerHealth()
     {
         playerManager.HideHealthBar();
+    }
+
+    /// <summary>
+    /// Places a PuzzlePiece at a location on the PuzzleBoard
+    /// </summary>
+    /// <param name="puzzlePiece">The PuzzlePiece to place</param>
+    /// <param name="index">The index of the location</param>
+    public void PlacePiece(PuzzlePiece puzzlePiece, int index)
+    {
+        puzzleBoard.PlacePiece(puzzlePiece, index);
+        puzzlePiecesPlayed++;
     }
 }

@@ -56,7 +56,6 @@ public class HealthBarManager : MonoBehaviour
     /// <param name="maxHealth">The value for the max health</param>
     public void SetHealth(int currentHealth, int maxHealth)
     {
-        Debug.Log(currentHealth + "/" + maxHealth);
         this.currentHealth = currentHealth;
         this.maxHealth = maxHealth;
         lerpTimer = 0;
@@ -120,7 +119,6 @@ public class HealthBarManager : MonoBehaviour
     /// </summary>
     public void ShowHealthBar()
     {
-        Debug.Log(currentHealth + "/" + maxHealth);
         background.sprite = backgroundSprite;
         background.color = backgroundColor;
         backHealthBar.sprite = fullSprite;
