@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7222885638231639518}
   - component: {fileID: 5681098690589132026}
   - component: {fileID: 1952556639442165104}
+  - component: {fileID: 9154952247061552634}
   m_Layer: 0
   m_Name: MouseFollow
   m_TagString: Untagged
@@ -158,6 +159,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+--- !u!225 &9154952247061552634
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9076047940498022533}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1001 &3893765228973698418
 PrefabInstance:
   m_ObjectHideFlags: 0

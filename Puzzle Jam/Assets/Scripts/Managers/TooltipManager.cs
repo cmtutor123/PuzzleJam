@@ -33,6 +33,8 @@ public class TooltipManager : SpriteManager
     {
         tooltipName.text = nameText;
         tooltipDescription.text = descriptionText;
+        tooltipName.ForceMeshUpdate();
+        tooltipDescription.ForceMeshUpdate();
     }
 
     /// <summary>

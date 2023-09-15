@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 public class FollowMouse : MonoBehaviour
 {
     private const float canvasScale = 100;
-    private Vector3 scale = new Vector3(0.1f, 0.15f, 1);
+    private Vector3 scale = new Vector3(0.1f, 0.15f, 1f);
     [Header("Camera")]
     [SerializeField] private Camera mainCamera;
     private RectTransform rectTransform;

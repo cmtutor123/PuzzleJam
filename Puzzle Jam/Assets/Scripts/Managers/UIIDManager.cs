@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Manages an object that has a UIID and can be interacted with
 /// </summary>
-public class UIIDManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UIIDManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [Header("Identification Information")]
     [SerializeField] private UIID uiid;
@@ -36,8 +36,8 @@ public class UIIDManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     /// <summary>
     /// Sends information to the CombatManager when the object is clicked
     /// </summary>
-    public void OnClick()
+    public void OnPointerClick(PointerEventData pointerEventData)
     {
-        combatManager.ObjectClicked(uiid, index);
+        combatManager.ObjectClicked(uiid, index); 
     }
 }
