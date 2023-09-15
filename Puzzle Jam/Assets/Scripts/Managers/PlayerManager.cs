@@ -34,4 +34,36 @@ public class PlayerManager : MonoBehaviour
     {
         return characterData.GetSpritePuzzleBoard();
     }
+    
+    /// <returns>The player's current health</returns>
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
+
+    /// <returns>The player's max health</returns>
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    /// <summary>
+    /// Heals the player
+    /// </summary>
+    /// <param name="amount">The amount of health to heal</param>
+    public void Heal(int amount)
+    {
+        amount = Mathf.Clamp(amount, 0, maxHealth - currentHealth);
+        currentHealth += amount;
+    }
+
+    /// <summary>
+    /// Damages the player
+    /// </summary>
+    /// <param name="amount">The amount of damage to take</param>
+    public void Damage(int amount)
+    {
+        amount = Mathf.Clamp(amount, 0, currentHealth);
+        currentHealth -= amount;
+    }
 }
