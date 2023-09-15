@@ -8,7 +8,7 @@ using UnityEngine;
 public class Enemy
 {
     private string enemyName;
-    private int maxHealth, currentHealth;
+    private int maxHealth, currentHealth, turnCounter;
     private Sprite spriteIdle;
     private EnemyAttackPattern attackPattern;
 
@@ -62,5 +62,10 @@ public class Enemy
     public bool ValidTarget()
     {
         return Alive();
+    }
+
+    public PuzzleData GetNextAttack()
+    {
+        return attackPattern.GetAttack(turnCounter);
     }
 }

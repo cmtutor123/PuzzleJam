@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe240ff6eaa8d2843978b57d3d89021c, type: 3}
   m_Name: TestAttackPattern
   m_EditorClassIdentifier: 
+  patternType: 0
+  enemyAttacks:
+  - {fileID: 11400000, guid: ffe572065f5d75848bf496b92e3002fd, type: 2}

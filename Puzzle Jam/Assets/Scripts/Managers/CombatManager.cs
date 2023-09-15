@@ -30,7 +30,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private SpriteManager mouseSpriteManager;
     [SerializeField] private PuzzleRenderer mousePuzzleRenderer;
     [SerializeField] private List<PuzzleRenderer> handPuzzlePieceRenderers, boardPuzzlePieceRenderers;
-    [SerializeField] private List<SpriteManager> enemySpriteManagers;
+    [SerializeField] private List<EnemySpriteManager> enemySpriteManagers;
 
     [Header("Test Variables")]
     public EnemyEncounter testEncounter;
@@ -93,7 +93,10 @@ public class CombatManager : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            if (i < enemies.Count) enemySpriteManagers[i].SetSprite(enemies[i].GetSpriteIdle());
+            if (i < enemies.Count)
+            {
+                enemySpriteManagers[i].SetSprite(enemies[i].GetSpriteIdle(), enemies[i].GetCurrentHealth(), enemies[i].GetMaxHealth(), enemies[i].GetNextAttack());
+            }
             else UnloadEnemySprite(i);
         }
     }
@@ -197,10 +200,17 @@ public class CombatManager : MonoBehaviour
                 }
                 break;
             case UIID.Enemy:
-
+                if (enemies != null && index < enemies.Count && enemies[index] != null)
+                {
+                    tooltipManager.SetSprite(enemies[index].GetSpriteIdle());
+                    tooltipManager.SetText(enemies[index].GetName(), string.Empty);
+                }
                 break;
             case UIID.EnemyAttack:
-
+                if (enemies != null && index < enemies.Count && enemies[index] != null && enemies[index].GetNextAttack() != null)
+                {
+                    SetTooltipUIFromPuzzlePiece(new PuzzlePiece(enemies[index].GetNextAttack()));
+                }
                 break;
         }
     }
