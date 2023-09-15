@@ -10,6 +10,9 @@ public class PlayerManager : MonoBehaviour
     [Header("Character Data")]
     [SerializeField] private CharacterData characterData;
 
+    [Header("Health Bar")]
+    [SerializeField] private HealthBarManager playerHealthBar;
+
     private PuzzlePile puzzleDeck;
 
     private int maxHealth;
@@ -21,6 +24,7 @@ public class PlayerManager : MonoBehaviour
         puzzleDeck.AddPuzzlePieces(characterData.GetStartingPuzzlePieces());
         maxHealth = characterData.GetHealth();
         currentHealth = maxHealth;
+        UpdateHealthBar();
     }
 
     /// <returns>A list of PuzzlePiece objects generated from the player's current deck PuzzlePile</returns>
@@ -55,6 +59,7 @@ public class PlayerManager : MonoBehaviour
     {
         amount = Mathf.Clamp(amount, 0, maxHealth - currentHealth);
         currentHealth += amount;
+        UpdateHealthBar();
     }
 
     /// <summary>
@@ -65,5 +70,30 @@ public class PlayerManager : MonoBehaviour
     {
         amount = Mathf.Clamp(amount, 0, currentHealth);
         currentHealth -= amount;
+        UpdateHealthBar();
+    }
+
+    /// <summary>
+    /// Updates the health bar ui
+    /// </summary>
+    public void UpdateHealthBar()
+    {
+        playerHealthBar.SetHealth(currentHealth, maxHealth);
+    }
+
+    /// <summary>
+    /// Shows the health bar ui
+    /// </summary>
+    public void ShowHealthBar()
+    {
+        playerHealthBar.ShowHealthBar();
+    }
+
+    /// <summary>
+    /// Hides the health bar ui
+    /// </summary>
+    public void HideHealthBar()
+    {
+        playerHealthBar.HideHealthBar();
     }
 }

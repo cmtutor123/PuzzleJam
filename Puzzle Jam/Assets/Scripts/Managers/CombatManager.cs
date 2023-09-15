@@ -71,6 +71,7 @@ public class CombatManager : MonoBehaviour
             UpdateHandSprites();
             UpdateBoardPieceSprites();
             ClearMouseImage();
+            ShowPlayerHealth();
             StartPlayerTurn();
         }
     }
@@ -492,5 +493,21 @@ public class CombatManager : MonoBehaviour
     public void SelectTarget(int index)
     {
 
+    }
+
+    /// <summary>
+    /// Shows the player health bar
+    /// </summary>
+    public void ShowPlayerHealth()
+    {
+        playerManager.ShowHealthBar();
+    }
+
+    /// <summary>
+    /// Hides the player health bar
+    /// </summary>
+    public void HidePlayerHealth()
+    {
+        playerManager.HideHealthBar();
     }
 }

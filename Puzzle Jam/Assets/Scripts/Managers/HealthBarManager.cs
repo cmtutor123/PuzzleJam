@@ -29,6 +29,11 @@ public class HealthBarManager : MonoBehaviour
     private int maxHealth;
     private int currentHealth;
 
+    void Start()
+    {
+        HideHealthBar();
+    }
+
     void Update()
     {
         UpdateHealthBarUI();
@@ -51,8 +56,10 @@ public class HealthBarManager : MonoBehaviour
     /// <param name="maxHealth">The value for the max health</param>
     public void SetHealth(int currentHealth, int maxHealth)
     {
+        Debug.Log(currentHealth + "/" + maxHealth);
         this.currentHealth = currentHealth;
         this.maxHealth = maxHealth;
+        lerpTimer = 0;
     }
 
     /// <summary>
@@ -79,7 +86,9 @@ public class HealthBarManager : MonoBehaviour
             frontHealthBar.fillAmount = hFraction;
             backHealthBar.color = damageColor;
             lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
+            float percentComplete;
+            if (chipSpeed <= 0) percentComplete = 1;
+            else percentComplete = lerpTimer / chipSpeed;
             percentComplete *= percentComplete;
             backHealthBar.fillAmount = Mathf.Lerp(fillBack, hFraction, percentComplete);
         }
@@ -111,6 +120,7 @@ public class HealthBarManager : MonoBehaviour
     /// </summary>
     public void ShowHealthBar()
     {
+        Debug.Log(currentHealth + "/" + maxHealth);
         background.sprite = backgroundSprite;
         background.color = backgroundColor;
         backHealthBar.sprite = fullSprite;
