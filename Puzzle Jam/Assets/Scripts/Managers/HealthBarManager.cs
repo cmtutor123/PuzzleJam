@@ -22,7 +22,7 @@ public class HealthBarManager : MonoBehaviour
     [SerializeField] private Color damageColor;
     [SerializeField] private Color healColor;
     [Header("Animation Values")]
-    [SerializeField] private float chipSpeed;
+    [SerializeField] private float chipSpeed = 0.2f;
 
     private float lerpTimer = 0;
 
@@ -88,7 +88,9 @@ public class HealthBarManager : MonoBehaviour
             backHealthBar.color = healColor;
             backHealthBar.fillAmount = hFraction;
             lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
+            float percentComplete;
+            if (chipSpeed <= 0) percentComplete = 1;
+            else percentComplete = lerpTimer / chipSpeed;
             percentComplete *= percentComplete;
             frontHealthBar.fillAmount = Mathf.Lerp(fillFront, backHealthBar.fillAmount, percentComplete);
         }
