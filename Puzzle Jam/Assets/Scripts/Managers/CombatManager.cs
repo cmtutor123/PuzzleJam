@@ -532,6 +532,19 @@ public class CombatManager : MonoBehaviour
     public void PlacePiece(PuzzlePiece puzzlePiece, int index)
     {
         puzzleBoard.PlacePiece(puzzlePiece, index);
+        ActivateEffects(CheckForTrigger(puzzlePiece, TriggerType.Place));
+        ActivateEffects(CheckForTrigger(puzzleBoard.GetAdjacent(index), TriggerType.Adjacent));
+        ActivateEffects(CheckForTrigger(puzzleBoard.GetConnected(index), TriggerType.Connected));
+        ActivateEffects(CheckForTrigger(puzzleBoard.GetChain(index), TriggerType.Chain));
+        if (puzzleBoard.InCombo(index))
+        {
+            List<PuzzlePiece> pieces = puzzleBoard.GetChain(index);
+            pieces.Insert(0, puzzlePiece);
+            ActivateEffects(CheckForTrigger(pieces, TriggerType.Combo));
+            List<int> indexes = puzzleBoard.GetChainIndex(index);
+            indexes.Insert(0, index);
+            DestroyPiece(index);
+        }
         puzzlePiecesPlayed++;
     }
 
@@ -545,5 +558,45 @@ public class CombatManager : MonoBehaviour
             selectedPuzzlePiece.RotatePiece();
             SetMousePuzzle(selectedPuzzlePiece);
         }
+    }
+
+    public List<PuzzleEffect> CheckForTrigger(PuzzlePiece piece, TriggerType triggerType)
+    {
+        List<PuzzlePiece> pieces = new List<PuzzlePiece>();
+        pieces.Add(piece);
+        return CheckForTrigger(pieces, triggerType);
+    }
+
+    public List<PuzzleEffect> CheckForTrigger(List<PuzzlePiece> pieces, TriggerType triggerType)
+    {
+        List<PuzzleEffect> puzzleEffects = new List<PuzzleEffect>();
+        foreach (PuzzlePiece piece in pieces)
+        {
+            foreach (PuzzleEffect effect in piece.GetEffects())
+            {
+                if (effect.GetTriggerType() == triggerType)
+                {
+                    puzzleEffects.Add(effect);
+                }
+            }
+        }
+        return puzzleEffects;
+    }
+
+    public void ActivateEffects(List<PuzzleEffect> effects)
+    {
+        foreach(PuzzleEffect effect in effects)
+        {
+            switch(effect)
+            {
+
+            }
+        }
+    }
+
+    public void DestroyPiece(int index)
+    {
+        ActivateEffects(CheckForTrigger(puzzleBoard.GetPuzzlePiece(index), TriggerType.Destroy));
+        discardPile.AddPuzzlePiece(puzzleBoard.RemovePiece(index));
     }
 }

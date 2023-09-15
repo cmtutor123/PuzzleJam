@@ -90,4 +90,11 @@ public class PuzzleEffect
         }
         return false;
     }
+
+    public EffectType GetEffectType()
+    {
+        return effectType;
+    }
+
+
 }

@@ -10,6 +10,8 @@ public class PuzzlePiece
     private PuzzleEdge topEdge, leftEdge, rightEdge, bottomEdge;
     private PuzzleColor puzzleColor;
 
+    private List<PuzzleEffect> puzzleEffects;
+
     private Sprite puzzleImage;
     private string puzzleDescription;
     private string puzzleName;
@@ -26,6 +28,7 @@ public class PuzzlePiece
         puzzleImage = puzzleData.GetImage();
         puzzleDescription = puzzleData.GetDescription();
         puzzleName = puzzleData.GetName();
+        puzzleEffects = puzzleData.GetEffects();
     }
 
     /// <summary>
@@ -96,5 +99,11 @@ public class PuzzlePiece
     public string GetDescription()
     {
         return puzzleDescription;
+    }
+
+    /// <returns>A list of PuzzleEffects</returns>
+    public List<PuzzleEffect> GetEffects()
+    {
+        return puzzleEffects;
     }
 }

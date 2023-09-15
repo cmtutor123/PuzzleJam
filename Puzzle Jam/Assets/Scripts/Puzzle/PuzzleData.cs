@@ -55,4 +55,10 @@ public class PuzzleData : ScriptableObject
     {
         return puzzleDescription;
     }
+
+    /// <returns>A list of PuzzleEffects</returns>
+    public List<PuzzleEffect> GetEffects()
+    {
+        return puzzleEffects;
+    }
 }
