@@ -304,6 +304,75 @@ public class PuzzleBoard
         else return true;
     }
 
+    /// <summary>
+    /// Determines if two PuzzleEdges are connected to each other
+    /// </summary>
+    /// <param name="edge1">First PuzzleEdge</param>
+    /// <param name="edge2">Second PuzzleEdge</param>
+    /// <returns>Whether the two PuzzleEdges are connected</returns>
+    public bool EdgesAreConnected(PuzzleEdge edge1, PuzzleEdge edge2)
+    {
+        return (edge1 == PuzzleEdge.Key && edge2 == PuzzleEdge.Socket) || (edge1 == PuzzleEdge.Socket && edge2 == PuzzleEdge.Key);
+    }
+
+    /// <summary>
+    /// Determines if two PuzzlePiece objects are connected to each other
+    /// </summary>
+    /// <param name="index1">The location index of the first PuzzlePiece</param>
+    /// <param name="index2">The location index of the second PuzzlePiece</param>
+    /// <returns>Whether the two PuzzlePiece objects are connected</returns>
+    public bool PiecesAreConnected(int index1, int index2)
+    {
+        if (!PiecesAreAdjacent(index1, index2)) return false;
+        int x1, y1, x2, y2, xdiff, ydiff;
+        x1 = index1 % width;
+        x2 = index2 % width;
+        y1 = (index1 - x1) / width;
+        y2 = (index2 - x2) / width;
+        xdiff = x1 - x2;
+        ydiff = y1 - y2;
+        PuzzleEdge edge1, edge2;
+        if (xdiff == -1)
+        {
+            edge1 = GetPuzzlePiece(index1).GetRight();
+            edge2 = GetPuzzlePiece(index2).GetLeft();
+        }
+        else if (xdiff == 1)
+        {
+            edge1 = GetPuzzlePiece(index1).GetLeft();
+            edge2 = GetPuzzlePiece(index2).GetRight();
+        }
+        else if (ydiff == -1)
+        {
+            edge1 = GetPuzzlePiece(index1).GetTop();
+            edge2 = GetPuzzlePiece(index2).GetBottom();
+        }
+        else
+        {
+            edge1 = GetPuzzlePiece(index1).GetBottom();
+            edge2 = GetPuzzlePiece(index2).GetTop();
+        }
+        return EdgesAreConnected(edge1, edge2);
+    }
+
+    /// <summary>
+    /// Determines if two PuzzlePiece objects are adjacent to each other
+    /// </summary>
+    /// <param name="index1">The location index of the first PuzzlePiece</param>
+    /// <param name="index2">The location index of the second PuzzlePiece</param>
+    /// <returns>Whether the two PuzzlePiece objects are adjacent</returns>
+    public bool PiecesAreAdjacent(int index1, int index2)
+    {
+        if (LocationEmpty(index1) || LocationEmpty(index2)) return false;
+        int x1, y1, x2, y2;
+        x1 = index1 % width;
+        x2 = index2 % width;
+        y1 = (index1 - x1) / width;
+        y2 = (index2 - x2) / width;
+        int distance = Mathf.Abs(x1 - x2) + Mathf.Abs(y1 - y2);
+        return distance == 1;
+    }
+
     /// <returns>The size of the PuzzleBoard</returns>
     public int GetSize()
     {
@@ -317,7 +386,12 @@ public class PuzzleBoard
     /// <returns>A list of PuzzlePiece objects that are adjacent to the PuzzlePiece</returns>
     public List<PuzzlePiece> GetAdjacent(int index)
     {
-        return null;
+        List<PuzzlePiece> adjacent = new List<PuzzlePiece>();
+        if (!LocationEmpty(index - 1)) adjacent.Add(GetPuzzlePiece(index - 1));
+        if (!LocationEmpty(index + 1)) adjacent.Add(GetPuzzlePiece(index + 1));
+        if (!LocationEmpty(index - width)) adjacent.Add(GetPuzzlePiece(index - width));
+        if (!LocationEmpty(index + width)) adjacent.Add(GetPuzzlePiece(index + width));
+        return adjacent;
     }
 
     /// <summary>
@@ -327,7 +401,27 @@ public class PuzzleBoard
     /// <returns>A list of PuzzlePiece objects that are connected to the PuzzlePiece</returns>
     public List<PuzzlePiece> GetConnected(int index)
     {
-        return null;
+        List<PuzzlePiece> connected = new List<PuzzlePiece>();
+        if (PiecesAreConnected(index, index - 1)) connected.Add(GetPuzzlePiece(index - 1));
+        if (PiecesAreConnected(index, index + 1)) connected.Add(GetPuzzlePiece(index + 1));
+        if (PiecesAreConnected(index, index - width)) connected.Add(GetPuzzlePiece(index - width));
+        if (PiecesAreConnected(index, index + width)) connected.Add(GetPuzzlePiece(index + width));
+        return connected;
+    }
+
+    /// <summary>
+    /// Gets all index that are connected to the PuzzlePiece at a location
+    /// </summary>
+    /// <param name="index">The index of the location</param>
+    /// <returns>A list of index that are connected to the PuzzlePiece</returns>
+    public List<int> GetConnectedIndex(int index)
+    {
+        List<int> connected = new List<int>();
+        if (PiecesAreConnected(index, index - 1)) connected.Add(index - 1);
+        if (PiecesAreConnected(index, index + 1)) connected.Add(index + 1);
+        if (PiecesAreConnected(index, index - width)) connected.Add(index - width);
+        if (PiecesAreConnected(index, index + width)) connected.Add(index + width);
+        return connected;
     }
 
     /// <summary>
@@ -337,13 +431,77 @@ public class PuzzleBoard
     /// <returns>A list of PuzzlePiece objects that are chained to the PuzzlePiece</returns>
     public List<PuzzlePiece> GetChain(int index)
     {
-        return null;
+        List<PuzzlePiece> chain = new List<PuzzlePiece>();
+        List<int> connected = new List<int>();
+        chain.Add(GetPuzzlePiece(index));
+        connected.AddRange(GetConnectedIndex(index));
+        int currentIndex;
+        while (connected.Count > 0)
+        {
+            currentIndex = connected[0];
+            connected.RemoveAt(0);
+            if (!chain.Contains(GetPuzzlePiece(currentIndex)))
+            {
+                chain.Add(GetPuzzlePiece(currentIndex));
+                connected.AddRange(GetConnectedIndex(currentIndex));
+            }
+        }
+        chain.RemoveAt(0);
+        return chain;
+    }
+
+    /// <summary>
+    /// Gets all PuzzlePieces that are chained to the PuzzlePiece at a location
+    /// </summary>
+    /// <param name="index">The index of the location</param>
+    /// <returns>A list of index that are chained to the PuzzlePiece</returns>
+    public List<int> GetChainIndex(int index)
+    {
+        List<int> chain = new List<int>();
+        List<int> connected = new List<int>();
+        chain.Add(index);
+        connected.AddRange(GetConnectedIndex(index));
+        int currentIndex;
+        while (connected.Count > 0)
+        {
+            currentIndex = connected[0];
+            connected.RemoveAt(0);
+            if (!chain.Contains(currentIndex))
+            {
+                chain.Add(currentIndex);
+                connected.AddRange(GetConnectedIndex(currentIndex));
+            }
+        }
+        chain.RemoveAt(0);
+        return chain;
     }
 
     /// <param name="index">The index of the location of the PuzzlePiece</param>
     /// <returns>Whether the PuzzlePiece is in a combo</returns>
     public bool InCombo(int index)
     {
-        return false;
+        List<int> chain = GetChainIndex(index);
+        chain.Insert(0, index);
+        foreach (int chainIndex in chain)
+        {
+            if (GetConnectedIndex(chainIndex).Count + GetBlankCount(chainIndex) != 4) return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Determines how many sides of the PuzzlePiece are Blank
+    /// </summary>
+    /// <param name="index">The location index</param>
+    /// <returns>The number of PuzzleEdges of the PuzzlePiece that are Blank</returns>
+    public int GetBlankCount(int index)
+    {
+        PuzzlePiece piece = GetPuzzlePiece(index);
+        int count = 0;
+        if (piece.GetTop() == PuzzleEdge.Blank) count++;
+        if (piece.GetBottom() == PuzzleEdge.Blank) count++;
+        if (piece.GetLeft() == PuzzleEdge.Blank) count++;
+        if (piece.GetRight() == PuzzleEdge.Blank) count++;
+        return count;
     }
 }
