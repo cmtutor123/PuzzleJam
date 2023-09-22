@@ -91,6 +91,203 @@ public class PuzzleEffect
         return false;
     }
 
+    ///<returns> Returns the TriggerColor </returns> 
+    public PuzzleColor GetTriggerColor()
+    {
+        return triggerColor;
+    }
+
+    ///<returns> Returns the EffectType </returns> 
+    public EffectType GetEffectType()
+    {
+        return effectType;
+    }
+
+    ///<returns> Returns the BuffID </returns> 
+    public BuffID GetBuffID()
+    {
+        return buffID;
+    }
+
+    ///<returns> Returns the ModificationType </returns> 
+    public ModificationType GetModificationType()
+    {
+        return modificationType;
+    }
+
+    ///<returns> Returns if it is completely destroyed </returns> 
+    public bool GetDestroyCompletely()
+    {
+        return destroyCompletely;
+    }
+
+    ///<returns> Returns the new Color </returns> 
+    public PuzzleColor GetNewColor()
+    {
+        return newColor;
+    }
+
+    ///<returns> Returns the ShapeChange </returns> 
+    public ShapeChange GetShapeChange()
+    {
+        return shapeChange;
+    }
+
+    ///<returns> Returns the TargetType </returns> 
+    public TargetType GetTargetType()
+    {
+        return targetType;
+    }
+
+    ///<returns> Returns if PieceSelection is limited </returns> 
+    public bool GetLimitPieceSelection()
+    {
+        return limitPieceSelection;
+    }
+
+    ///<returns> Returns if TargetColor is limited </returns> 
+    public bool GetLimitTargetColor()
+    {
+        return limitTargetColor;
+    }
+
+    ///<returns> Returns the TargetColor </returns> 
+    public PuzzleColor GetTargetColor()
+    {
+        return targetColor;
+    }
+
+    ///<returns> Returns the Amount ValueType </returns> 
+    public ValueType GetAmount()
+    {
+        return amount;
+    }
+
+    ///<returns> Returns the Amount Constant </returns>
+    public int GetAmountConstant()
+    {
+        return amountConstant;
+    }
+
+    // ... continue for all other getters
+
+
+    ///<returns> Returns the minimum Amount </returns> 
+    public int GetAmountMin()
+    {
+        return amountMin;
+    }
+
+    ///<returns> Returns the maximum Amount </returns> 
+    public int GetAmountMax()
+    {
+        return amountMax;
+    }
+
+    ///<returns> Returns the Amount Variable Source Condition </returns> 
+    public ConditionSource GetAmountVariableSource()
+    {
+        return amountVariableSource;
+    }
+
+    ///<returns> Returns the Amount Puzzle Piece Range </returns> 
+    public PuzzlePieceRange GetAmountPuzzlePieceRange()
+    {
+        return amountPuzzlePieceRange;
+    }
+
+    ///<returns> Returns if Amount Color is limited </returns> 
+    public bool GetAmountLimitColor()
+    {
+        return amountLimitColor;
+    }
+
+    ///<returns> Returns the Amount Color </returns> 
+    public PuzzleColor GetAmountColor()
+    {
+        return amountColor;
+    }
+
+    ///<returns> Returns the Amount Variable Coefficient </returns> 
+    public int GetAmountVariableCoefficient()
+    {
+        return amountVariableCoefficient;
+    }
+
+    ///<returns> Returns the Amount Variable Constant </returns>
+    public int GetAmountVariableConstant()
+    {
+        return amountVariableConstant;
+    }
+
+    ///<returns> Returns if it repeats </returns>
+    public bool GetRepeats()
+    {
+        return repeats;
+    }
+
+    ///<returns> Returns the Repetitions ValueType </returns>
+    public ValueType GetRepetitions()
+    {
+        return repetitions;
+    }
+
+    ///<returns> Returns the Repetitions Constant </returns>
+    public int GetRepetitionsConstant()
+    {
+        return repetitionsConstant;
+    }
+
+    ///<returns> Returns the minimum Repetitions </returns>
+    public int GetRepetitionsMin()
+    {
+        return repetitionsMin;
+    }
+
+    ///<returns> Returns the maximum Repetitions </returns>
+    public int GetRepetitionsMax()
+    {
+        return repetitionsMax;
+    }
+
+    ///<returns> Returns the Repetitions Variable Source Condition </returns>
+    public ConditionSource GetRepetitionsVariableSource()
+    {
+        return repetitionsVariableSource;
+    }
+
+    ///<returns> Returns the Repetitions Puzzle Piece Range </returns>
+    public PuzzlePieceRange GetRepetitionsPuzzlePieceRange()
+    {
+        return repetitionsPuzzlePieceRange;
+    }
+
+    ///<returns> Returns if Repetitions Color is limited </returns>
+    public bool GetRepetitionsLimitColor()
+    {
+        return repetitionsLimitColor;
+    }
+
+    ///<returns> Returns the Repetitions Color </returns>
+    public PuzzleColor GetRepetitionsColor()
+    {
+        return repetitionsColor;
+    }
+
+    ///<returns> Returns the Repetitions Variable Coefficient </returns>
+    public int GetRepetitionsVariableCoefficient()
+    {
+        return repetitionsVariableCoefficient;
+    }
+
+    ///<returns> Returns the Repetitions Variable Constant </returns>
+    public int GetRepetitionsVariableConstant()
+    {
+        return repetitionsVariableConstant;
+    }
+
+
+    /*
     public EffectType GetEffectType()
     {
         return effectType;
@@ -174,4 +371,5 @@ public class PuzzleEffect
     {
         return targetType;
     }
+    */
 }

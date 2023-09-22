@@ -80,7 +80,7 @@ public class HealthBarManager : MonoBehaviour
         float fillBack = backHealthBar.fillAmount;
         float hFraction;
         if (maxHealth <= 0 || currentHealth <= 0) hFraction = 0;
-        else hFraction = currentHealth / maxHealth;
+        else hFraction = (float)currentHealth / maxHealth;
         if (fillBack > hFraction)
         {
             frontHealthBar.fillAmount = hFraction;

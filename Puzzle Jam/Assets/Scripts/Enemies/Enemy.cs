@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// Holds the data for active enemies in combat
 /// </summary>
+[Serializable]
 public class Enemy
 {
     private string enemyName;

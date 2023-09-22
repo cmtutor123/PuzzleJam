@@ -443,7 +443,7 @@ public class CombatManager : MonoBehaviour
     /// <param name="index">The index of the PuzzleBoard position</param>
     public void AttemptBoardPlacement(int index)
     {
-        SetCombatState(CombatState.PlayerTurn);
+        SetCombatState(CombatState.DoingStuff);
         if (puzzlePiecesPlayed < energyCount && puzzleBoard.PieceCanFit(index, selectedPuzzlePiece))
         {
             PlacePiece(selectedPuzzlePiece, index);
@@ -454,6 +454,7 @@ public class CombatManager : MonoBehaviour
         else
         {
             ReturnHandSelection();
+            SetCombatState(CombatState.PlayerTurn);
         }
     }
 
@@ -638,7 +639,7 @@ public class CombatManager : MonoBehaviour
         if (effect.GetEffectType() == EffectType.Damage)
         {
             int damage = 0, repetitions = 1;
-            switch (effect.GetAmountValueType())
+            switch (effect.GetAmount())
             {
                 case ValueType.Constant:
                     damage = effect.GetAmountConstant();
@@ -670,7 +671,7 @@ public class CombatManager : MonoBehaviour
             }
             if (effect.GetRepeats())
             {
-                switch (effect.GetRepetitionsValueType())
+                switch (effect.GetRepetitions())
                 {
                     case ValueType.Constant:
                         damage = effect.GetRepetitionsConstant();
