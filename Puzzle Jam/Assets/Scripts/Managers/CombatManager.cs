@@ -22,7 +22,7 @@ public class CombatManager : MonoBehaviour
     private PuzzleBoard puzzleBoard;
     private List<Enemy> enemies;
 
-    private List<PuzzleEffect> effectQueue;
+    private List<ActiveEffect> effectQueue;
 
     //[SerializeField] private GameObject combatCanvas;
 
@@ -50,7 +50,7 @@ public class CombatManager : MonoBehaviour
         puzzleBoard = new PuzzleBoard(defaultBoardSize);
         enemies = new List<Enemy>();
         selectedPuzzlePiece = null;
-        effectQueue = new List<PuzzleEffect>();
+        effectQueue = new List<ActiveEffect>();
         StartEncounter(testEncounter);
     }
 
@@ -543,15 +543,15 @@ public class CombatManager : MonoBehaviour
     public void PlacePiece(PuzzlePiece puzzlePiece, int index)
     {
         puzzleBoard.PlacePiece(puzzlePiece, index);
-        QueueEffects(CheckForTrigger(puzzlePiece, TriggerType.Place));
-        QueueEffects(CheckForTrigger(puzzleBoard.GetAdjacent(index), TriggerType.Adjacent));
-        QueueEffects(CheckForTrigger(puzzleBoard.GetConnected(index), TriggerType.Connected));
-        QueueEffects(CheckForTrigger(puzzleBoard.GetChain(index), TriggerType.Chain));
+        QueueEffects(CheckForTrigger(puzzlePiece, TriggerType.Place), puzzlePiece, index);
+        QueueEffects(CheckForTrigger(puzzleBoard.GetAdjacent(index), TriggerType.Adjacent), puzzlePiece, index);
+        QueueEffects(CheckForTrigger(puzzleBoard.GetConnected(index), TriggerType.Connected), puzzlePiece, index);
+        QueueEffects(CheckForTrigger(puzzleBoard.GetChain(index), TriggerType.Chain), puzzlePiece, index);
         if (puzzleBoard.InCombo(index))
         {
             List<PuzzlePiece> pieces = puzzleBoard.GetChain(index);
             pieces.Insert(0, puzzlePiece);
-            QueueEffects(CheckForTrigger(pieces, TriggerType.Combo));
+            QueueEffects(CheckForTrigger(pieces, TriggerType.Combo), puzzlePiece, index);
             List<int> indexes = puzzleBoard.GetChainIndex(index);
             indexes.Insert(0, index);
             DestroyPiece(index);
@@ -595,25 +595,26 @@ public class CombatManager : MonoBehaviour
         return puzzleEffects;
     }
 
-    public void QueueEffects(List<PuzzleEffect> effects)
+    public void QueueEffects(List<PuzzleEffect> effects, PuzzlePiece puzzlePiece, int index)
     {
         if (effects.Count > 0 && effects[0] != null) SetCombatState(CombatState.PickingTarget);
         foreach(PuzzleEffect effect in effects)
         {
-            effectQueue.Add(effect);
+            effectQueue.Add(null);
         }
     }
 
     public void DestroyPiece(int index)
     {
-        QueueEffects(CheckForTrigger(puzzleBoard.GetPuzzlePiece(index), TriggerType.Destroy));
+        QueueEffects(CheckForTrigger(puzzleBoard.GetPuzzlePiece(index), TriggerType.Destroy), null, 0);
         discardPile.AddPuzzlePiece(puzzleBoard.RemovePiece(index));
     }
 
     public PuzzleEffect GetCurrentEffect()
     {
-        if (effectQueue.Count > 0) return effectQueue[0];
-        else return null;
+        return null;
+        //if (effectQueue.Count > 0) return effectQueue[0];
+        //else return null;
     }
 
     public void ActivateNextEffect()
