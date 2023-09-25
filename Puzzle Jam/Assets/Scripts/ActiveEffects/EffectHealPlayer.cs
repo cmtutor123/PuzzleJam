@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectHealPlayer : MonoBehaviour
+public class EffectHealPlayer : ActiveEffect
 {
-    // Start is called before the first frame update
-    void Start()
+    private int amount, repetitions;
+
+    public EffectHealPlayer(int amount, int repetitions)
     {
-        
+        this.amount = amount;
+        this.repetitions = repetitions;
     }
 
-    // Update is called once per frame
-    void Update()
+    public int GetAmount()
     {
-        
+        return amount;
+    }
+
+    public int GetRepetitions()
+    {
+        return repetitions;
     }
 }

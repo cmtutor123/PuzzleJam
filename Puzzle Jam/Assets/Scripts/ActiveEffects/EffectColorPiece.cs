@@ -2,17 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectColorPiece : MonoBehaviour
+public class EffectColorPiece : ActiveEffect
 {
-    // Start is called before the first frame update
-    void Start()
+    private TargetType targetType;
+    private PuzzleColor colorCondition, newColor;
+    private int index, repetitions;
+
+    public EffectColorPiece(int index, TargetType targetType, PuzzleColor colorCondition, PuzzleColor newColor, int repetitions)
     {
-        
+        this.index = index;
+        this.targetType = targetType;
+        this.colorCondition = colorCondition;
+        this.newColor = newColor;
+        this.repetitions = repetitions;
     }
 
-    // Update is called once per frame
-    void Update()
+    public int GetIndex()
     {
-        
+        return index;
+    }
+
+    public TargetType GetTargetType()
+    {
+        return targetType;
+    }
+
+    public PuzzleColor GetColorCondition()
+    {
+        return colorCondition;
+    }
+
+    public PuzzleColor GetNewColor()
+    {
+        return newColor;
+    }
+
+    public int GetRepetitions()
+    {
+        return repetitions;
     }
 }

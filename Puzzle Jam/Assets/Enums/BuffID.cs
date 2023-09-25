@@ -7,5 +7,6 @@ using UnityEngine;
 /// </summary>
 public enum BuffID
 {
-    None
+    None,
+    Shield
 }

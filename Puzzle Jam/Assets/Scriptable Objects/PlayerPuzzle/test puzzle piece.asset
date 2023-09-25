@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf05c41416271f4ab6e8e5c8e7a8bb6, type: 3}
+  m_Name: test puzzle piece
+  m_EditorClassIdentifier: 
+  puzzleShape:
+    topEdge: 0
+    leftEdge: 0
+    rightEdge: 0
+    bottomEdge: 0
+  puzzleColor: {fileID: 0}
+  puzzleImage: {fileID: 0}
+  puzzleName: 
+  puzzleDescription: 
+  puzzleEffects:
+  - triggerType: 0
+    hasTriggerColor: 0
+    triggerColor: {fileID: 0}
+    effectType: 6
+    buffID: 0
+    modificationType: 1
+    destroyCompletely: 0
+    newColor: {fileID: 0}
+    shapeChange: 0
+    targetType: 3
+    limitPieceSelection: 0
+    limitTargetColor: 0
+    targetColor: {fileID: 0}
+    amount: 0
+    amountConstant: 0
+    amountMin: 0
+    amountMax: 0
+    amountVariableSource: 0
+    amountPuzzlePieceRange: 0
+    amountLimitColor: 0
+    amountColor: {fileID: 0}
+    amountVariableCoefficient: 0
+    amountVariableConstant: 0
+    repeats: 1
+    repetitions: 0
+    repetitionsConstant: 0
+    repetitionsMin: 0
+    repetitionsMax: 0
+    repetitionsVariableSource: 0
+    repetitionsPuzzlePieceRange: 0
+    repetitionsLimitColor: 0
+    repetitionsColor: {fileID: 0}
+    repetitionsVariableCoefficient: 0
+    repetitionsVariableConstant: 0

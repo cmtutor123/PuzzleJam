@@ -7,5 +7,5 @@ using UnityEngine;
 /// </summary>
 public abstract class ActiveEffect
 {
-    
+
 }

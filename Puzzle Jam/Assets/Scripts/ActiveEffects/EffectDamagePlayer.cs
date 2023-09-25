@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectDamagePlayer : MonoBehaviour
+public class EffectDamagePlayer : ActiveEffect
 {
-    // Start is called before the first frame update
-    void Start()
+    private int damage, repetitions;
+
+    public EffectDamagePlayer(int damage, int repetitions)
     {
-        
+        this.damage = damage;
+        this.repetitions = repetitions;
     }
 
-    // Update is called once per frame
-    void Update()
+    public int GetDamage()
     {
-        
+        return damage;
+    }
+
+    public int GetRepetitions()
+    {
+        return repetitions;
     }
 }

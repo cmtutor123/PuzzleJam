@@ -8,5 +8,6 @@ public enum CombatState
     PlayerTurn,
     PieceSelected,
     PickingTarget,
-    DoingStuff
+    DoingStuff,
+    EnemyTurn
 }

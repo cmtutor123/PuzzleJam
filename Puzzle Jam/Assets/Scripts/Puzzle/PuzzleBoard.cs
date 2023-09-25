@@ -504,4 +504,17 @@ public class PuzzleBoard
         if (piece.GetRight() == PuzzleEdge.Blank) count++;
         return count;
     }
+
+    public List<PuzzlePiece> GetAll()
+    {
+        List<PuzzlePiece> pieces = new List<PuzzlePiece>();
+        foreach (PuzzlePiece piece in board)
+        {
+            if (piece != null)
+            {
+                pieces.Add(piece);
+            }
+        }
+        return pieces;
+    }
 }

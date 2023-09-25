@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectBuffPlayer : MonoBehaviour
+public class EffectBuffPlayer : ActiveEffect
 {
-    // Start is called before the first frame update
-    void Start()
+    private BuffID buff;
+    private int amount, repetitions;
+
+    public EffectBuffPlayer(BuffID buff, int amount, int repetitions)
     {
-        
+        this.buff = buff;
+        this.amount = amount;
+        this.repetitions = repetitions;
     }
 
-    // Update is called once per frame
-    void Update()
+    public BuffID GetBuff()
     {
-        
+        return buff;
+    }
+
+    public int GetAmount()
+    {
+        return amount;
+    }
+
+    public int GetRepetitons()
+    {
+        return repetitions;
     }
 }
