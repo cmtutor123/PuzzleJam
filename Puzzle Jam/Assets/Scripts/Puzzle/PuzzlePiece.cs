@@ -106,4 +106,9 @@ public class PuzzlePiece
     {
         return puzzleEffects;
     }
+
+    public void SetPuzzleColor(PuzzleColor color)
+    {
+        puzzleColor = color;
+    }
 }

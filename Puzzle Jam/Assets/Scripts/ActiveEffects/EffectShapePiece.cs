@@ -42,4 +42,9 @@ public class EffectShapePiece : ActiveEffect
     {
         return repetitions;
     }
+
+    public void ReduceRepetition()
+    {
+        repetitions--;
+    }
 }

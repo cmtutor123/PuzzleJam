@@ -225,7 +225,7 @@ public class CombatManager : MonoBehaviour
     {
         tooltipManager.UnloadSprites();
     }
-    
+
     /// <summary>
     /// Updates the sprites of the PuzzlePiece objects on the puzzle board
     /// </summary>
@@ -236,7 +236,7 @@ public class CombatManager : MonoBehaviour
             UpdateBoardPieceSprite(i);
         }
     }
-    
+
     /// <summary>
     /// Updates the sprite of a PuzzlePiece object
     /// </summary>
@@ -642,13 +642,6 @@ public class CombatManager : MonoBehaviour
         discardPile.AddPuzzlePiece(puzzleBoard.RemovePiece(index));
     }
 
-    public PuzzleEffect GetCurrentEffect()
-    {
-        return null;
-        //if (effectQueue.Count > 0) return effectQueue[0];
-        //else return null;
-    }
-
     public void ActivateNextEffect()
     {
         if (effectQueue.Count == 0)
@@ -664,19 +657,392 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            ActiveEffect effect = effectQueue[0];
+            ActiveEffect currentEffect = effectQueue[0];
+            if (currentEffect.GetType() == typeof(EffectDamageEnemy))
+            {
+                EffectDamageEnemy effect = (EffectDamageEnemy)currentEffect;
+                switch (effect.GetTargetType())
+                {
+                    case TargetType.Single:
+                        if (GetValidEnemyTargets().Count == 1)
+                        {
+                            int times = 0;
+                            int damage = effect.GetDamage();
+                            int repetitions = effect.GetRepetitions();
+                            Enemy enemy = GetValidEnemyTargets()[0];
+                            while (enemy.ValidTarget() && times++ < repetitions)
+                            {
+                                DamageEnemy(enemy, damage);
+                            }
+                        }
+                        else if (GetValidEnemyTargets().Count != 0)
+                        {
+                            StartTargeting();
+                            return;
+                        }
+                        break;
+                    case TargetType.Random:
+                        if (GetValidEnemyTargets().Count > 0)
+                        {
+                            List<Enemy> validTargets = GetValidEnemyTargets();
+                            int times = 0;
+                            int damage = effect.GetDamage();
+                            int repetitions = effect.GetRepetitions();
+                            while (validTargets.Count > 0 && times++ < repetitions)
+                            {
+                                Enemy target = validTargets[Random.Range(0, validTargets.Count)];
+                                DamageEnemy(target, damage);
+                                validTargets = GetValidEnemyTargets();
+                            }
+                        }
+                        break;
+                    case TargetType.All:
+                        List<Enemy> targetsAll = GetValidEnemyTargets();
+                        int damageAll = effect.GetDamage();
+                        int repetitionsAll = effect.GetRepetitions();
+                        foreach (Enemy target in targetsAll)
+                        {
+                            int times = 0;
+                            while (target.ValidTarget() && times++ < repetitionsAll)
+                            {
+                                DamageEnemy(target, damageAll);
+                            }
+                        }
+                        break;
+                }
+            }
+            else if (currentEffect.GetType() == typeof(EffectHealPlayer))
+            {
+                EffectHealPlayer effect = (EffectHealPlayer)currentEffect;
+                int amount = effect.GetAmount();
+                for (int i = 0; i < effect.GetRepetitions(); i++)
+                {
+                    playerManager.Heal(amount);
+                }
+            }
+            else if (currentEffect.GetType() == typeof(EffectBuffPlayer))
+            {
+                EffectBuffPlayer effect = (EffectBuffPlayer)currentEffect;
+                BuffID buff = effect.GetBuff();
+                int amount = effect.GetAmount();
+                for (int i = 0; i < effect.GetRepetitons(); i++)
+                {
+                    playerManager.ApplyBuff(buff, amount);
+                }
+            }
+            else if (currentEffect.GetType() == typeof(EffectBuffEnemy))
+            {
+                EffectBuffEnemy effect = (EffectBuffEnemy)currentEffect;
+                BuffID buff = effect.GetBuff();
+                switch (effect.GetTargetType())
+                {
+                    case TargetType.Single:
+                        if (GetValidEnemyTargets().Count == 1)
+                        {
+                            int times = 0;
+                            int amount = effect.GetAmount();
+                            int repetitions = effect.GetRepetitions();
+                            Enemy enemy = GetValidEnemyTargets()[0];
+                            while (enemy.ValidTarget() && times++ < repetitions)
+                            {
+                                BuffEnemy(enemy, buff, amount);
+                            }
+                        }
+                        else if (GetValidEnemyTargets().Count != 0)
+                        {
+                            StartTargeting();
+                            return;
+                        }
+                        break;
+                    case TargetType.Random:
+                        if (GetValidEnemyTargets().Count > 0)
+                        {
+                            List<Enemy> validTargets = GetValidEnemyTargets();
+                            int times = 0;
+                            int amount = effect.GetAmount();
+                            int repetitions = effect.GetRepetitions();
+                            while (validTargets.Count > 0 && times++ < repetitions)
+                            {
+                                Enemy target = validTargets[Random.Range(0, validTargets.Count)];
+                                BuffEnemy(target, buff, amount);
+                                validTargets = GetValidEnemyTargets();
+                            }
+                        }
+                        break;
+                    case TargetType.All:
+                        List<Enemy> targetsAll = GetValidEnemyTargets();
+                        int amountAll = effect.GetAmount();
+                        int repetitionsAll = effect.GetRepetitions();
+                        foreach (Enemy target in targetsAll)
+                        {
+                            int times = 0;
+                            while (target.ValidTarget() && times++ < repetitionsAll)
+                            {
+                                BuffEnemy(target, buff, amountAll);
+                            }
+                        }
+                        break;
+                }
+            }
+            else if (currentEffect.GetType() == typeof(EffectDestroyPiece))
+            {
+                EffectDestroyPiece effect = (EffectDestroyPiece)currentEffect;
+                if (effect.GetColorCondition() == null)
+                {
+                    switch (effect.GetTargetType())
+                    {
 
+                        case TargetType.Single:
+                            if (GetValidPuzzleTargets().Count == 1)
+                            {
+                                DestroyPiece(GetValidPuzzleTargets()[0]);
+                            }
+                            else if (GetValidPuzzleTargets().Count != 0)
+                            {
+                                StartTargeting();
+                                return;
+                            }
+                            break;
+                        case TargetType.Random:
+                            if (GetValidPuzzleTargets().Count > 0)
+                            {
+                                List<int> validTargets = GetValidPuzzleTargets();
+                                int times = 0;
+                                int repetitions = effect.GetRepetitions();
+                                while (validTargets.Count > 0 && times++ < repetitions)
+                                {
+                                    int target = validTargets[Random.Range(0, validTargets.Count)];
+                                    DestroyPiece(target);
+                                    validTargets = GetValidPuzzleTargets();
+                                }
+                            }
+                            break;
+                        case TargetType.All:
+                            List<int> targetsAll = GetValidPuzzleTargets();
+                            foreach (int target in targetsAll)
+                            {
+                                DestroyPiece(target);
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (effect.GetTargetType())
+                    {
+
+                        case TargetType.Single:
+                            if (GetValidPuzzleTargets(effect.GetColorCondition()).Count == 1)
+                            {
+                                DestroyPiece(GetValidPuzzleTargets(effect.GetColorCondition())[0]);
+                            }
+                            else if (GetValidPuzzleTargets(effect.GetColorCondition()).Count != 0)
+                            {
+                                StartTargeting();
+                                return;
+                            }
+                            break;
+                        case TargetType.Random:
+                            if (GetValidPuzzleTargets(effect.GetColorCondition()).Count > 0)
+                            {
+                                List<int> validTargets = GetValidPuzzleTargets(effect.GetColorCondition());
+                                int times = 0;
+                                int repetitions = effect.GetRepetitions();
+                                while (validTargets.Count > 0 && times++ < repetitions)
+                                {
+                                    int target = validTargets[Random.Range(0, validTargets.Count)];
+                                    DestroyPiece(target);
+                                    validTargets = GetValidPuzzleTargets(effect.GetColorCondition());
+                                }
+                            }
+                            break;
+                        case TargetType.All:
+                            List<int> targetsAll = GetValidPuzzleTargets(effect.GetColorCondition());
+                            foreach (int target in targetsAll)
+                            {
+                                DestroyPiece(target);
+                            }
+                            break;
+                    }
+                }
+            }
+            else if (currentEffect.GetType() == typeof(EffectColorPiece))
+            {
+                EffectColorPiece effect = (EffectColorPiece)currentEffect;
+                if (effect.GetColorCondition() == null)
+                {
+                    switch (effect.GetTargetType())
+                    {
+
+                        case TargetType.Single:
+                            if (GetValidPuzzleTargets().Count == 1)
+                            {
+                                ChangePuzzleColor(GetValidPuzzleTargets()[0], effect.GetNewColor());
+                            }
+                            else if (GetValidPuzzleTargets().Count != 0)
+                            {
+                                StartTargeting();
+                                return;
+                            }
+                            break;
+                        case TargetType.Random:
+                            if (GetValidPuzzleTargets().Count > 0)
+                            {
+                                List<int> validTargets = GetValidPuzzleTargets();
+                                int times = 0;
+                                int repetitions = effect.GetRepetitions();
+                                while (validTargets.Count > 0 && times++ < repetitions)
+                                {
+                                    int target = validTargets[Random.Range(0, validTargets.Count)];
+                                    ChangePuzzleColor(target, effect.GetNewColor());
+                                    validTargets = GetValidPuzzleTargets();
+                                }
+                            }
+                            break;
+                        case TargetType.All:
+                            List<int> targetsAll = GetValidPuzzleTargets();
+                            foreach (int target in targetsAll)
+                            {
+                                ChangePuzzleColor(target, effect.GetNewColor());
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (effect.GetTargetType())
+                    {
+
+                        case TargetType.Single:
+                            if (GetValidPuzzleTargets(effect.GetColorCondition()).Count == 1)
+                            {
+                                ChangePuzzleColor(GetValidPuzzleTargets(effect.GetColorCondition())[0], effect.GetNewColor());
+                            }
+                            else if (GetValidPuzzleTargets(effect.GetColorCondition()).Count != 0)
+                            {
+                                StartTargeting();
+                                return;
+                            }
+                            break;
+                        case TargetType.Random:
+                            if (GetValidPuzzleTargets(effect.GetColorCondition()).Count > 0)
+                            {
+                                List<int> validTargets = GetValidPuzzleTargets(effect.GetColorCondition());
+                                int times = 0;
+                                int repetitions = effect.GetRepetitions();
+                                while (validTargets.Count > 0 && times++ < repetitions)
+                                {
+                                    int target = validTargets[Random.Range(0, validTargets.Count)];
+                                    ChangePuzzleColor(target, effect.GetNewColor());
+                                    validTargets = GetValidPuzzleTargets(effect.GetColorCondition());
+                                }
+                            }
+                            break;
+                        case TargetType.All:
+                            List<int> targetsAll = GetValidPuzzleTargets(effect.GetColorCondition());
+                            foreach (int target in targetsAll)
+                            {
+                                ChangePuzzleColor(target, effect.GetNewColor());
+                            }
+                            break;
+                    }
+                }
+            }
+            else if (currentEffect.GetType() == typeof(EffectShapePiece))
+            {
+                EffectShapePiece effect = (EffectShapePiece)currentEffect;
+                if (effect.GetColorCondition() == null)
+                {
+                    switch (effect.GetTargetType())
+                    {
+
+                        case TargetType.Single:
+                            if (GetValidPuzzleTargets().Count == 1)
+                            {
+                                ChangePuzzleShape(GetValidPuzzleTargets()[0], effect.GetNewShape());
+                            }
+                            else if (GetValidPuzzleTargets().Count != 0)
+                            {
+                                StartTargeting();
+                                return;
+                            }
+                            break;
+                        case TargetType.Random:
+                            if (GetValidPuzzleTargets().Count > 0)
+                            {
+                                List<int> validTargets = GetValidPuzzleTargets();
+                                int times = 0;
+                                int repetitions = effect.GetRepetitions();
+                                while (validTargets.Count > 0 && times++ < repetitions)
+                                {
+                                    int target = validTargets[Random.Range(0, validTargets.Count)];
+                                    ChangePuzzleShape(target, effect.GetNewShape());
+                                    validTargets = GetValidPuzzleTargets();
+                                }
+                            }
+                            break;
+                        case TargetType.All:
+                            List<int> targetsAll = GetValidPuzzleTargets();
+                            foreach (int target in targetsAll)
+                            {
+                                ChangePuzzleShape(target, effect.GetNewShape());
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (effect.GetTargetType())
+                    {
+
+                        case TargetType.Single:
+                            if (GetValidPuzzleTargets(effect.GetColorCondition()).Count == 1)
+                            {
+                                ChangePuzzleShape(GetValidPuzzleTargets(effect.GetColorCondition())[0], effect.GetNewShape());
+                            }
+                            else if (GetValidPuzzleTargets(effect.GetColorCondition()).Count != 0)
+                            {
+                                StartTargeting();
+                                return;
+                            }
+                            break;
+                        case TargetType.Random:
+                            if (GetValidPuzzleTargets(effect.GetColorCondition()).Count > 0)
+                            {
+                                List<int> validTargets = GetValidPuzzleTargets(effect.GetColorCondition());
+                                int times = 0;
+                                int repetitions = effect.GetRepetitions();
+                                while (validTargets.Count > 0 && times++ < repetitions)
+                                {
+                                    int target = validTargets[Random.Range(0, validTargets.Count)];
+                                    ChangePuzzleShape(target, effect.GetNewShape());
+                                    validTargets = GetValidPuzzleTargets(effect.GetColorCondition());
+                                }
+                            }
+                            break;
+                        case TargetType.All:
+                            List<int> targetsAll = GetValidPuzzleTargets(effect.GetColorCondition());
+                            foreach (int target in targetsAll)
+                            {
+                                ChangePuzzleShape(target, effect.GetNewShape());
+                            }
+                            break;
+                    }
+                }
+            }
+            else if (currentEffect.GetType() == typeof(EffectDamagePlayer))
+            {
+                EffectDamagePlayer effect = (EffectDamagePlayer)currentEffect;
+                int damage = effect.GetDamage();
+                for (int i = 0; i < effect.GetRepetitions(); i++)
+                {
+                    playerManager.Damage(damage);
+                }
+            }
+            effectQueue.RemoveAt(0);
+            ActivateNextEffect();
         }
     }
-
-    public void DamageSingleEnemy(Enemy enemy, int damage, int repetitions)
-    {
-        for (int i = 0; i < repetitions; i++)
-        {
-            enemy.Damage(damage);
-        }
-        ReloadEnemySprites();
-    }    
 
     public void GetTarget()
     {
@@ -811,5 +1177,75 @@ public class CombatManager : MonoBehaviour
         {
             return 1;
         }
+    }
+
+    public void StartTargeting()
+    {
+        SetCombatState(CombatState.PickingTarget);
+    }
+
+    public List<Enemy> GetValidEnemyTargets()
+    {
+        List<Enemy> validTargets = new List<Enemy>();
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy != null && enemy.ValidTarget())
+            {
+                validTargets.Add(enemy);
+            }
+        }
+        return validTargets;
+    }
+
+    public List<int> GetValidPuzzleTargets()
+    {
+        List<int> pieces = new List<int>();
+        for (int i = 0; i < puzzleBoard.GetSize(); i++)
+        {
+            if (puzzleBoard.GetPuzzlePiece(i) != null) pieces.Add(i);
+        }
+        return pieces;
+    }
+
+    public List<int> GetValidPuzzleTargets(PuzzleColor color)
+    {
+        List<int> allPieces = GetValidPuzzleTargets();
+        List<int> pieces = new List<int>();
+        foreach (int piece in allPieces)
+        {
+            if (puzzleBoard.GetPuzzlePiece(piece).GetPuzzleColor() == color) pieces.Add(piece);
+        }
+        return pieces;
+    }
+
+    public void DamageEnemy(Enemy enemy, int damage)
+    {
+        enemy.Damage(damage);
+        ReloadEnemySprites();
+    }
+
+    public void BuffEnemy(Enemy enemy, BuffID buff, int amount)
+    {
+        enemy.ApplyBuff(buff, amount);
+    }
+
+    public void ChangePuzzleColor(int index, PuzzleColor color)
+    {
+        puzzleBoard.GetPuzzlePiece(index).SetPuzzleColor(color);
+        UpdateBoardPieceSprites();
+    }
+
+    public void ChangePuzzleShape(int index, ShapeChange shape)
+    {
+        switch (shape)
+        {
+            case ShapeChange.ConnectSurrounding:
+
+                break;
+            case ShapeChange.SmoothEdges:
+
+                break;
+        }
+        UpdateBoardPieceSprites();
     }
 }

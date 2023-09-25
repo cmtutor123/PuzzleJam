@@ -13,10 +13,12 @@ public class Enemy
     private int maxHealth, currentHealth, turnCounter;
     private Sprite spriteIdle;
     private EnemyAttackPattern attackPattern;
+    private Dictionary<BuffID, int> buffs;
 
     /// <param name="enemyData">The EnemyData to load from</param>
     public Enemy(EnemyData enemyData)
     {
+        buffs = new Dictionary<BuffID, int>();
         enemyName = enemyData.GetName();
         maxHealth = enemyData.GetMaxHealth();
         currentHealth = maxHealth;
@@ -75,5 +77,53 @@ public class Enemy
     {
         damage = Mathf.Clamp(damage, 0, maxHealth);
         currentHealth -= damage;
+    }
+
+    public void ApplyBuff(BuffID buff, int amount)
+    {
+        if (buffs.ContainsKey(buff))
+        {
+            buffs[buff] += amount;
+        }
+        else
+        {
+            buffs.Add(buff, amount);
+        }
+    }
+
+    public void RemoveBuff(BuffID buff, int amount)
+    {
+        if (buffs.ContainsKey(buff))
+        {
+            buffs[buff] -= amount;
+            if (buffs[buff] < 0) buffs[buff] = 0;
+        }
+        else
+        {
+            buffs.Add(buff, 0);
+        }
+    }
+
+    public void RemoveAllBuff(BuffID buff)
+    {
+        if (buffs.ContainsKey(buff))
+        {
+            buffs[buff] = 0;
+        }
+        else
+        {
+            buffs.Add(buff, 0);
+        }
+    }
+
+    public bool HasBuff(BuffID buff)
+    {
+        return buffs.ContainsKey(buff) && buffs[buff] > 0;
+    }
+
+    public int GetBuffAmount(BuffID buff)
+    {
+        if (HasBuff(buff)) return buffs[buff];
+        else return 0;
     }
 }

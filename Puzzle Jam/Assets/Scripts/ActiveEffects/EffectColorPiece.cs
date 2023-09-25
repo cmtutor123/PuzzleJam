@@ -41,4 +41,9 @@ public class EffectColorPiece : ActiveEffect
     {
         return repetitions;
     }
+    
+    public void ReduceRepetition()
+    {
+        repetitions--;
+    }
 }

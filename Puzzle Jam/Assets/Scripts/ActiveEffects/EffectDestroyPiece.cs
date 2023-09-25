@@ -35,4 +35,9 @@ public class EffectDestroyPiece : ActiveEffect
     {
         return repetitions;
     }
+
+    public void ReduceRepetition()
+    {
+        repetitions--;
+    }
 }
