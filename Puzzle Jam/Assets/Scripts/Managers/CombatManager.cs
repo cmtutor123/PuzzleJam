@@ -10,6 +10,9 @@ public class CombatManager : MonoBehaviour
 {
     private CombatState combatState;
 
+    private bool playerTurn;
+    private bool enemyTurn;
+
     private const int defaultBoardSize = 6;
     private const int turnDrawAmount = 6;
     private const int energyCount = 3;
@@ -291,6 +294,7 @@ public class CombatManager : MonoBehaviour
         SetCombatState(CombatState.PlayerTurn);
         DrawHand(turnDrawAmount);
         puzzlePiecesPlayed = 0;
+        playerTurn = true;
     }
 
     /// <summary>
@@ -349,6 +353,7 @@ public class CombatManager : MonoBehaviour
     public void EndPlayerTurn()
     {
         SetCombatState(CombatState.DoingStuff);
+        playerTurn = false;
         DiscardHand();
         StartEnemyTurn();
     }
@@ -359,6 +364,7 @@ public class CombatManager : MonoBehaviour
     public void StartEnemyTurn()
     {
         SetCombatState(CombatState.EnemyTurn);
+        enemyTurn = true;
     }
 
     /// <summary>
@@ -366,6 +372,7 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     public void EndEnemyTurn()
     {
+        enemyTurn = false;
         StartPlayerTurn();
     }
 
@@ -465,6 +472,16 @@ public class CombatManager : MonoBehaviour
     /// <param name="index">The index of the target Enemy</param>
     public void AttemptPickTargetEnemy(int index)
     {
+        ActiveEffect effect = effectQueue[0];
+        if (effect.GetType() == typeof(EffectDamageEnemy))
+        {
+
+        }
+        else if (effect.GetType() == typeof(EffectBuffEnemy))
+        {
+
+        }
+
         if (index < enemies.Count && enemies[index].ValidTarget())
         {
             SetCombatState(CombatState.PlayerTurn);
@@ -493,24 +510,6 @@ public class CombatManager : MonoBehaviour
     public void SetCombatState(CombatState newCombatState)
     {
         combatState = newCombatState;
-    }
-
-    /// <summary>
-    /// Sets the target to an Enemy object
-    /// </summary>
-    /// <param name="enemy">The Enemy to target</param>
-    public void SelectTarget(Enemy enemy)
-    {
-
-    }
-
-    /// <summary>
-    /// Sets the target to a PuzzlePiece object
-    /// </summary>
-    /// <param name="index">The index of the PuzzlePiece target on the PuzzleBoard</param>
-    public void SelectTarget(int index)
-    {
-
     }
 
     /// <summary>
