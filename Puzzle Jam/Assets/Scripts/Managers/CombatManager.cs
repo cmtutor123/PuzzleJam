@@ -36,6 +36,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private PuzzleRenderer mousePuzzleRenderer;
     [SerializeField] private List<PuzzleRenderer> handPuzzlePieceRenderers, boardPuzzlePieceRenderers;
     [SerializeField] private List<EnemySpriteManager> enemySpriteManagers;
+    [SerializeField] private Sprite targetingSprite;
 
     [Header("Test Variables")]
     public EnemyEncounter testEncounter;
@@ -472,21 +473,39 @@ public class CombatManager : MonoBehaviour
     /// <param name="index">The index of the target Enemy</param>
     public void AttemptPickTargetEnemy(int index)
     {
-        ActiveEffect effect = effectQueue[0];
-        if (effect.GetType() == typeof(EffectDamageEnemy))
+        ActiveEffect activeEffect = effectQueue[0];
+        if (activeEffect.GetType() == typeof(EffectDamageEnemy))
         {
-
+            EffectDamageEnemy effect = (EffectDamageEnemy)activeEffect;
+            if (effect.GetTargetType() == TargetType.Single && enemies[index] != null && enemies[index].ValidTarget())
+            {
+                int times = 0;
+                int damage = effect.GetDamage();
+                int repetitions = effect.GetRepetitions();
+                while (enemies[index].ValidTarget() && times++ < repetitions)
+                {
+                    DamageEnemy(enemies[index], damage);
+                }
+                effectQueue.RemoveAt(0);
+                EndTargeting();
+            }
         }
-        else if (effect.GetType() == typeof(EffectBuffEnemy))
+        else if (activeEffect.GetType() == typeof(EffectBuffEnemy))
         {
-
-        }
-
-        if (index < enemies.Count && enemies[index].ValidTarget())
-        {
-            SetCombatState(CombatState.PlayerTurn);
-            SelectTarget(enemies[index]);
-            ClearMouseImage();
+            EffectBuffEnemy effect = (EffectBuffEnemy)activeEffect;
+            if (effect.GetTargetType() == TargetType.Single && enemies[index] != null && enemies[index].ValidTarget())
+            {
+                int times = 0;
+                int damage = effect.GetAmount();
+                int repetitions = effect.GetRepetitions();
+                BuffID buff = effect.GetBuff();
+                while (enemies[index].ValidTarget() && times++ < repetitions)
+                {
+                    BuffEnemy(enemies[index], buff, damage);
+                }
+                effectQueue.RemoveAt(0);
+                EndTargeting();
+            }
         }
     }
 
@@ -496,10 +515,18 @@ public class CombatManager : MonoBehaviour
     /// <param name="index">the index of the target PuzzlePiece on the PuzzleBoard</param>
     public void AttemptPickTargetPuzzlePiece(int index)
     {
-        if (index < puzzleBoard.GetSize() && true)
+        ActiveEffect activeEffect = effectQueue[0];
+        if (activeEffect.GetType() == typeof(EffectDestroyPiece))
         {
-            SetCombatState(CombatState.PlayerTurn);
-            SelectTarget(index);
+
+        }
+        else if (activeEffect.GetType() == typeof(EffectColorPiece))
+        {
+
+        }
+        else if (activeEffect.GetType() == typeof(EffectShapePiece))
+        {
+
         }
     }
 
@@ -1039,6 +1066,7 @@ public class CombatManager : MonoBehaviour
                 }
             }
             effectQueue.RemoveAt(0);
+            ReloadEnemySprites();
             ActivateNextEffect();
         }
     }
@@ -1053,7 +1081,7 @@ public class CombatManager : MonoBehaviour
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemySpriteManagers[i].SetSprite(enemies[0].GetSpriteIdle(), enemies[0].GetCurrentHealth(), enemies[0].GetMaxHealth(), enemies[0].GetNextAttack());
+            enemySpriteManagers[i].SetSprite(enemies[i].GetSpriteIdle(), enemies[i].GetCurrentHealth(), enemies[i].GetMaxHealth(), enemies[i].GetNextAttack());
         }
     }
 
@@ -1181,6 +1209,7 @@ public class CombatManager : MonoBehaviour
     public void StartTargeting()
     {
         SetCombatState(CombatState.PickingTarget);
+        SetMouseSprite(targetingSprite);
     }
 
     public List<Enemy> GetValidEnemyTargets()
@@ -1246,5 +1275,14 @@ public class CombatManager : MonoBehaviour
                 break;
         }
         UpdateBoardPieceSprites();
+    }
+
+    public void EndTargeting()
+    {
+        ReloadEnemySprites();
+        if (playerTurn) SetCombatState(CombatState.DoingStuff);
+        else if (enemyTurn) SetCombatState(CombatState.EnemyTurn);
+        ClearMouseImage();
+        ActivateNextEffect();
     }
 }
