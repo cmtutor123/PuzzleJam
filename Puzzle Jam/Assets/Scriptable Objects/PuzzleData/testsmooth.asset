@@ -10,33 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bf05c41416271f4ab6e8e5c8e7a8bb6, type: 3}
-  m_Name: Alert
+  m_Name: testsmooth
   m_EditorClassIdentifier: 
   puzzleShape:
     topEdge: 0
-    leftEdge: 1
+    leftEdge: 0
     rightEdge: 0
-    bottomEdge: 1
-  puzzleColor: {fileID: 11400000, guid: 730a3a752e23e9741b1689d132651fb8, type: 2}
+    bottomEdge: 0
+  puzzleColor: {fileID: 0}
   puzzleImage: {fileID: 0}
-  puzzleName: Alert
-  puzzleDescription: Gain 5 Shield when an adjacent puzzle piece is played.
+  puzzleName: 
+  puzzleDescription: 
   puzzleEffects:
-  - triggerType: 3
+  - triggerType: 1
     hasTriggerColor: 0
     triggerColor: {fileID: 0}
-    effectType: 3
+    effectType: 6
     buffID: 0
-    modificationType: 0
+    modificationType: 2
     destroyCompletely: 0
     newColor: {fileID: 0}
-    shapeChange: 0
-    targetType: 0
+    shapeChange: 1
+    targetType: 1
     limitPieceSelection: 0
     limitTargetColor: 0
     targetColor: {fileID: 0}
     amount: 0
-    amountConstant: 5
+    amountConstant: 1
     amountMin: 0
     amountMax: 0
     amountVariableSource: 0
