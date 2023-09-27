@@ -402,10 +402,10 @@ public class PuzzleBoard
     public List<PuzzlePiece> GetConnected(int index)
     {
         List<PuzzlePiece> connected = new List<PuzzlePiece>();
-        if (PiecesAreConnected(index, index - 1)) connected.Add(GetPuzzlePiece(index - 1));
-        if (PiecesAreConnected(index, index + 1)) connected.Add(GetPuzzlePiece(index + 1));
-        if (PiecesAreConnected(index, index - width)) connected.Add(GetPuzzlePiece(index - width));
-        if (PiecesAreConnected(index, index + width)) connected.Add(GetPuzzlePiece(index + width));
+        if (index != 0 && !LocationEmpty(index - 1) && PiecesAreConnected(index, index - 1)) connected.Add(GetPuzzlePiece(index - 1));
+        if (index != 35 && !LocationEmpty(index + 1) && PiecesAreConnected(index, index + 1)) connected.Add(GetPuzzlePiece(index + 1));
+        if (index - width >= 0 && !LocationEmpty(index - width) && PiecesAreConnected(index, index - width)) connected.Add(GetPuzzlePiece(index - width));
+        if (index + width <= 35 && !LocationEmpty(index + width) && PiecesAreConnected(index, index + width)) connected.Add(GetPuzzlePiece(index + width));
         return connected;
     }
 
@@ -417,10 +417,10 @@ public class PuzzleBoard
     public List<int> GetConnectedIndex(int index)
     {
         List<int> connected = new List<int>();
-        if (PiecesAreConnected(index, index - 1)) connected.Add(index - 1);
-        if (PiecesAreConnected(index, index + 1)) connected.Add(index + 1);
-        if (PiecesAreConnected(index, index - width)) connected.Add(index - width);
-        if (PiecesAreConnected(index, index + width)) connected.Add(index + width);
+        if (index != 0 && !LocationEmpty(index - 1) && PiecesAreConnected(index, index - 1)) connected.Add(index - 1);
+        if (index != 35 && !LocationEmpty(index + 1) && PiecesAreConnected(index, index + 1)) connected.Add(index + 1);
+        if (index - width >= 0 && !LocationEmpty(index - width) && PiecesAreConnected(index, index - width)) connected.Add(index - width);
+        if (index + width <= 35 && !LocationEmpty(index + width) && PiecesAreConnected(index, index + width)) connected.Add(index + width);
         return connected;
     }
 

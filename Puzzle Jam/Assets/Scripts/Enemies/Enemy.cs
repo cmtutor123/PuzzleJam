@@ -126,4 +126,9 @@ public class Enemy
         if (HasBuff(buff)) return buffs[buff];
         else return 0;
     }
+
+    public void IncrementTurnCounter()
+    {
+        turnCounter++;
+    }
 }

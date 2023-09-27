@@ -353,11 +353,10 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     public void EndPlayerTurn()
     {
-        StartPlayerTurn();
-        /*SetCombatState(CombatState.DoingStuff);
+        SetCombatState(CombatState.DoingStuff);
         playerTurn = false;
         DiscardHand();
-        StartEnemyTurn();*/
+        StartEnemyTurn();
     }
 
     /// <summary>
@@ -367,6 +366,7 @@ public class CombatManager : MonoBehaviour
     {
         SetCombatState(CombatState.EnemyTurn);
         enemyTurn = true;
+        DoEnemyAttacks();
     }
 
     /// <summary>
@@ -375,6 +375,7 @@ public class CombatManager : MonoBehaviour
     public void EndEnemyTurn()
     {
         enemyTurn = false;
+        ReloadEnemySprites();
         StartPlayerTurn();
     }
 
@@ -608,6 +609,7 @@ public class CombatManager : MonoBehaviour
             DestroyPieces(indexes);
         }
         puzzlePiecesPlayed++;
+        UpdateBoardPieceSprites();
         ActivateNextEffect();
     }
 
@@ -1375,5 +1377,66 @@ public class CombatManager : MonoBehaviour
         else if (enemyTurn) SetCombatState(CombatState.EnemyTurn);
         ClearMouseImage();
         ActivateNextEffect();
+    }
+
+    public void DoEnemyAttacks()
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy != null && enemy.Alive())
+            {
+                DoEnemyAttack(enemy);
+            }
+        }
+        ActivateNextEffect();
+    }
+
+    public void DoEnemyAttack(Enemy enemy)
+    {
+        PuzzlePiece enemyAttack = new PuzzlePiece(enemy.GetNextAttack());
+        List<int> validLocations = new List<int>();
+        for (int i = 0; i < puzzleBoard.GetSize(); i++)
+        {
+            if (puzzleBoard.PieceCanFit(i, enemyAttack))
+            {
+                validLocations.Add(i);
+            }
+            enemyAttack.RotatePiece();
+            if (puzzleBoard.PieceCanFit(i, enemyAttack) && !validLocations.Contains(i))
+            {
+                validLocations.Add(i);
+            }
+            enemyAttack.RotatePiece();
+            if (puzzleBoard.PieceCanFit(i, enemyAttack) && !validLocations.Contains(i))
+            {
+                validLocations.Add(i);
+            }
+            enemyAttack.RotatePiece();
+            if (puzzleBoard.PieceCanFit(i, enemyAttack) && !validLocations.Contains(i))
+            {
+                validLocations.Add(i);
+            }
+            enemyAttack.RotatePiece();
+        }
+        if (validLocations.Count != 0)
+        {
+            int index = validLocations[Random.Range(0, validLocations.Count)];
+            List<int> validRotations = new List<int>();
+            if (puzzleBoard.PieceCanFit(index, enemyAttack)) validRotations.Add(0);
+            enemyAttack.RotatePiece();
+            if (puzzleBoard.PieceCanFit(index, enemyAttack)) validRotations.Add(1);
+            enemyAttack.RotatePiece();
+            if (puzzleBoard.PieceCanFit(index, enemyAttack)) validRotations.Add(2);
+            enemyAttack.RotatePiece();
+            if (puzzleBoard.PieceCanFit(index, enemyAttack)) validRotations.Add(3);
+            enemyAttack.RotatePiece();
+            int rotations = validRotations[Random.Range(0, validRotations.Count)];
+            for (int i = 0; i < rotations; i++)
+            {
+                enemyAttack.RotatePiece();
+            }
+            Debug.Log("Chose " + index);
+            PlacePiece(enemyAttack, index);
+        }
     }
 }
