@@ -353,10 +353,11 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     public void EndPlayerTurn()
     {
-        SetCombatState(CombatState.DoingStuff);
+        StartPlayerTurn();
+        /*SetCombatState(CombatState.DoingStuff);
         playerTurn = false;
         DiscardHand();
-        StartEnemyTurn();
+        StartEnemyTurn();*/
     }
 
     /// <summary>
@@ -518,15 +519,26 @@ public class CombatManager : MonoBehaviour
         ActiveEffect activeEffect = effectQueue[0];
         if (activeEffect.GetType() == typeof(EffectDestroyPiece))
         {
-
+            EffectDestroyPiece effect = (EffectDestroyPiece)activeEffect;
+            if (effect.GetTargetType() == TargetType.Single && puzzleBoard.GetPuzzlePiece(index) != null && effect.GetColorCondition() == null ? true : effect.GetColorCondition() == puzzleBoard.GetPuzzlePiece(index).GetPuzzleColor())
+            {
+                DestroyPiece(index);
+                activeEffect.ReduceRepetition();
+                if (activeEffect.GetRepetitions() <= 0 || (effect.GetColorCondition() == null ? GetValidPuzzleTargets().Count == 0 : GetValidPuzzleTargets(effect.GetColorCondition()).Count == 0))
+                {
+                    Debug.Log("Removed");
+                    effectQueue.RemoveAt(0);
+                    EndTargeting();
+                }
+            }
         }
         else if (activeEffect.GetType() == typeof(EffectColorPiece))
         {
-
+            EffectColorPiece effect = (EffectColorPiece)activeEffect;
         }
         else if (activeEffect.GetType() == typeof(EffectShapePiece))
         {
-
+            EffectShapePiece effect = (EffectShapePiece)activeEffect;
         }
     }
 
@@ -574,7 +586,7 @@ public class CombatManager : MonoBehaviour
             QueueEffects(CheckForTrigger(pieces, TriggerType.Combo), index);
             List<int> indexes = puzzleBoard.GetChainIndex(index);
             indexes.Insert(0, index);
-            DestroyPiece(index);
+            DestroyPieces(indexes);
         }
         puzzlePiecesPlayed++;
         ActivateNextEffect();
@@ -666,6 +678,15 @@ public class CombatManager : MonoBehaviour
     {
         QueueEffects(CheckForTrigger(puzzleBoard.GetPuzzlePiece(index), TriggerType.Destroy), index);
         discardPile.AddPuzzlePiece(puzzleBoard.RemovePiece(index));
+        UpdateBoardPieceSprites();
+    }
+
+    public void DestroyPieces(List<int> indexes)
+    {
+        foreach (int index in indexes)
+        {
+            DestroyPiece(index);
+        }
     }
 
     public void ActivateNextEffect()
@@ -1280,6 +1301,7 @@ public class CombatManager : MonoBehaviour
     public void EndTargeting()
     {
         ReloadEnemySprites();
+        UpdateBoardPieceSprites();
         if (playerTurn) SetCombatState(CombatState.DoingStuff);
         else if (enemyTurn) SetCombatState(CombatState.EnemyTurn);
         ClearMouseImage();

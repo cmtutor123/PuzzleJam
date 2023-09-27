@@ -7,5 +7,13 @@ using UnityEngine;
 /// </summary>
 public abstract class ActiveEffect
 {
+    public virtual void ReduceRepetition()
+    {
 
+    }
+
+    public virtual int GetRepetitions()
+    {
+        return 0;
+    }
 }

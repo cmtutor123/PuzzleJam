@@ -31,12 +31,12 @@ public class EffectDestroyPiece : ActiveEffect
         return colorCondition;
     }
 
-    public int GetRepetitions()
+    public override int GetRepetitions()
     {
         return repetitions;
     }
 
-    public void ReduceRepetition()
+    public override void ReduceRepetition()
     {
         repetitions--;
     }

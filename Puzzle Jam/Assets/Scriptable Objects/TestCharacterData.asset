@@ -17,4 +17,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ffe572065f5d75848bf496b92e3002fd, type: 2}
   - {fileID: 11400000, guid: ffe572065f5d75848bf496b92e3002fd, type: 2}
   - {fileID: 11400000, guid: ffe572065f5d75848bf496b92e3002fd, type: 2}
+  - {fileID: 11400000, guid: ffe572065f5d75848bf496b92e3002fd, type: 2}
+  - {fileID: 11400000, guid: ffe572065f5d75848bf496b92e3002fd, type: 2}
+  - {fileID: 11400000, guid: ffe572065f5d75848bf496b92e3002fd, type: 2}
+  - {fileID: 11400000, guid: fb2f3a3b0e1618c45b75dfd94c45843b, type: 2}
+  - {fileID: 11400000, guid: fb2f3a3b0e1618c45b75dfd94c45843b, type: 2}
+  - {fileID: 11400000, guid: 2044c72d149e9b44395d5cadaf96f474, type: 2}
+  - {fileID: 11400000, guid: 2044c72d149e9b44395d5cadaf96f474, type: 2}
   health: 100

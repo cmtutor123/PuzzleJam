@@ -387,10 +387,10 @@ public class PuzzleBoard
     public List<PuzzlePiece> GetAdjacent(int index)
     {
         List<PuzzlePiece> adjacent = new List<PuzzlePiece>();
-        if (!LocationEmpty(index - 1)) adjacent.Add(GetPuzzlePiece(index - 1));
-        if (!LocationEmpty(index + 1)) adjacent.Add(GetPuzzlePiece(index + 1));
-        if (!LocationEmpty(index - width)) adjacent.Add(GetPuzzlePiece(index - width));
-        if (!LocationEmpty(index + width)) adjacent.Add(GetPuzzlePiece(index + width));
+        if (index != 0 && !LocationEmpty(index - 1)) adjacent.Add(GetPuzzlePiece(index - 1));
+        if (index != 35 && !LocationEmpty(index + 1)) adjacent.Add(GetPuzzlePiece(index + 1));
+        if (index - width >= 0 && !LocationEmpty(index - width)) adjacent.Add(GetPuzzlePiece(index - width));
+        if (index + width <= 35 && !LocationEmpty(index + width)) adjacent.Add(GetPuzzlePiece(index + width));
         return adjacent;
     }
 

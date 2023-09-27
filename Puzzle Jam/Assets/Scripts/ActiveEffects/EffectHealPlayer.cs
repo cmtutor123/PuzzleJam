@@ -17,7 +17,7 @@ public class EffectHealPlayer : ActiveEffect
         return amount;
     }
 
-    public int GetRepetitions()
+    public override int GetRepetitions()
     {
         return repetitions;
     }

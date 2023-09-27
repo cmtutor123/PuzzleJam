@@ -37,12 +37,12 @@ public class EffectColorPiece : ActiveEffect
         return newColor;
     }
 
-    public int GetRepetitions()
+    public override int GetRepetitions()
     {
         return repetitions;
     }
     
-    public void ReduceRepetition()
+    public override void ReduceRepetition()
     {
         repetitions--;
     }

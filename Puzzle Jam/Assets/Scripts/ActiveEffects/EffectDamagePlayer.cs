@@ -17,7 +17,7 @@ public class EffectDamagePlayer : ActiveEffect
         return damage;
     }
 
-    public int GetRepetitions()
+    public override int GetRepetitions()
     {
         return repetitions;
     }
