@@ -36,13 +36,20 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private PuzzleRenderer mousePuzzleRenderer;
     [SerializeField] private List<PuzzleRenderer> handPuzzlePieceRenderers, boardPuzzlePieceRenderers;
     [SerializeField] private List<EnemySpriteManager> enemySpriteManagers;
+    [SerializeField] private SpriteManager endButton;
+
+    [Header("Sprites")]
     [SerializeField] private Sprite targetingSprite;
+    [SerializeField] private Sprite buttonEndSprite;
+    [SerializeField] private Sprite buttonCancelSprite;
 
     [Header("Test Variables")]
     public EnemyEncounter testEncounter;
     public PuzzleData testPuzzlePiece;
 
     private PlayerManager playerManager;
+
+
 
     private void Start()
     {
@@ -91,6 +98,13 @@ public class CombatManager : MonoBehaviour
     public void EndEncounter()
     {
         SetCombatState(CombatState.OutOfCombat);
+        UnloadEnemySprites();
+        UnloadHandSprites();
+        UnloadPuzzleBoardBackground();
+        UnloadTooltipUI();
+        HideEndButton();
+        HidePlayerHealth();
+        ClearMouseImage();
     }
 
     /// <summary>
@@ -292,6 +306,7 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     public void StartPlayerTurn()
     {
+        SetButtonEnd();
         SetCombatState(CombatState.PlayerTurn);
         DrawHand(turnDrawAmount);
         puzzlePiecesPlayed = 0;
@@ -353,6 +368,7 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     public void EndPlayerTurn()
     {
+        HideEndButton();
         SetCombatState(CombatState.DoingStuff);
         playerTurn = false;
         DiscardHand();
@@ -429,6 +445,7 @@ public class CombatManager : MonoBehaviour
     {
         if (index < handPile.GetSize() && selectedPuzzlePiece == null)
         {
+            SetButtonCancel();
             SetCombatState(CombatState.PieceSelected);
             selectedPuzzlePiece = handPile.DrawPuzzlePiece(index);
             SetMousePuzzle(selectedPuzzlePiece);
@@ -441,6 +458,7 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     public void ReturnHandSelection()
     {
+        SetButtonEnd();
         SetCombatState(CombatState.PlayerTurn);
         handPile.AddPuzzlePiece(selectedPuzzlePiece);
         selectedPuzzlePiece = null;
@@ -455,11 +473,13 @@ public class CombatManager : MonoBehaviour
     public void AttemptBoardPlacement(int index)
     {
         SetCombatState(CombatState.DoingStuff);
+        SetButtonEnd();
         if (puzzlePiecesPlayed < energyCount && puzzleBoard.PieceCanFit(index, selectedPuzzlePiece))
         {
-            PlacePiece(selectedPuzzlePiece, index);
-            selectedPuzzlePiece = null;
             ClearMouseImage();
+            PlacePiece(selectedPuzzlePiece, index);
+            puzzlePiecesPlayed++;
+            selectedPuzzlePiece = null;
             UpdateBoardPieceSprites();
         }
         else
@@ -608,7 +628,6 @@ public class CombatManager : MonoBehaviour
             indexes.Insert(0, index);
             DestroyPieces(indexes);
         }
-        puzzlePiecesPlayed++;
         UpdateBoardPieceSprites();
         ActivateNextEffect();
     }
@@ -1113,12 +1132,6 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void GetTarget()
-    {
-        SetMouseSprite(enemies[0].GetSpriteIdle());
-        SetCombatState(CombatState.PickingTarget);
-    }
-
     public void ReloadEnemySprites()
     {
         for (int i = 0; i < enemies.Count; i++)
@@ -1435,8 +1448,22 @@ public class CombatManager : MonoBehaviour
             {
                 enemyAttack.RotatePiece();
             }
-            Debug.Log("Chose " + index);
             PlacePiece(enemyAttack, index);
         }
+    }
+
+    public void HideEndButton()
+    {
+        endButton.UnloadSprites();
+    }
+
+    public void SetButtonEnd()
+    {
+        endButton.SetSprite(buttonEndSprite);
+    }
+
+    public void SetButtonCancel()
+    {
+        endButton.SetSprite(buttonCancelSprite);
     }
 }

@@ -15,10 +15,11 @@ public class SpriteManager : MonoBehaviour
     private void Start()
     {
         if (this.GetType() != typeof(TooltipManager)) spriteRenderer = GetComponent<Image>();
+        spriteRenderer = GetComponent<Image>();
     }
 
     /// <summary>
-    /// Sets the SpriteREnderer's Sprite
+    /// Sets the SpriteRenderer's Sprite
     /// </summary>
     /// <param name="sprite">The Sprite to change to</param>
     public virtual void SetSprite(Sprite sprite)

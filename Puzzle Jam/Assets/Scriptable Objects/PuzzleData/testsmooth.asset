@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: testsmooth
   m_EditorClassIdentifier: 
   puzzleShape:
-    topEdge: 0
+    topEdge: 1
     leftEdge: 0
     rightEdge: 0
     bottomEdge: 0
-  puzzleColor: {fileID: 0}
+  puzzleColor: {fileID: 11400000, guid: 730a3a752e23e9741b1689d132651fb8, type: 2}
   puzzleImage: {fileID: 0}
-  puzzleName: 
+  puzzleName: Smooth
   puzzleDescription: 
   puzzleEffects:
   - triggerType: 1

@@ -25,7 +25,7 @@ MonoBehaviour:
   - triggerType: 1
     hasTriggerColor: 0
     triggerColor: {fileID: 0}
-    effectType: 1
+    effectType: 7
     buffID: 0
     modificationType: 0
     destroyCompletely: 0

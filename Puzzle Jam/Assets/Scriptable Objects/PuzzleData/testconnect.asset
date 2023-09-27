@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: testconnect
   m_EditorClassIdentifier: 
   puzzleShape:
-    topEdge: 0
+    topEdge: 1
     leftEdge: 0
     rightEdge: 0
     bottomEdge: 0
-  puzzleColor: {fileID: 0}
+  puzzleColor: {fileID: 11400000, guid: 9d26a87dc4d38934d811abaef45cff05, type: 2}
   puzzleImage: {fileID: 0}
-  puzzleName: 
+  puzzleName: Connect
   puzzleDescription: 
   puzzleEffects:
   - triggerType: 1
@@ -30,7 +30,7 @@ MonoBehaviour:
     modificationType: 2
     destroyCompletely: 0
     newColor: {fileID: 0}
-    shapeChange: 1
+    shapeChange: 2
     targetType: 1
     limitPieceSelection: 0
     limitTargetColor: 0

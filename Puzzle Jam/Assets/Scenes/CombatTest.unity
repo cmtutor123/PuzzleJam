@@ -1130,6 +1130,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 2708253336314088635, guid: 49a2b2efce5fef34dacc5510bda8cf01, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9076047940498022533, guid: 49a2b2efce5fef34dacc5510bda8cf01, type: 3}
       propertyPath: m_Name
       value: MouseFollow
@@ -4947,6 +4951,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68ebaa449de6f148b728a0cdb23f148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1408307943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4855324392186699768, guid: 49a2b2efce5fef34dacc5510bda8cf01, type: 3}
+  m_PrefabInstance: {fileID: 241418929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1412473295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5861,12 +5870,24 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6080271643135572196, guid: 49a2b2efce5fef34dacc5510bda8cf01, type: 3}
   m_PrefabInstance: {fileID: 241418929}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1408307943}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e68ebaa449de6f148b728a0cdb23f148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1858948282
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408307943}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1900853833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6501,6 +6522,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8730338709074501777, guid: 08b9e1a0d1586e244a4946d4d94a42e0, type: 3}
   m_PrefabInstance: {fileID: 2068372803}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2068372806 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 461357660558735145, guid: 08b9e1a0d1586e244a4946d4d94a42e0, type: 3}
+  m_PrefabInstance: {fileID: 2068372803}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd1796e9713cca1449180c2003d3c24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2080883320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6852,6 +6884,10 @@ MonoBehaviour:
   - {fileID: 1030109021}
   - {fileID: 928685165}
   - {fileID: 1443856646}
+  endButton: {fileID: 2068372806}
+  targetingSprite: {fileID: 21300000, guid: 82d3fd9733b1d7d4e82478aaf400d63f, type: 3}
+  buttonEndSprite: {fileID: 1894326024, guid: dceb0bccd30888646ba8aeddf2578019, type: 3}
+  buttonCancelSprite: {fileID: 909580248, guid: dceb0bccd30888646ba8aeddf2578019, type: 3}
   testEncounter: {fileID: 11400000, guid: 75d059feec5fdd2499564fcce248552f, type: 2}
   testPuzzlePiece: {fileID: 0}
 --- !u!114 &2104373807
