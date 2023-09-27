@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Contains all of the logic required to run combat
 /// </summary>
-[RequireComponent(typeof(PlayerManager))]
+[RequireComponent(typeof(PlayerManager), typeof(MapManager))]
 public class CombatManager : MonoBehaviour
 {
     private CombatState combatState;
@@ -48,6 +48,7 @@ public class CombatManager : MonoBehaviour
     public PuzzleData testPuzzlePiece;
 
     private PlayerManager playerManager;
+    private MapManager mapManager;
 
 
 
@@ -55,6 +56,7 @@ public class CombatManager : MonoBehaviour
     {
         combatState = CombatState.OutOfCombat;
         playerManager = GetComponent<PlayerManager>();
+        mapManager = GetComponent<MapManager>();
         drawPile = new PuzzlePile();
         discardPile = new PuzzlePile();
         handPile = new PuzzlePile(6);
@@ -731,7 +733,19 @@ public class CombatManager : MonoBehaviour
 
     public void ActivateNextEffect()
     {
-        if (effectQueue.Count == 0)
+        if (CheckBattleOver())
+        {
+            EndEncounter();
+            if (CheckLose())
+            {
+                //mapManager.GameOver();
+            }
+            else if (CheckWin())
+            {
+                //mapManager.BattleOver();
+            }
+        }
+        else if (effectQueue.Count == 0)
         {
             if (combatState == CombatState.DoingStuff)
             {
@@ -1465,5 +1479,24 @@ public class CombatManager : MonoBehaviour
     public void SetButtonCancel()
     {
         endButton.SetSprite(buttonCancelSprite);
+    }
+
+    public bool CheckBattleOver()
+    {
+        return CheckLose() || CheckWin();
+    }
+
+    public bool CheckLose()
+    {
+        return playerManager.GetHealth() <= 0;
+    }
+
+    public bool CheckWin()
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy != null && enemy.Alive()) return false;
+        }
+        return true;
     }
 }
