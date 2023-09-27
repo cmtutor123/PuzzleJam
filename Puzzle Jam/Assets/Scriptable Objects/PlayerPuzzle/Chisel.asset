@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 2
     bottomEdge: 2
   puzzleColor: {fileID: 11400000, guid: 9d26a87dc4d38934d811abaef45cff05, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 3026aa41066dd524893929b3b4ef75af, type: 3}
   puzzleName: Chisel
   puzzleDescription: On place, smooth a single puzzle piece's edges.
   puzzleEffects:

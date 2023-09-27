@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 1
     bottomEdge: 1
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 5ca73adaeb8f0f1479bceb20d5779f5a, type: 3}
   puzzleName: Sacrifice
   puzzleDescription: Deal 25 damage to a single enemy and deal 3 self damage when
     placed.

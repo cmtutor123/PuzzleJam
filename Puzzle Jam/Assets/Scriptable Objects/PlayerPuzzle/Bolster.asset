@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 2
     bottomEdge: 0
   puzzleColor: {fileID: 11400000, guid: 730a3a752e23e9741b1689d132651fb8, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 176ff739a8642e340a787e809555cf1b, type: 3}
   puzzleName: Bolster
   puzzleDescription: Gain 2 Shield when a piece is chained.
   puzzleEffects:

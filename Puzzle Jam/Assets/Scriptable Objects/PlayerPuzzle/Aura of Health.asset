@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 1
     bottomEdge: 1
   puzzleColor: {fileID: 11400000, guid: 9d26a87dc4d38934d811abaef45cff05, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 49ab99cd0fc460d4cbd9cb748bd2c7c1, type: 3}
   puzzleName: Aura of Health
   puzzleDescription: Heal 1 for each green chained puzzle piece when destroyed.
   puzzleEffects:

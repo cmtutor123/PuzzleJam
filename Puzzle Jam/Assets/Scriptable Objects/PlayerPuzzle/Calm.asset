@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 1
     bottomEdge: 0
   puzzleColor: {fileID: 11400000, guid: 730a3a752e23e9741b1689d132651fb8, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 2ae7417cbec35de499ebd4314fe085c3, type: 3}
   puzzleName: Calm
   puzzleDescription: On place make a single puzzle piece blue.
   puzzleEffects:

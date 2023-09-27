@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 2
     bottomEdge: 0
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: d15afd2ec11e05643bc8fd9d53334d23, type: 3}
   puzzleName: Cleave
   puzzleDescription: Deal 8 damage to all enemies when placed.
   puzzleEffects:

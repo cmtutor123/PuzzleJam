@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf05c41416271f4ab6e8e5c8e7a8bb6, type: 3}
   m_Name: RedBBBB 1
   m_EditorClassIdentifier: 
-  puzzleShape: {fileID: 11400000, guid: dbf8e6ec45e54054896747c0544b59f9, type: 2}
+  puzzleShape:
+    topEdge: 0
+    leftEdge: 0
+    rightEdge: 0
+    bottomEdge: 0
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 13e0d9decf034054c87619e464bb77d3, type: 3}
   puzzleName: Instant Combo
   puzzleDescription: 'On combo, deal 5 damage to a random enemy up to 3 times. '
   puzzleEffects:

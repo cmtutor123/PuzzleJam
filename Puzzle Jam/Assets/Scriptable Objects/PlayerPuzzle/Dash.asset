@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 1
     bottomEdge: 0
   puzzleColor: {fileID: 11400000, guid: 730a3a752e23e9741b1689d132651fb8, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: dbb4b6784600e074b844a5cb5eb34f46, type: 3}
   puzzleName: Dash
   puzzleDescription: Gain 5 Shield when placed, and when a puzzle piece is connected.
   puzzleEffects:

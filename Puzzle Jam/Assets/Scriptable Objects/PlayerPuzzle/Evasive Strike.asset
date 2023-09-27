@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 0
     bottomEdge: 2
   puzzleColor: {fileID: 11400000, guid: 730a3a752e23e9741b1689d132651fb8, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 93dd555911f145840a1f9c952bb56013, type: 3}
   puzzleName: Evasive Strike
   puzzleDescription: Gain 4 Shield when placed. Deal 5 damage to all enemies when
     destroyed.

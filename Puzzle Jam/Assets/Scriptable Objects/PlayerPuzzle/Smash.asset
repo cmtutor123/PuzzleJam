@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 1
     bottomEdge: 2
   puzzleColor: {fileID: 11400000, guid: 9d26a87dc4d38934d811abaef45cff05, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 87ec79b87adc442468b09fed271808cb, type: 3}
   puzzleName: Smash
   puzzleDescription: When a blue puzzle piece is chained, deal 2 damage to a random
     enemy and gain 2 Shield.

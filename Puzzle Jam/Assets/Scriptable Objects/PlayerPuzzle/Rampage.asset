@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 2
     bottomEdge: 1
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 1a542d5921a45ea4e82c4e8e3c958ce2, type: 3}
   puzzleName: Rampage
   puzzleDescription: Deal 4 damage to a random enemy twice for each chained red piece
     when placed.

@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 0
     bottomEdge: 0
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 027d3c6e82d80de45a8d070e71fa6fe9, type: 3}
   puzzleName: Strike
   puzzleDescription: Deal 6 damage to a single enemy when placed.
   puzzleEffects:

@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 2
     bottomEdge: 2
   puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 8b5842ac1ca93ab4b844185ebb6ca8e1, type: 3}
   puzzleName: Panic
   puzzleDescription: Deal 5 damage to a random enemy when a puzzle piece is chained.
   puzzleEffects:

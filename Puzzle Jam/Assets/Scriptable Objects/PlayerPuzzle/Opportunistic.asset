@@ -17,8 +17,8 @@ MonoBehaviour:
     leftEdge: 2
     rightEdge: 1
     bottomEdge: 1
-  puzzleColor: {fileID: 0}
-  puzzleImage: {fileID: 0}
+  puzzleColor: {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
+  puzzleImage: {fileID: 21300000, guid: 49e45662d57709746bca1e7792e11073, type: 3}
   puzzleName: Opportunistic
   puzzleDescription: Deal 5 damage to all enemies when a puzzle piece is connected.
   puzzleEffects:

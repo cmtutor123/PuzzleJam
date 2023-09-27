@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 1
     bottomEdge: 1
   puzzleColor: {fileID: 11400000, guid: 9d26a87dc4d38934d811abaef45cff05, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 9f92b456d8989424cbce4cdcc0700db1, type: 3}
   puzzleName: Regenerate
   puzzleDescription: Heal 1 health on place, on destroy, and on combo.
   puzzleEffects:

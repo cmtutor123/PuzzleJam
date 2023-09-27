@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 0
     bottomEdge: 2
   puzzleColor: {fileID: 11400000, guid: 9d26a87dc4d38934d811abaef45cff05, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: d05e789a63a0c6d47abab5e0cf9fe8d5, type: 3}
   puzzleName: Destruction
   puzzleDescription: Destroy a random puzzle piece on place. Deal 5 damage to a random
     enemy when destroyed.

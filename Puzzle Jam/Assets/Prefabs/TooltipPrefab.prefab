@@ -228,7 +228,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.35
+  m_fontSize: 53.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -497,4 +497,4 @@ MonoBehaviour:
   image: {fileID: 7221053396673590866}
   backgroundRenderer: {fileID: 2708253336314088635}
   emptySprite: {fileID: 21300000, guid: d87a7e09610f91f4fad460b2baea6018, type: 3}
-  backgroundSprite: {fileID: 21300000, guid: a47441be56675494fb69dafe92e6cf14, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: b396e2dae53844747920c1c4a3dbf1a8, type: 3}

@@ -18,7 +18,7 @@ MonoBehaviour:
     rightEdge: 0
     bottomEdge: 0
   puzzleColor: {fileID: 11400000, guid: 730a3a752e23e9741b1689d132651fb8, type: 2}
-  puzzleImage: {fileID: 0}
+  puzzleImage: {fileID: 21300000, guid: 92f61efc519307445821bcc799e21cd9, type: 3}
   puzzleName: Catch
   puzzleDescription: Deal 3 damage to all enemies when placed. Gain 8 Shield when
     destroyed.
