@@ -517,4 +517,14 @@ public class PuzzleBoard
         }
         return pieces;
     }
+
+    public int GetX(int index)
+    {
+        return index % width;
+    }
+
+    public int GetY(int index)
+    {
+        return (index - GetX(index)) / width;
+    }
 }

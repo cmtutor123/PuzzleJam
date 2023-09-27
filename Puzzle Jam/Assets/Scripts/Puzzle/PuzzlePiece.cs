@@ -111,4 +111,24 @@ public class PuzzlePiece
     {
         puzzleColor = color;
     }
+
+    public void SetTopEdge(PuzzleEdge edge)
+    {
+        topEdge = edge;
+    }
+
+    public void SetLeftEdge(PuzzleEdge edge)
+    {
+        leftEdge = edge;
+    }
+
+    public void SetRightEdge(PuzzleEdge edge)
+    {
+        rightEdge = edge;
+    }
+
+    public void SetBottomEdge(PuzzleEdge edge)
+    {
+        bottomEdge = edge;
+    }
 }

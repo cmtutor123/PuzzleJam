@@ -526,7 +526,6 @@ public class CombatManager : MonoBehaviour
                 activeEffect.ReduceRepetition();
                 if (activeEffect.GetRepetitions() <= 0 || (effect.GetColorCondition() == null ? GetValidPuzzleTargets().Count == 0 : GetValidPuzzleTargets(effect.GetColorCondition()).Count == 0))
                 {
-                    Debug.Log("Removed");
                     effectQueue.RemoveAt(0);
                     EndTargeting();
                 }
@@ -535,10 +534,30 @@ public class CombatManager : MonoBehaviour
         else if (activeEffect.GetType() == typeof(EffectColorPiece))
         {
             EffectColorPiece effect = (EffectColorPiece)activeEffect;
+            if (effect.GetTargetType() == TargetType.Single && puzzleBoard.GetPuzzlePiece(index) != null && effect.GetColorCondition() == null ? true : effect.GetColorCondition() == puzzleBoard.GetPuzzlePiece(index).GetPuzzleColor())
+            {
+                ChangePuzzleColor(index, effect.GetNewColor());
+                activeEffect.ReduceRepetition();
+                if (activeEffect.GetRepetitions() <= 0 || (effect.GetColorCondition() == null ? GetValidPuzzleTargets().Count == 0 : GetValidPuzzleTargets(effect.GetColorCondition()).Count == 0))
+                {
+                    effectQueue.RemoveAt(0);
+                    EndTargeting();
+                }
+            }
         }
         else if (activeEffect.GetType() == typeof(EffectShapePiece))
         {
             EffectShapePiece effect = (EffectShapePiece)activeEffect;
+            if (effect.GetTargetType() == TargetType.Single && puzzleBoard.GetPuzzlePiece(index) != null && effect.GetColorCondition() == null ? true : effect.GetColorCondition() == puzzleBoard.GetPuzzlePiece(index).GetPuzzleColor())
+            {
+                ChangePuzzleShape(index, effect.GetNewShape());
+                activeEffect.ReduceRepetition();
+                if (activeEffect.GetRepetitions() <= 0 || (effect.GetColorCondition() == null ? GetValidPuzzleTargets().Count == 0 : GetValidPuzzleTargets(effect.GetColorCondition()).Count == 0))
+                {
+                    effectQueue.RemoveAt(0);
+                    EndTargeting();
+                }
+            }
         }
     }
 
@@ -1289,10 +1308,16 @@ public class CombatManager : MonoBehaviour
         switch (shape)
         {
             case ShapeChange.ConnectSurrounding:
-
+                if (puzzleBoard.GetY(index) < 5 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index), puzzleBoard.GetY(index) + 1) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetTop(), puzzleBoard.GetTopEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) { };
+                if (puzzleBoard.GetX(index) > 0 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) - 1, puzzleBoard.GetY(index)) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetLeft(), puzzleBoard.GetLeftEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) puzzleBoard.GetPuzzlePiece(index).SetLeftEdge(PuzzleEdge.Blank);
+                if (puzzleBoard.GetX(index) < 5 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) + 1, puzzleBoard.GetY(index)) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetRight(), puzzleBoard.GetRightEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) puzzleBoard.GetPuzzlePiece(index).SetRightEdge(PuzzleEdge.Blank);
+                if (puzzleBoard.GetY(index) > 0 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index), puzzleBoard.GetY(index) - 1) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetBottom(), puzzleBoard.GetBottomEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) puzzleBoard.GetPuzzlePiece(index).SetBottomEdge(PuzzleEdge.Blank);
                 break;
             case ShapeChange.SmoothEdges:
-
+                if (puzzleBoard.GetY(index) < 5 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index), puzzleBoard.GetY(index) + 1) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetTop(), puzzleBoard.GetTopEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) puzzleBoard.GetPuzzlePiece(index).SetTopEdge(PuzzleEdge.Blank);
+                if (puzzleBoard.GetX(index) > 0 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) - 1, puzzleBoard.GetY(index)) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetLeft(), puzzleBoard.GetLeftEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) puzzleBoard.GetPuzzlePiece(index).SetLeftEdge(PuzzleEdge.Blank);
+                if (puzzleBoard.GetX(index) < 5 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) + 1, puzzleBoard.GetY(index)) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetRight(), puzzleBoard.GetRightEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) puzzleBoard.GetPuzzlePiece(index).SetRightEdge(PuzzleEdge.Blank);
+                if (puzzleBoard.GetY(index) > 0 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index), puzzleBoard.GetY(index) - 1) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetBottom(), puzzleBoard.GetBottomEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) puzzleBoard.GetPuzzlePiece(index).SetBottomEdge(PuzzleEdge.Blank);
                 break;
         }
         UpdateBoardPieceSprites();
