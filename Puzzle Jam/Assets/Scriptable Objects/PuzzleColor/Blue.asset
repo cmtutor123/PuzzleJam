@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bed3c06815a4f494b8392f98ad666ca0, type: 3}
-  m_Name: Red
+  m_Name: Blue
   m_EditorClassIdentifier: 
-  color: {r: 0.7924528, g: 0, b: 0, a: 1}
-  colorName: Red
+  color: {r: 0, g: 0.4458381, b: 0.9716981, a: 1}
+  colorName: Blue

@@ -1308,10 +1308,54 @@ public class CombatManager : MonoBehaviour
         switch (shape)
         {
             case ShapeChange.ConnectSurrounding:
-                if (puzzleBoard.GetY(index) < 5 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index), puzzleBoard.GetY(index) + 1) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetTop(), puzzleBoard.GetTopEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) { };
-                if (puzzleBoard.GetX(index) > 0 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) - 1, puzzleBoard.GetY(index)) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetLeft(), puzzleBoard.GetLeftEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) puzzleBoard.GetPuzzlePiece(index).SetLeftEdge(PuzzleEdge.Blank);
-                if (puzzleBoard.GetX(index) < 5 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) + 1, puzzleBoard.GetY(index)) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetRight(), puzzleBoard.GetRightEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) puzzleBoard.GetPuzzlePiece(index).SetRightEdge(PuzzleEdge.Blank);
-                if (puzzleBoard.GetY(index) > 0 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index), puzzleBoard.GetY(index) - 1) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetBottom(), puzzleBoard.GetBottomEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) puzzleBoard.GetPuzzlePiece(index).SetBottomEdge(PuzzleEdge.Blank);
+                if (puzzleBoard.GetY(index) < 5 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index), puzzleBoard.GetY(index) + 1) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetTop(), puzzleBoard.GetTopEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index))))
+                {
+                    PuzzleEdge edge = puzzleBoard.GetTopEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index));
+                    if (edge == PuzzleEdge.Key)
+                    {
+                        puzzleBoard.GetPuzzlePiece(index).SetTopEdge(PuzzleEdge.Socket);
+                    }
+                    else if (edge == PuzzleEdge.Socket)
+                    {
+                        puzzleBoard.GetPuzzlePiece(index).SetTopEdge(PuzzleEdge.Key);
+                    }
+                }
+                if (puzzleBoard.GetX(index) > 0 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) - 1, puzzleBoard.GetY(index)) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetLeft(), puzzleBoard.GetLeftEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index))))
+                {
+                    PuzzleEdge edge = puzzleBoard.GetLeftEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index));
+                    if (edge == PuzzleEdge.Key)
+                    {
+                        puzzleBoard.GetPuzzlePiece(index).SetLeftEdge(PuzzleEdge.Socket);
+                    }
+                    else if (edge == PuzzleEdge.Socket)
+                    {
+                        puzzleBoard.GetPuzzlePiece(index).SetLeftEdge(PuzzleEdge.Key);
+                    }
+                }
+                if (puzzleBoard.GetX(index) < 5 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) + 1, puzzleBoard.GetY(index)) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetRight(), puzzleBoard.GetRightEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index))))
+                {
+                    PuzzleEdge edge = puzzleBoard.GetRightEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index));
+                    if (edge == PuzzleEdge.Key)
+                    {
+                        puzzleBoard.GetPuzzlePiece(index).SetRightEdge(PuzzleEdge.Socket);
+                    }
+                    else if (edge == PuzzleEdge.Socket)
+                    {
+                        puzzleBoard.GetPuzzlePiece(index).SetRightEdge(PuzzleEdge.Key);
+                    }
+                }
+                if (puzzleBoard.GetY(index) > 0 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index), puzzleBoard.GetY(index) - 1) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetBottom(), puzzleBoard.GetBottomEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index))))
+                {
+                    PuzzleEdge edge = puzzleBoard.GetBottomEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index));
+                    if (edge == PuzzleEdge.Key)
+                    {
+                        puzzleBoard.GetPuzzlePiece(index).SetBottomEdge(PuzzleEdge.Socket);
+                    }
+                    else if (edge == PuzzleEdge.Socket)
+                    {
+                        puzzleBoard.GetPuzzlePiece(index).SetBottomEdge(PuzzleEdge.Key);
+                    }
+                }
                 break;
             case ShapeChange.SmoothEdges:
                 if (puzzleBoard.GetY(index) < 5 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index), puzzleBoard.GetY(index) + 1) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetTop(), puzzleBoard.GetTopEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index)))) puzzleBoard.GetPuzzlePiece(index).SetTopEdge(PuzzleEdge.Blank);
