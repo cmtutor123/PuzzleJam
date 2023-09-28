@@ -749,11 +749,11 @@ public class CombatManager : MonoBehaviour
             EndEncounter();
             if (CheckLose())
             {
-                //mapManager.GameOver();
+                mapManager.GameOver();
             }
             else if (CheckWin())
             {
-                //mapManager.BattleOver();
+                EndEncounter();
             }
         }
         else if (effectQueue.Count == 0)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CombatManager))]
 public class MapManager : MonoBehaviour
@@ -331,5 +332,10 @@ public class MapManager : MonoBehaviour
     public EnemyEncounter GetEncounter(int difficulty)
     {
         return enemyEncounters[difficulty][Random.Range(0, enemyEncounters[difficulty].Count)];
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene("LoseGame");
     }
 }
