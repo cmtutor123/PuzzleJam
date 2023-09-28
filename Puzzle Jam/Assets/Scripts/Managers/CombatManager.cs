@@ -1161,7 +1161,8 @@ public class CombatManager : MonoBehaviour
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemySpriteManagers[i].SetSprite(enemies[i].GetSpriteIdle(), enemies[i].GetCurrentHealth(), enemies[i].GetMaxHealth(), enemies[i].GetNextAttack());
+            if (enemies[i].Alive()) enemySpriteManagers[i].SetSprite(enemies[i].GetSpriteIdle(), enemies[i].GetCurrentHealth(), enemies[i].GetMaxHealth(), enemies[i].GetNextAttack());
+            else UnloadEnemySprite(i);
         }
     }
 
