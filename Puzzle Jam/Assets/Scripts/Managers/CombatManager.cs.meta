@@ -3,7 +3,20 @@ guid: 5d093d6ec5f20db4193b7f476319e8f4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - puzzleBoardSpriteManager: {instanceID: 0}
+  - tooltipManager: {instanceID: 0}
+  - mouseSpriteManager: {instanceID: 0}
+  - mousePuzzleRenderer: {instanceID: 0}
+  - endButton: {instanceID: 0}
+  - targetingSprite: {instanceID: 0}
+  - buttonEndSprite: {instanceID: 0}
+  - buttonCancelSprite: {instanceID: 0}
+  - piecePlace: {instanceID: 0}
+  - pieceDestroyed: {instanceID: 0}
+  - enemyDamaged: {instanceID: 0}
+  - testEncounter: {instanceID: 0}
+  - testPuzzlePiece: {instanceID: 0}
   executionOrder: 50
   icon: {instanceID: 0}
   userData: 
