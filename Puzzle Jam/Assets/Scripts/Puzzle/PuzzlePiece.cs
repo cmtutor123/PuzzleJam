@@ -16,8 +16,10 @@ public class PuzzlePiece
     private string puzzleDescription;
     private string puzzleName;
 
+    private bool fromPlayer;
+
     /// <param name="puzzleData">The PuzzleData to create the PuzzlePiece from</param>
-    public PuzzlePiece(PuzzleData puzzleData)
+    public PuzzlePiece(PuzzleData puzzleData, bool fromPlayer = true)
     {
         PuzzleShape puzzleShape = puzzleData.GetPuzzleShape();
         topEdge = puzzleShape.GetTop();
@@ -29,6 +31,7 @@ public class PuzzlePiece
         puzzleDescription = puzzleData.GetDescription();
         puzzleName = puzzleData.GetName();
         puzzleEffects = puzzleData.GetEffects();
+        this.fromPlayer = fromPlayer;
     }
 
     public PuzzlePiece(EncounterPuzzlePiece piece, Sprite image)
@@ -143,5 +146,10 @@ public class PuzzlePiece
     public void SetBottomEdge(PuzzleEdge edge)
     {
         bottomEdge = edge;
+    }
+
+    public bool FromPlayer()
+    {
+        return fromPlayer;
     }
 }

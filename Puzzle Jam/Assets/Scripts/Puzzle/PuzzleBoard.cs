@@ -532,4 +532,9 @@ public class PuzzleBoard
     {
         return (index - GetX(index)) / width;
     }
+
+    public bool FromPlayer(int index)
+    {
+        return GetPuzzlePiece(index).FromPlayer();
+    }
 }

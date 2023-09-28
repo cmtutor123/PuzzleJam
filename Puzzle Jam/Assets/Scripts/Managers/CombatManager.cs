@@ -729,7 +729,8 @@ public class CombatManager : MonoBehaviour
     public void DestroyPiece(int index)
     {
         QueueEffects(CheckForTrigger(puzzleBoard.GetPuzzlePiece(index), TriggerType.Destroy), index);
-        discardPile.AddPuzzlePiece(puzzleBoard.RemovePiece(index));
+        if (puzzleBoard.FromPlayer(index)) discardPile.AddPuzzlePiece(puzzleBoard.RemovePiece(index));
+        else puzzleBoard.RemovePiece(index);
         UpdateBoardPieceSprites();
     }
 
@@ -1441,7 +1442,7 @@ public class CombatManager : MonoBehaviour
 
     public void DoEnemyAttack(Enemy enemy)
     {
-        PuzzlePiece enemyAttack = new PuzzlePiece(enemy.GetNextAttack());
+        PuzzlePiece enemyAttack = new PuzzlePiece(enemy.GetNextAttack(), fromPlayer : false);
         List<int> validLocations = new List<int>();
         for (int i = 0; i < puzzleBoard.GetSize(); i++)
         {
