@@ -31,6 +31,19 @@ public class PuzzlePiece
         puzzleEffects = puzzleData.GetEffects();
     }
 
+    public PuzzlePiece(EncounterPuzzlePiece piece, Sprite image)
+    {
+        topEdge = piece.GetTop();
+        bottomEdge = piece.GetBottom();
+        leftEdge = piece.GetLeft();
+        rightEdge = piece.GetRight();
+        puzzleColor = piece.GetPuzzleColor();
+        puzzleImage = image;
+        puzzleName = "";
+        puzzleDescription = "";
+        puzzleEffects = new List<PuzzleEffect>();
+    }
+
     /// <summary>
     /// Rotates the edges of the PuzzlePiece 90 degrees to the right
     /// </summary>

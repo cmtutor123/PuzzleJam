@@ -47,7 +47,7 @@ public class PuzzleRenderer : MonoBehaviour
     /// </summary>
     /// <param name="puzzlePiece">The PuzzlePiece to match</param>
     public void UpdateSprites(PuzzlePiece puzzlePiece)
-    {
+    {;
         // reads the data from the puzzle piece
         Color color = puzzlePiece.GetColor();
         PuzzleEdge topEdge = puzzlePiece.GetTop();
@@ -142,5 +142,15 @@ public class PuzzleRenderer : MonoBehaviour
         UpdateSprite(bottomRight, empty);
         UpdateSprite(bottom, empty);
         UpdateSprite(image, empty);
+    }
+
+    public void SetPosition(float xPos, float yPos)
+    {
+        transform.position = new Vector3(xPos, yPos, transform.position.z);
+    }
+
+    public Sprite GetImage()
+    {
+        return image.sprite;
     }
 }

@@ -297,11 +297,16 @@ public class PuzzleBoard
     /// <param name="edge1">First PuzzleEdge</param>
     /// <param name="edge2">Second PuzzleEdge</param>
     /// <returns>Whether the two PuzzleEdges can be placed next to each other</returns>
-    public bool EdgesCanConnect(PuzzleEdge edge1, PuzzleEdge edge2)
+    public static bool EdgesCanConnect(PuzzleEdge edge1, PuzzleEdge edge2)
     {
         if (edge1 == PuzzleEdge.Socket || edge2 == PuzzleEdge.Socket) return true;
         else if (edge1 == PuzzleEdge.Key || edge2 == PuzzleEdge.Key) return false;
         else return true;
+    }
+
+    public static bool EdgesDoConnect(PuzzleEdge edge1, PuzzleEdge edge2)
+    {
+        return (edge1 == PuzzleEdge.Socket && edge2 == PuzzleEdge.Key) || (edge1 == PuzzleEdge.Key && edge2 == PuzzleEdge.Socket);
     }
 
     /// <summary>

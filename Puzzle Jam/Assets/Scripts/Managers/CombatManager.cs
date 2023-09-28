@@ -27,7 +27,8 @@ public class CombatManager : MonoBehaviour
 
     private List<ActiveEffect> effectQueue;
 
-    //[SerializeField] private GameObject combatCanvas;
+    [Header("Combat Canvas")]
+    [SerializeField] private GameObject combatCanvas;
 
     [Header("UI Elements")]
     [SerializeField] private SpriteManager puzzleBoardSpriteManager;
@@ -96,6 +97,7 @@ public class CombatManager : MonoBehaviour
             ClearMouseImage();
             ShowPlayerHealth();
             StartPlayerTurn();
+            EnableCanvas();
         }
     }
 
@@ -112,6 +114,8 @@ public class CombatManager : MonoBehaviour
         HideEndButton();
         HidePlayerHealth();
         ClearMouseImage();
+        DisableCanvas();
+        mapManager.EnableCanvas();
     }
 
     /// <summary>
@@ -1515,5 +1519,15 @@ public class CombatManager : MonoBehaviour
             if (enemy != null && enemy.Alive()) return false;
         }
         return true;
+    }
+
+    public void DisableCanvas()
+    {
+        combatCanvas.SetActive(false);
+    }
+
+    public void EnableCanvas()
+    {
+        combatCanvas.SetActive(true);
     }
 }
