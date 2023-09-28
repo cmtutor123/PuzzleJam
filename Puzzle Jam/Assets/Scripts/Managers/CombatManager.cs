@@ -64,7 +64,7 @@ public class CombatManager : MonoBehaviour
         enemies = new List<Enemy>();
         selectedPuzzlePiece = null;
         effectQueue = new List<ActiveEffect>();
-        StartEncounter(testEncounter);
+        //StartEncounter(testEncounter);
     }
 
     /// <summary>

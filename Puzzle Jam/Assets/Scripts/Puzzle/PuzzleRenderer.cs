@@ -36,7 +36,12 @@ public class PuzzleRenderer : MonoBehaviour
     [SerializeField] private Image bottomMiddle;
     [SerializeField] private Image bottomRight;
     [SerializeField] private Image bottom;
-    
+
+    private void Start()
+    {
+        UnloadSprites();
+    }
+
     /// <summary>
     /// Updates the sprite renderers to match a given PuzzlePiece
     /// </summary>
