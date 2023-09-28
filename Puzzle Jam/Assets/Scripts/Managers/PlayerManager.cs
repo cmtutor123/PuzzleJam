@@ -13,6 +13,9 @@ public class PlayerManager : MonoBehaviour
     [Header("Health Bar")]
     [SerializeField] private HealthBarManager playerHealthBar;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip playerDamaged;
+
     private PuzzlePile puzzleDeck;
 
     private Dictionary<BuffID, int> buffs;
@@ -86,6 +89,7 @@ public class PlayerManager : MonoBehaviour
         }
         amount = Mathf.Clamp(amount, 0, currentHealth);
         currentHealth -= amount;
+        AudioSource.PlayClipAtPoint(playerDamaged,Camera.main.transform.position);
         UpdateHealthBar();
     }
 

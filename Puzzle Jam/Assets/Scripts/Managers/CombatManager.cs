@@ -43,6 +43,11 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private Sprite buttonEndSprite;
     [SerializeField] private Sprite buttonCancelSprite;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip piecePlace;
+    [SerializeField] private AudioClip pieceDestroyed;
+    [SerializeField] private AudioClip enemyDamaged;
+
     [Header("Test Variables")]
     public EnemyEncounter testEncounter;
     public PuzzleData testPuzzlePiece;
@@ -631,6 +636,7 @@ public class CombatManager : MonoBehaviour
             DestroyPieces(indexes);
         }
         UpdateBoardPieceSprites();
+        AudioSource.PlayClipAtPoint(piecePlace,Camera.main.transform.position);
         ActivateNextEffect();
     }
 
@@ -1318,6 +1324,7 @@ public class CombatManager : MonoBehaviour
     public void DamageEnemy(Enemy enemy, int damage)
     {
         enemy.Damage(damage);
+        AudioSource.PlayClipAtPoint(enemyDamaged,Camera.main.transform.position);
         ReloadEnemySprites();
     }
 
