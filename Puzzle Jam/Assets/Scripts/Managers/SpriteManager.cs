@@ -16,6 +16,7 @@ public class SpriteManager : MonoBehaviour
     {
         if (this.GetType() != typeof(TooltipManager)) spriteRenderer = GetComponent<Image>();
         spriteRenderer = GetComponent<Image>();
+        UnloadSprites();
     }
 
     /// <summary>
