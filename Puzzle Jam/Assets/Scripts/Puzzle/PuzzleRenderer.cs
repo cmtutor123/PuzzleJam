@@ -9,11 +9,15 @@ using UnityEngine.UI;
 public class PuzzleRenderer : MonoBehaviour
 {
     [Header("Puzzle Piece Segments")]
-    [SerializeField] private Sprite blank;
-    [SerializeField] private Sprite socket;
-    [SerializeField] private Sprite key;
+    [SerializeField] private Sprite blankV;
+    [SerializeField] private Sprite blankH;
+    [SerializeField] private Sprite socketV;
+    [SerializeField] private Sprite socketH;
+    [SerializeField] private Sprite keyV;
+    [SerializeField] private Sprite keyH;
     [SerializeField] private Sprite center;
-    [SerializeField] private Sprite corner;
+    [SerializeField] private Sprite cornerDL;
+    [SerializeField] private Sprite cornerDR;
     [Header("Empty Sprite")]
     [SerializeField] private Sprite empty;
     [Header("Center Image Sprite Renderer")]
@@ -61,26 +65,26 @@ public class PuzzleRenderer : MonoBehaviour
         UpdateColor(bottomRight, color);
         UpdateColor(bottom, color);
         // updates the sprite of all of the sprite renderers
-        UpdateSprite(topLeft, corner);
-        UpdateSprite(topRight, corner);
+        UpdateSprite(topLeft, cornerDL);
+        UpdateSprite(topRight, cornerDR);
         UpdateSprite(middle, center);
-        UpdateSprite(bottomLeft, corner);
-        UpdateSprite(bottomRight, corner);
-        if (topEdge == PuzzleEdge.Socket) UpdateSprite(topMiddle, socket);
-        else UpdateSprite(topMiddle, blank);
-        if (topEdge == PuzzleEdge.Key) UpdateSprite(top, key);
+        UpdateSprite(bottomLeft, cornerDR);
+        UpdateSprite(bottomRight, cornerDL);
+        if (topEdge == PuzzleEdge.Socket) UpdateSprite(topMiddle, socketV);
+        else UpdateSprite(topMiddle, blankV);
+        if (topEdge == PuzzleEdge.Key) UpdateSprite(top, keyV);
         else UpdateSprite(top, empty);
-        if (leftEdge == PuzzleEdge.Socket) UpdateSprite(middleLeft, socket);
-        else UpdateSprite(middleLeft, blank);
-        if (leftEdge == PuzzleEdge.Key) UpdateSprite(left, key);
+        if (leftEdge == PuzzleEdge.Socket) UpdateSprite(middleLeft, socketH);
+        else UpdateSprite(middleLeft, blankH);
+        if (leftEdge == PuzzleEdge.Key) UpdateSprite(left, keyH);
         else UpdateSprite(left, empty);
-        if (rightEdge == PuzzleEdge.Socket) UpdateSprite(middleRight, socket);
-        else UpdateSprite(middleRight, blank);
-        if (rightEdge == PuzzleEdge.Key) UpdateSprite(right, key);
+        if (rightEdge == PuzzleEdge.Socket) UpdateSprite(middleRight, socketH);
+        else UpdateSprite(middleRight, blankH);
+        if (rightEdge == PuzzleEdge.Key) UpdateSprite(right, keyH);
         else UpdateSprite(right, empty);
-        if (bottomEdge == PuzzleEdge.Socket) UpdateSprite(bottomMiddle, socket);
-        else UpdateSprite(bottomMiddle, blank);
-        if (bottomEdge == PuzzleEdge.Key) UpdateSprite(bottom, key);
+        if (bottomEdge == PuzzleEdge.Socket) UpdateSprite(bottomMiddle, socketV);
+        else UpdateSprite(bottomMiddle, blankV);
+        if (bottomEdge == PuzzleEdge.Key) UpdateSprite(bottom, keyV);
         else UpdateSprite(bottom, empty);
         UpdateSprite(image, puzzleImage);
     }
