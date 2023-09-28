@@ -12,6 +12,8 @@ public class PuzzleRenderer : MonoBehaviour
     [SerializeField] private Sprite blank;
     [SerializeField] private Sprite socket;
     [SerializeField] private Sprite key;
+    [SerializeField] private Sprite center;
+    [SerializeField] private Sprite corner;
     [Header("Empty Sprite")]
     [SerializeField] private Sprite empty;
     [Header("Center Image Sprite Renderer")]
@@ -59,11 +61,11 @@ public class PuzzleRenderer : MonoBehaviour
         UpdateColor(bottomRight, color);
         UpdateColor(bottom, color);
         // updates the sprite of all of the sprite renderers
-        UpdateSprite(topLeft, blank);
-        UpdateSprite(topRight, blank);
-        UpdateSprite(middle, blank);
-        UpdateSprite(bottomLeft, blank);
-        UpdateSprite(bottomRight, blank);
+        UpdateSprite(topLeft, corner);
+        UpdateSprite(topRight, corner);
+        UpdateSprite(middle, center);
+        UpdateSprite(bottomLeft, corner);
+        UpdateSprite(bottomRight, corner);
         if (topEdge == PuzzleEdge.Socket) UpdateSprite(topMiddle, socket);
         else UpdateSprite(topMiddle, blank);
         if (topEdge == PuzzleEdge.Key) UpdateSprite(top, key);
