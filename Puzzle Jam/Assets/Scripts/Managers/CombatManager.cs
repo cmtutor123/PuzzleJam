@@ -1391,6 +1391,16 @@ public class CombatManager : MonoBehaviour
                 if (puzzleBoard.GetX(index) == 0 || puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) - 1, puzzleBoard.GetY(index)) || (puzzleBoard.GetX(index) > 0 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) - 1, puzzleBoard.GetY(index)) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetLeft(), puzzleBoard.GetLeftEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index))))) puzzleBoard.GetPuzzlePiece(index).SetLeftEdge(PuzzleEdge.Blank);
                 if (puzzleBoard.GetX(index) == 5 || puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) + 1, puzzleBoard.GetY(index)) || (puzzleBoard.GetX(index) < 5 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index) + 1, puzzleBoard.GetY(index)) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetRight(), puzzleBoard.GetRightEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index))))) puzzleBoard.GetPuzzlePiece(index).SetRightEdge(PuzzleEdge.Blank);
                 if (puzzleBoard.GetY(index) == 0 || puzzleBoard.LocationEmpty(puzzleBoard.GetX(index), puzzleBoard.GetY(index) - 1) || (puzzleBoard.GetY(index) > 0 && !puzzleBoard.LocationEmpty(puzzleBoard.GetX(index), puzzleBoard.GetY(index) - 1) && !puzzleBoard.EdgesAreConnected(puzzleBoard.GetPuzzlePiece(index).GetBottom(), puzzleBoard.GetBottomEdge(puzzleBoard.GetX(index), puzzleBoard.GetY(index))))) puzzleBoard.GetPuzzlePiece(index).SetBottomEdge(PuzzleEdge.Blank);
+
+                if (puzzleBoard.InCombo(index))
+                {
+                    List<PuzzlePiece> pieces = puzzleBoard.GetChain(index);
+                    pieces.Insert(0, puzzleBoard.GetPuzzlePiece(index));
+                    QueueEffects(CheckForTrigger(pieces, TriggerType.Combo), index);
+                    List<int> indexes = puzzleBoard.GetChainIndex(index);
+                    indexes.Insert(0, index);
+                    DestroyPieces(indexes);
+                }
                 break;
         }
         UpdateBoardPieceSprites();
