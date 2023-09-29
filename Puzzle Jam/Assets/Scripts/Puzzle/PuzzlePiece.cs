@@ -120,7 +120,12 @@ public class PuzzlePiece
     /// <returns>A list of PuzzleEffects</returns>
     public List<PuzzleEffect> GetEffects()
     {
-        return puzzleEffects;
+        List<PuzzleEffect> effects = new List<PuzzleEffect>();
+        foreach (PuzzleEffect effect in puzzleEffects)
+        {
+            effects.Add(new PuzzleEffect(effect));
+        }
+        return effects;
     }
 
     public void SetPuzzleColor(PuzzleColor color)
