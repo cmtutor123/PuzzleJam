@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(CombatManager))]
+[RequireComponent(typeof(CombatManager), typeof(LootManager))]
 public class MapManager : MonoBehaviour
 {
     private CombatManager combatManager;
+    private LootManager lootManager;
 
     private List<PuzzleRenderer> possiblePuzzlePieces;
     private List<PuzzleRenderer> puzzlePiecePath;
@@ -56,6 +57,7 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         combatManager = GetComponent<CombatManager>();
+        lootManager = GetComponent<LootManager>();
         enemyEncounters = new List<List<EnemyEncounter>>();
         enemyEncounters.Add(enemyEncountersDifficulty0);
         enemyEncounters.Add(enemyEncountersDifficulty1);
@@ -280,6 +282,10 @@ public class MapManager : MonoBehaviour
     public void EnableCanvas()
     {
         mapCanvas.SetActive(true);
+        if (currentPosition == 19)
+        {
+            WinScreen();
+        }
     }
 
     public bool TestValidNextPuzzle(int distance, int number)
@@ -300,33 +306,23 @@ public class MapManager : MonoBehaviour
                 StartEncounter();
                 break;
             case EncounterType.Loot:
+                StartLoot();
                 break;
         }
     }
 
     public void StartEncounter()
     {
-        if (currentPosition == 19)
-        {
-            StartFinalFight();
-        }
-        else
-        {
-            int encounterDifficulty = Mathf.FloorToInt(currentPosition / 4);
-            EnemyEncounter currentEncounter = GetEncounter(encounterDifficulty);
-            combatManager.StartEncounter(currentEncounter);
-        }
+        int encounterDifficulty = Mathf.FloorToInt(currentPosition / 4);
+        EnemyEncounter currentEncounter = GetEncounter(encounterDifficulty);
+        combatManager.StartEncounter(currentEncounter);
         DisableCanvas();
     }
 
     public void StartLoot()
     {
-
-    }
-
-    public void StartFinalFight()
-    {
-
+        lootManager.StartLootSelection();
+        DisableCanvas();
     }
 
     public EnemyEncounter GetEncounter(int difficulty)
@@ -337,5 +333,10 @@ public class MapManager : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene("LoseGame");
+    }
+
+    public void WinScreen()
+    {
+        SceneManager.LoadScene("WinGame");
     }
 }
