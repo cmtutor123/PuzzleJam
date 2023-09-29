@@ -314,7 +314,7 @@ public class MapManager : MonoBehaviour
     public void StartEncounter()
     {
         int encounterDifficulty = Mathf.FloorToInt(currentPosition / 4);
-        EnemyEncounter currentEncounter = GetEncounter(encounterDifficulty);
+        EnemyEncounter currentEncounter = GetEncounter(Mathf.Clamp(encounterDifficulty, 0, 3));
         combatManager.StartEncounter(currentEncounter);
         DisableCanvas();
     }
@@ -327,7 +327,7 @@ public class MapManager : MonoBehaviour
 
     public EnemyEncounter GetEncounter(int difficulty)
     {
-        return enemyEncounters[difficulty][Mathf.Clamp(Random.Range(0, enemyEncounters[difficulty].Count), 0, 3)];
+        return enemyEncounters[difficulty][Random.Range(0, enemyEncounters[difficulty].Count)];
     }
 
     public void GameOver()
