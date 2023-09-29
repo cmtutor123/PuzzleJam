@@ -8345,10 +8345,39 @@ MonoBehaviour:
   lootWeights: 0000000001000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000100000000000000
   puzzlePrefab: {fileID: 8460290175747846794, guid: 0a672a2e58be19e4f9b98006245fb239, type: 3}
   enemyEncountersDifficulty0:
-  - {fileID: 11400000, guid: 75d059feec5fdd2499564fcce248552f, type: 2}
-  enemyEncountersDifficulty1: []
-  enemyEncountersDifficulty2: []
-  enemyEncountersDifficulty3: []
+  - {fileID: 11400000, guid: 9b6b56e5581791848855e090286aa778, type: 2}
+  - {fileID: 11400000, guid: cf8a463076ba2b146a2bd5a4e86d43b9, type: 2}
+  - {fileID: 11400000, guid: eecc6c2858f151f4f93793d171aee714, type: 2}
+  enemyEncountersDifficulty1:
+  - {fileID: 11400000, guid: b613b86d155f02e47aafd3948b824149, type: 2}
+  - {fileID: 11400000, guid: 152945045c9e30c41905cbf446faff48, type: 2}
+  - {fileID: 11400000, guid: 613dce506e8893d409d647d440941fb3, type: 2}
+  - {fileID: 11400000, guid: 2623f682aa4966b4fa20043500116736, type: 2}
+  - {fileID: 11400000, guid: 8863d49222593514f9eee6cd7e6e23b5, type: 2}
+  - {fileID: 11400000, guid: ba487b128132a284fbf29b7f5e80bb46, type: 2}
+  - {fileID: 11400000, guid: 27ee87910c843d54e9563714c688e8ed, type: 2}
+  - {fileID: 11400000, guid: 568b64c04fbd195499fe97819f7485cf, type: 2}
+  - {fileID: 11400000, guid: 2c6828434a4bb284bb2d06dc4a080dd6, type: 2}
+  enemyEncountersDifficulty2:
+  - {fileID: 11400000, guid: cb096875f543e8941b642ee6671846f8, type: 2}
+  - {fileID: 11400000, guid: 5100affb6172e334e9c4d8b1868bb2c6, type: 2}
+  - {fileID: 11400000, guid: e730b95171b2101458e6a984651f4d14, type: 2}
+  - {fileID: 11400000, guid: 2c0e775d597ad27439f63d233d032c2d, type: 2}
+  - {fileID: 11400000, guid: b30a3c65e3cfac94894010b7a632d1eb, type: 2}
+  - {fileID: 11400000, guid: 04111d5c6112de34ea1f99a18acc5b39, type: 2}
+  - {fileID: 11400000, guid: 8d37453f68d664a4da1758337d186794, type: 2}
+  - {fileID: 11400000, guid: 505f09861fa40d94fa4db6cbf62302a6, type: 2}
+  - {fileID: 11400000, guid: 000be780ef46be44dbeda975d4cea811, type: 2}
+  enemyEncountersDifficulty3:
+  - {fileID: 11400000, guid: 5f14cb5cae522834ab4e8f2ec9ade47f, type: 2}
+  - {fileID: 11400000, guid: 46317ea138254d3408aa4b51bd36421a, type: 2}
+  - {fileID: 11400000, guid: 18edeff7b65bafc499d6d359b78cb06c, type: 2}
+  - {fileID: 11400000, guid: dd3e3c9b67fcb434bb6a7bb765d14c09, type: 2}
+  - {fileID: 11400000, guid: d3a78f91500ec1541927d983a3fa4514, type: 2}
+  - {fileID: 11400000, guid: a262856667e678448ab5948426dc75db, type: 2}
+  - {fileID: 11400000, guid: 17b9490a067a7a449a1b74bfd64ff449, type: 2}
+  - {fileID: 11400000, guid: 366b8cd92fff2d742a9ccae719671fbf, type: 2}
+  - {fileID: 11400000, guid: 37a958c0a32b3574e8b1458d0e413360, type: 2}
   possiblePuzzleColors:
   - {fileID: 11400000, guid: 22cae91ee76894249bdeca2d56baf26a, type: 2}
   - {fileID: 11400000, guid: 730a3a752e23e9741b1689d132651fb8, type: 2}

@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bf05c41416271f4ab6e8e5c8e7a8bb6, type: 3}
-  m_Name: One Damage 1
+  m_Name: Boom 2
   m_EditorClassIdentifier: 
   puzzleShape:
-    topEdge: 0
-    leftEdge: 0
-    rightEdge: 0
-    bottomEdge: 0
+    topEdge: 2
+    leftEdge: 2
+    rightEdge: 2
+    bottomEdge: 2
   puzzleColor: {fileID: 11400000, guid: 07cebbd8c86d28844b98fefe91c767ac, type: 2}
   puzzleImage: {fileID: 21300000, guid: 4ac5b56e70ec148479989ac358e6f996, type: 3}
-  puzzleName: Whack
-  puzzleDescription: Deals 1 damage to the player when placed.
+  puzzleName: Boom
+  puzzleDescription: Destroy a random piece when played.
   puzzleEffects:
   - triggerType: 1
     hasTriggerColor: 0
     triggerColor: {fileID: 0}
-    effectType: 7
+    effectType: 6
     buffID: 0
-    modificationType: 0
+    modificationType: 1
     destroyCompletely: 0
     newColor: {fileID: 0}
     shapeChange: 0
-    targetType: 0
+    targetType: 2
     limitPieceSelection: 0
     limitTargetColor: 0
     targetColor: {fileID: 0}

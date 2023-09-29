@@ -20,7 +20,7 @@ MonoBehaviour:
   puzzleColor: {fileID: 11400000, guid: 07cebbd8c86d28844b98fefe91c767ac, type: 2}
   puzzleImage: {fileID: 21300000, guid: 4ac5b56e70ec148479989ac358e6f996, type: 3}
   puzzleName: Whack
-  puzzleDescription: Deals 1 damage to the player when placed.
+  puzzleDescription: Deals 3 damage to the player when placed.
   puzzleEffects:
   - triggerType: 1
     hasTriggerColor: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
     limitTargetColor: 0
     targetColor: {fileID: 0}
     amount: 0
-    amountConstant: 1
+    amountConstant: 3
     amountMin: 0
     amountMax: 0
     amountVariableSource: 0

@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b527d5b853fc2408a56ab1d5faa923, type: 3}
-  m_Name: Servant1
+  m_Script: {fileID: 11500000, guid: 764d38dddbe303a44890ff7c74a3cf03, type: 3}
+  m_Name: Diff 1 7
   m_EditorClassIdentifier: 
-  enemyName: Robo Servent
-  maxHealth: 10
-  spriteIdle: {fileID: 21300000, guid: 81a6f0b8b3eae9544a4d91c30718256b, type: 3}
-  attackPattern: {fileID: 0}
+  enemies:
+  - {fileID: 11400000, guid: cf68f4fee6dfe364a8fb04f3af36d7f3, type: 2}
+  - {fileID: 11400000, guid: b031a859884ff5244924aa87bda037ec, type: 2}
