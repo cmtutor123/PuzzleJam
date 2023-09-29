@@ -164,4 +164,9 @@ public class PlayerManager : MonoBehaviour
         if (HasBuff(buff)) return buffs[buff];
         else return 0;
     }
+
+    public void AddToDeck(PuzzlePiece piece)
+    {
+        puzzleDeck.AddPuzzlePiece(piece);
+    }
 }

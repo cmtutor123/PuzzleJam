@@ -16,8 +16,10 @@ public class PuzzlePiece
     private string puzzleDescription;
     private string puzzleName;
 
+    private bool fromPlayer;
+
     /// <param name="puzzleData">The PuzzleData to create the PuzzlePiece from</param>
-    public PuzzlePiece(PuzzleData puzzleData)
+    public PuzzlePiece(PuzzleData puzzleData, bool fromPlayer = true)
     {
         PuzzleShape puzzleShape = puzzleData.GetPuzzleShape();
         topEdge = puzzleShape.GetTop();
@@ -29,6 +31,33 @@ public class PuzzlePiece
         puzzleDescription = puzzleData.GetDescription();
         puzzleName = puzzleData.GetName();
         puzzleEffects = puzzleData.GetEffects();
+        this.fromPlayer = fromPlayer;
+    }
+
+    public PuzzlePiece(EncounterPuzzlePiece piece, Sprite image)
+    {
+        topEdge = piece.GetTop();
+        bottomEdge = piece.GetBottom();
+        leftEdge = piece.GetLeft();
+        rightEdge = piece.GetRight();
+        puzzleColor = piece.GetPuzzleColor();
+        puzzleImage = image;
+        puzzleName = "";
+        puzzleDescription = "";
+        puzzleEffects = new List<PuzzleEffect>();
+    }
+
+    public PuzzlePiece(PuzzlePiece piece)
+    {
+        topEdge = piece.GetTop();
+        bottomEdge = piece.GetBottom();
+        leftEdge = piece.GetLeft();
+        rightEdge = piece.GetRight();
+        puzzleColor = piece.GetPuzzleColor();
+        puzzleImage = piece.GetImage();
+        puzzleName = piece.GetName();
+        puzzleDescription = piece.GetDescription();
+        puzzleEffects = piece.GetEffects();
     }
 
     /// <summary>
@@ -130,5 +159,10 @@ public class PuzzlePiece
     public void SetBottomEdge(PuzzleEdge edge)
     {
         bottomEdge = edge;
+    }
+
+    public bool FromPlayer()
+    {
+        return fromPlayer;
     }
 }

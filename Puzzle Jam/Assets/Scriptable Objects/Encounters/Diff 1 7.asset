@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed3c06815a4f494b8392f98ad666ca0, type: 3}
-  m_Name: TestColor
+  m_Script: {fileID: 11500000, guid: 764d38dddbe303a44890ff7c74a3cf03, type: 3}
+  m_Name: Diff 1 7
   m_EditorClassIdentifier: 
-  color: {r: 0.8517766, g: 0, b: 1, a: 1}
-  colorName: Test Name
+  enemies:
+  - {fileID: 11400000, guid: cf68f4fee6dfe364a8fb04f3af36d7f3, type: 2}
+  - {fileID: 11400000, guid: b031a859884ff5244924aa87bda037ec, type: 2}

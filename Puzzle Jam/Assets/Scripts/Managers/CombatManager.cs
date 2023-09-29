@@ -27,7 +27,8 @@ public class CombatManager : MonoBehaviour
 
     private List<ActiveEffect> effectQueue;
 
-    //[SerializeField] private GameObject combatCanvas;
+    [Header("Combat Canvas")]
+    [SerializeField] private GameObject combatCanvas;
 
     [Header("UI Elements")]
     [SerializeField] private SpriteManager puzzleBoardSpriteManager;
@@ -96,6 +97,7 @@ public class CombatManager : MonoBehaviour
             ClearMouseImage();
             ShowPlayerHealth();
             StartPlayerTurn();
+            EnableCanvas();
         }
     }
 
@@ -112,6 +114,8 @@ public class CombatManager : MonoBehaviour
         HideEndButton();
         HidePlayerHealth();
         ClearMouseImage();
+        DisableCanvas();
+        mapManager.EnableCanvas();
     }
 
     /// <summary>
@@ -725,7 +729,8 @@ public class CombatManager : MonoBehaviour
     public void DestroyPiece(int index)
     {
         QueueEffects(CheckForTrigger(puzzleBoard.GetPuzzlePiece(index), TriggerType.Destroy), index);
-        discardPile.AddPuzzlePiece(puzzleBoard.RemovePiece(index));
+        if (puzzleBoard.FromPlayer(index)) discardPile.AddPuzzlePiece(puzzleBoard.RemovePiece(index));
+        else puzzleBoard.RemovePiece(index);
         UpdateBoardPieceSprites();
     }
 
@@ -744,11 +749,11 @@ public class CombatManager : MonoBehaviour
             EndEncounter();
             if (CheckLose())
             {
-                //mapManager.GameOver();
+                mapManager.GameOver();
             }
             else if (CheckWin())
             {
-                //mapManager.BattleOver();
+                EndEncounter();
             }
         }
         else if (effectQueue.Count == 0)
@@ -1156,7 +1161,8 @@ public class CombatManager : MonoBehaviour
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemySpriteManagers[i].SetSprite(enemies[i].GetSpriteIdle(), enemies[i].GetCurrentHealth(), enemies[i].GetMaxHealth(), enemies[i].GetNextAttack());
+            if (enemies[i].Alive()) enemySpriteManagers[i].SetSprite(enemies[i].GetSpriteIdle(), enemies[i].GetCurrentHealth(), enemies[i].GetMaxHealth(), enemies[i].GetNextAttack());
+            else UnloadEnemySprite(i);
         }
     }
 
@@ -1437,7 +1443,7 @@ public class CombatManager : MonoBehaviour
 
     public void DoEnemyAttack(Enemy enemy)
     {
-        PuzzlePiece enemyAttack = new PuzzlePiece(enemy.GetNextAttack());
+        PuzzlePiece enemyAttack = new PuzzlePiece(enemy.GetNextAttack(), fromPlayer : false);
         List<int> validLocations = new List<int>();
         for (int i = 0; i < puzzleBoard.GetSize(); i++)
         {
@@ -1515,5 +1521,15 @@ public class CombatManager : MonoBehaviour
             if (enemy != null && enemy.Alive()) return false;
         }
         return true;
+    }
+
+    public void DisableCanvas()
+    {
+        combatCanvas.SetActive(false);
+    }
+
+    public void EnableCanvas()
+    {
+        combatCanvas.SetActive(true);
     }
 }

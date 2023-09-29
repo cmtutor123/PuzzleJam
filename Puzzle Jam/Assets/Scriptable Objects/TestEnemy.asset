@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TestEnemy
   m_EditorClassIdentifier: 
   enemyName: Test Enemy
-  maxHealth: 100
+  maxHealth: 30
   spriteIdle: {fileID: 21300000, guid: 81a6f0b8b3eae9544a4d91c30718256b, type: 3}
   attackPattern: {fileID: 11400000, guid: 2fbf35a6516f53e4194cec5e75ac153f, type: 2}
