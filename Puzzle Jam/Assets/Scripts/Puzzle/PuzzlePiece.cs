@@ -47,6 +47,19 @@ public class PuzzlePiece
         puzzleEffects = new List<PuzzleEffect>();
     }
 
+    public PuzzlePiece(PuzzlePiece piece)
+    {
+        topEdge = piece.GetTop();
+        bottomEdge = piece.GetBottom();
+        leftEdge = piece.GetLeft();
+        rightEdge = piece.GetRight();
+        puzzleColor = piece.GetPuzzleColor();
+        puzzleImage = piece.GetImage();
+        puzzleName = piece.GetName();
+        puzzleDescription = piece.GetDescription();
+        puzzleEffects = piece.GetEffects();
+    }
+
     /// <summary>
     /// Rotates the edges of the PuzzlePiece 90 degrees to the right
     /// </summary>
@@ -120,7 +133,12 @@ public class PuzzlePiece
     /// <returns>A list of PuzzleEffects</returns>
     public List<PuzzleEffect> GetEffects()
     {
-        return puzzleEffects;
+        List<PuzzleEffect> effects = new List<PuzzleEffect>();
+        foreach (PuzzleEffect effect in puzzleEffects)
+        {
+            effects.Add(new PuzzleEffect(effect));
+        }
+        return effects;
     }
 
     public void SetPuzzleColor(PuzzleColor color)
