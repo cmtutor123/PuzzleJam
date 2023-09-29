@@ -120,12 +120,7 @@ public class PuzzlePile
     /// <returns>A list of all PuzzlePiece objects in the PuzzlePile</returns>
     public List<PuzzlePiece> GetPuzzlePieces()
     {
-        List<PuzzlePiece> pieces = new List<PuzzlePiece>();
-        foreach (PuzzlePiece piece in puzzlePieces)
-        {
-            pieces.Add(new PuzzlePiece(piece));
-        }
-        return pieces;
+        return puzzlePieces;
     }
 
     /// <returns>The number of PuzzlePieces in the PuzzlePile</returns>
