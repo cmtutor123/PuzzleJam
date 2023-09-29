@@ -72,49 +72,6 @@ public class PuzzleEffect
     [SerializeField] private int repetitionsVariableCoefficient;
     [SerializeField] private int repetitionsVariableConstant;
 
-    public PuzzleEffect(PuzzleEffect other)
-    {
-        triggerType = other.GetTriggerType();
-        hasTriggerColor = other.GetHasTriggerColor();
-        triggerColor = other.GetTriggerColor();
-        effectType = other.GetEffectType();
-        buffID = other.GetBuffID();
-        modificationType = other.GetModificationType();
-        destroyCompletely = other.GetDestroyCompletely();
-        newColor = other.GetNewColor();
-        shapeChange = other.GetShapeChange();
-        targetType = other.GetTargetType();
-        limitPieceSelection = other.GetLimitPieceSelection();
-        limitTargetColor = other.GetLimitTargetColor();
-        targetColor = other.GetTargetColor();
-        amount = other.GetAmount();
-        amountConstant = other.GetAmountConstant();
-        amountMin = other.GetAmountMin();
-        amountMax = other.GetAmountMax();
-        amountVariableSource = other.GetAmountVariableSource();
-        amountPuzzlePieceRange = other.GetAmountPuzzlePieceRange();
-        amountLimitColor = other.GetAmountLimitColor();
-        amountColor = other.GetAmountColor();
-        amountVariableCoefficient = other.GetAmountVariableCoefficient();
-        amountVariableConstant = other.GetAmountVariableConstant();
-        repeats = other.GetRepeats();
-        repetitions = other.GetRepetitions();
-        repetitionsConstant = other.GetRepetitionsConstant();
-        repetitionsMin = other.GetRepetitionsMin();
-        repetitionsMax = other.GetRepetitionsMax();
-        repetitionsVariableSource = other.GetRepetitionsVariableSource();
-        repetitionsPuzzlePieceRange = other.GetRepetitionsPuzzlePieceRange();
-        repetitionsLimitColor = other.GetRepetitionsLimitColor();
-        repetitionsColor = other.GetRepetitionsColor();
-        repetitionsVariableCoefficient = other.GetRepetitionsVariableCoefficient();
-        repetitionsVariableConstant = other.GetRepetitionsVariableConstant();
-    }
-
-    public bool GetHasTriggerColor()
-    {
-        return hasTriggerColor;
-    }
-
     /// <returns>The TriggerType of the PuzzleEffect</returns>
     public TriggerType GetTriggerType()
     {

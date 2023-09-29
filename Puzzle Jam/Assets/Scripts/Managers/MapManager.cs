@@ -327,7 +327,7 @@ public class MapManager : MonoBehaviour
 
     public EnemyEncounter GetEncounter(int difficulty)
     {
-        return enemyEncounters[difficulty][Mathf.Clamp(Random.Range(0, enemyEncounters[difficulty].Count), 0, 3)];
+        return enemyEncounters[difficulty][Random.Range(0, enemyEncounters[difficulty].Count)];
     }
 
     public void GameOver()
