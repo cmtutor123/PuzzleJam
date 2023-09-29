@@ -70,7 +70,6 @@ public class MapManager : MonoBehaviour
         ShowPuzzlePossibilities();
         ShowPuzzlePath();
         initLoad = true;
-        combatManager.DisableCanvas();
     }
 
     private void Update()

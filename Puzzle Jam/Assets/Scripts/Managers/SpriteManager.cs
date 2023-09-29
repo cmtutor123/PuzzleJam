@@ -14,7 +14,7 @@ public class SpriteManager : MonoBehaviour
 
     private void Start()
     {
-        if (this.GetType() != typeof(TooltipManager)) spriteRenderer = GetComponent<Image>();
+        //if (this.GetType() != typeof(TooltipManager)) spriteRenderer = GetComponent<Image>();
         spriteRenderer = GetComponent<Image>();
         UnloadSprites();
     }
@@ -25,7 +25,8 @@ public class SpriteManager : MonoBehaviour
     /// <param name="sprite">The Sprite to change to</param>
     public virtual void SetSprite(Sprite sprite)
     {
-        spriteRenderer.sprite = sprite;
+        if (sprite != null) spriteRenderer.sprite = sprite;
+        else spriteRenderer.sprite = empty;
     }
 
     /// <summary>

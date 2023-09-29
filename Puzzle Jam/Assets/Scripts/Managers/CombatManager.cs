@@ -70,6 +70,7 @@ public class CombatManager : MonoBehaviour
         enemies = new List<Enemy>();
         selectedPuzzlePiece = null;
         effectQueue = new List<ActiveEffect>();
+        DisableCanvas();
         //StartEncounter(testEncounter);
     }
 
